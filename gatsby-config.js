@@ -7,7 +7,7 @@ module.exports = {
     // Main Site Title
     title: `Rajeshwar Rathi | Machine Learning Engineer and Researcher`,
     // Description that goes under your name in main bio
-    description: ``,
+    description: `Machine Learning Engineer and Researcher`,
     // Optional: Twitter account handle
     author: `@rajeshwar_rathi`,
     // Optional: Github account URL
