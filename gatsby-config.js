@@ -19,7 +19,7 @@ module.exports = {
     // Optional: List your projects, they must have `name` and `description`. `link` is optional.
     projects: [
       {
-        name: 'Devfolio',
+        name: 'Unpaired Image Translation for ',
         description:
           'A zero-config and blazing fast personal site + blog built with GatsbyJs and TailwindCSS',
         link: 'https://github.com/RyanFitzgerald/devfolio',
@@ -54,6 +54,9 @@ module.exports = {
         description: 'Full-Stack Developer, May 2015 - December 2017',
         link: 'https://github.com/RyanFitzgerald/devfolio',
       },
+    ],
+    education: [
+
     ],
     // Optional: List your skills, they must have `name` and `description`.
     skills: [
