@@ -19,23 +19,28 @@ module.exports = {
     // Optional: List your projects, they must have `name` and `description`. `link` is optional.
     projects: [
       {
-        name: 'Unpaired Image Translation for ',
+        name: 'Unpaired Image Translation for Brain MRI (T1 to T2 and vice-versa) using CycleGAN',
         description:
-          'A zero-config and blazing fast personal site + blog built with GatsbyJs and TailwindCSS',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
+          '',
+        link: 'https://github.com/rajrathi/image2imageBrainMRI',
       },
       {
-        name: 'ChromeExtensionKit',
+        name: 'Impact Analysis Engine for Microservices',
         description:
-          'Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates',
-        link: 'https://chromeextensionkit.com/?ref=devfolio',
+          '',
+        link: '',
       },
       {
-        name: 'Another Cool Project',
+        name: 'Helmet Detection for Realtime Road Transport Video',
         description:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit ducimus perferendis',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
+          '',
+        link: '',
       },
+      {
+        name: 'HuggingFace space for generating MNIST digits using Conditional GAN',
+        description: '',
+        link: 'https://huggingface.co/spaces/keras-io/conditional-GAN',
+      }
     ],
     // Optional: List your experience, they must have `name` and `description`. `link` is optional.
     experience: [
