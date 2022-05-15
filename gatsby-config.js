@@ -40,23 +40,37 @@ module.exports = {
     // Optional: List your experience, they must have `name` and `description`. `link` is optional.
     experience: [
       {
-        name: 'Acme Corp',
-        description: 'Full-Stack Developer, February 2020 - Present',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
+        name: 'Bitwise Inc.',
+        description: 'Programmer (Data Engineer), Sep 2020 - Present',
+        link: '',
       },
       {
-        name: 'Globex Corp',
-        description: 'Full-Stack Developer, December 2017 - February 2020',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
+        name: 'Veritas LLC',
+        description: 'SDE Intern, Jan 2020 - Jun 2020',
+        link: '',
       },
       {
-        name: 'Hooli',
-        description: 'Full-Stack Developer, May 2015 - December 2017',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
+        name: 'VInvent Tech',
+        description: 'SDE Intern (Machine Learning), May 2019 - Jul 2019',
+        link: '',
       },
     ],
     education: [
-
+      {
+        name: 'Liverpool John Moores University, Liverpool',
+        description: 'M. Sc Data Science, Jan 2022 - Aug 2022',
+        link: ''
+      },
+      {
+        name: 'International Institute of Information Technology, Bangalore',
+        description: 'PG Diploma Data Science, Jan 2021 - Jan 2022',
+        link: ''
+      },
+      {
+        name: 'College of Engineering, Pune',
+        description: 'B. Tech, Aug 2016 - Oct 2020',
+        link: ''
+      }
     ],
     // Optional: List your skills, they must have `name` and `description`.
     skills: [
