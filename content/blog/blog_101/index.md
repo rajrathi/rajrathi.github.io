@@ -1,7 +1,6 @@
 ---
-title: Linear Regression made Simpler
-date: '2020-09-20T12:00:00.00Z'
-description: 'Lets understand Linear Regression inside a Human Brain'
+title: 'Machine Learning 101: Linear Regression'
+date: '2022-05-22T12:00:00.00Z'
+description: 'All about Linear Regression'
 ---
 
-# Linear Regression
