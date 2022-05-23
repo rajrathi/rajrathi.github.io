@@ -1,13 +1,13 @@
 module.exports = {
   siteMetadata: {
     // Site URL for when it goes live
-    siteUrl: `https://elastic-meninsky-aa7c74.netlify.app/`,
+    siteUrl: `https://rajrathi.github.io`,
     // Your Name
     name: 'Rajeshwar Rathi',
     // Main Site Title
     title: `Rajeshwar Rathi | Machine Learning Engineer and Researcher`,
     // Description that goes under your name in main bio
-    description: `Machine Learning Engineer and Researcher`,
+    description: `Machine Learning Researcher and Engineer`,
     // Optional: Twitter account handle
     author: `@rajeshwar_rathi`,
     // Optional: Github account URL
@@ -15,7 +15,7 @@ module.exports = {
     // Optional: LinkedIn account URL
     linkedin: `https://www.linkedin.com/in/rajeshwarrathi/`,
     // Content of the About Me section
-    about: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus perferendis porro cumque ea error ab voluptatem. Temporibus adipisci exercitationem similique itaque quibusdam laudantium, qui molestiae quas, aut amet animi id.`,
+    about: `I am a curious Machine Learning Researcher aiming to solve the problems affecting the society, environment and Earth. I am highly interested in developing novel Machine Learning techniques and Neural Network architectures espicially in Vision tasks.`,
     // Optional: List your projects, they must have `name` and `description`. `link` is optional.
     projects: [
       {
@@ -37,10 +37,12 @@ module.exports = {
         link: '',
       },
       {
-        name: 'HuggingFace space for generating MNIST digits using Conditional GAN',
-        description: '',
-        link: 'https://huggingface.co/spaces/keras-io/conditional-GAN',
-      }
+        name: 'Trading System',
+        description:
+          '',
+        link: '',
+      },
+
     ],
     // Optional: List your experience, they must have `name` and `description`. `link` is optional.
     experience: [
@@ -82,16 +84,21 @@ module.exports = {
       {
         name: 'Languages & Frameworks',
         description:
-          'JavaScript (ES6+), Golang, Node.js, Express.js, React, Ruby on Rails, PHP',
+          'Python, C++, C, Flutter',
       },
       {
-        name: 'Databases',
-        description: 'MongoDB, PostreSQL, MySQL',
+        name: 'Python libraries',
+        description: 'NumPy, Pandas, Matplotlib, scikit-learn, statsapi, PyTorch, TensorFlow, Keras, OpenCV, NetworkX, GraphViz'
       },
+      {
+        name: 'Databases and ETL',
+        description: 'SQLServer, MySQL, RedShift, Azure Data Factory, Informatica',
+      },
+      
       {
         name: 'Other',
         description:
-          'Docker, Amazon Web Services (AWS), CI / CD, Microservices, API design, Agile / Scrum',
+          'Amazon Web Services (AWS), CI / CD (Jenkins), Agile / Scrum',
       },
     ],
   },
