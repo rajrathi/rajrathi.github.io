@@ -1,9 +1,9 @@
 {
-  "name": "devfolio",
+  "name": "rblogger",
   "private": true,
-  "description": "A modern and production-ready personal portfolio + blog template built with GatsbyJs and TailwindCSS",
+  "description": "My Personal Blog Website about writning blogs on AI, ML and software development",
   "version": "0.1.0",
-  "author": "Ryan Fitzgerald",
+  "author": "Rajeshwar Rathi",
   "dependencies": {
     "emoji-picker-react": "^3.5.1",
     "gatsby": "^2.24.67",
@@ -33,6 +33,7 @@
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
+    "gh-pages": "^4.0.0",
     "prettier": "2.1.2",
     "tailwindcss": "^1.8.13"
   },
@@ -46,13 +47,14 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "deploy": "gatsby build && gh-pages -d public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RyanFitzgerald/devfolio"
+    "url": "https://github.com/rajrathi/rajrathi.github.io"
   },
   "bugs": {
-    "url": "https://github.com/RyanFitzgerald/devfolio/issues"
+    "url": "https://github.com/rajrathi/rajrathi.github.io/issues"
   }
 }
