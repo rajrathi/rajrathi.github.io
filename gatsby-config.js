@@ -21,44 +21,51 @@ module.exports = {
       {
         name: 'Unpaired Image Translation for Brain MRI (T1 to T2 and vice-versa) using CycleGAN',
         description:
-          '',
+          'Developed a model for ',
         link: 'https://github.com/rajrathi/image2imageBrainMRI',
-        technology: 'Python Tensorflow CycleGAN',
+        technology: 'Python Tensorflow skimage Matplotlib NumPy',
+      },
+      {
+        name: 'HuggingFace space for generating specific handwritten digits using Conditional GAN',
+        description:
+          '',
+        link: 'https://huggingface.co/spaces/keras-io/conditional-GAN',
+        technology: 'Python Keras Gradio HuggingFace NumPy',
       },
       {
         name: 'Impact Analysis Engine for Microservices',
         description:
-          '',
+          'Developed an utility to generate the dependency graphs for Microservices and calculate the impact score of a microservice on architecture if that microservice is down.',
         link: '',
-        technology: 'Python NetworkX',
+        technology: 'Python NetworkX GraphViz regex Plotly Pandas Jenkins CI/CD',
       },
       {
         name: 'Helmet Detection for Realtime Road Transport Video',
         description:
           '',
         link: '',
-        technology: 'Python NetworkX',
+        technology: 'Python Keras OpenCV NumPy Flask',
+      },
+      {
+        name: 'Ecommerce Android Application',
+        description:
+          '',
+        link: 'https://github.com/rajrathi/EcommerceApplication',
+        technology: 'Flutter Dart Firebase',
       },
       {
         name: 'Trading System',
         description:
           '',
         link: '',
-        technology: 'Python NetworkX',
+        technology: 'Python Flask JSON C++ SQlite',
       },
       {
-        name: 'Trading System',
+        name: 'Terminal based Text Editor',
         description:
           '',
         link: '',
-        technology: 'Python NetworkX',
-      },
-      {
-        name: 'Trading System',
-        description:
-          '',
-        link: '',
-        technology: 'Python NetworkX',
+        technology: 'C ncurses regex',
       },
     ],
     // Optional: List your experience, they must have `name` and `description`. `link` is optional.

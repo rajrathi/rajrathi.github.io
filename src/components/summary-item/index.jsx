@@ -3,15 +3,16 @@ import React from 'react';
 
 const classes = {
   wrapper: 'mb-6',
-  name: 'font-semibold text-gray-900 pb-1',
-  description: 'text-md text-gray-600 font-light',
-  code: 'flex flex-row space-x-2 text-blue-600 font-mono text-md text-sm'
+  name: 'font-semibold text-lg text-black pb-1 text-xl',
+  description: 'text-md text-gray-600 font-light space-y-1 mb-2',
+  code: 'flex flex-row box-decoration-slice space-x-4 text-blue-600 font-mono text-md text-sm'
 };
 
 const SummaryItem = ({ name, description, link = false, internal = false, technology = ''}) => {
   let linkContent;
   let techstack = technology.toString().split(' ');
-  const techs = techstack.map(tech => <div class="basis-1/4 md:basis-1/3" key={tech}>{tech}</div>) 
+  const techs = (techstack.length!==1 && techstack.map(tech => <div class="box-border md:box-content p-1 rounded-md 
+  bg-blue-100 m4 justify-center" key={tech}>{tech}</div>)); 
   if (internal) {
     linkContent = <Link to={link}>{name}</Link>;
   } else {
@@ -27,6 +28,7 @@ const SummaryItem = ({ name, description, link = false, internal = false, techno
         {link ? linkContent : name}
       </h3>
       <p className={classes.description}>{description}</p>
+      <p></p>
       <p><span><div className={classes.code}>{techs}</div></span></p>
     </div>
   );
