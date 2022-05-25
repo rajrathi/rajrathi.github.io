@@ -56,6 +56,7 @@ export const pageQuery = graphql`
           name
           description
           link
+          technology
         }
         experience {
           name

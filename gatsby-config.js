@@ -15,7 +15,7 @@ module.exports = {
     // Optional: LinkedIn account URL
     linkedin: `https://www.linkedin.com/in/rajeshwarrathi/`,
     // Content of the About Me section
-    about: `I am a curious Machine Learning Researcher aiming to solve the problems affecting the society, environment and Earth. I am highly interested in developing novel Machine Learning techniques and Neural Network architectures espicially in Vision tasks.`,
+    about: `I am a curious and motivated Machine Learning Researcher aiming to solve the social and ecological problems affecting humans and the environment. I expertise in Machine Learning algorithms and Deep Learning architectures, especially in Vision tasks such as image classification, object detection, segmentation, etc. My main priority is to make ML accessible to as many humans as possible and make even children understand the basics of ML. Though I love spending time on ML, I also work on software development to automate stuff.`,
     // Optional: List your projects, they must have `name` and `description`. `link` is optional.
     projects: [
       {
@@ -23,26 +23,43 @@ module.exports = {
         description:
           '',
         link: 'https://github.com/rajrathi/image2imageBrainMRI',
+        technology: 'Python Tensorflow CycleGAN',
       },
       {
         name: 'Impact Analysis Engine for Microservices',
         description:
           '',
         link: '',
+        technology: 'Python NetworkX',
       },
       {
         name: 'Helmet Detection for Realtime Road Transport Video',
         description:
           '',
         link: '',
+        technology: 'Python NetworkX',
       },
       {
         name: 'Trading System',
         description:
           '',
         link: '',
+        technology: 'Python NetworkX',
       },
-
+      {
+        name: 'Trading System',
+        description:
+          '',
+        link: '',
+        technology: 'Python NetworkX',
+      },
+      {
+        name: 'Trading System',
+        description:
+          '',
+        link: '',
+        technology: 'Python NetworkX',
+      },
     ],
     // Optional: List your experience, they must have `name` and `description`. `link` is optional.
     experience: [
