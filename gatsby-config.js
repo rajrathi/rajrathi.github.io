@@ -21,49 +21,49 @@ module.exports = {
       {
         name: 'Unpaired Image Translation for Brain MRI (T1 to T2 and vice-versa) using CycleGAN',
         description:
-          'Developed a model for ',
+          'Developed a deep learning model for creating Brain MRI of type T1 from type T2 and vice versa using CycleGAN fused with ResNet blocks to reduce the cost, time and efforts while taking two types of MRI.',
         link: 'https://github.com/rajrathi/image2imageBrainMRI',
         technology: 'Python Tensorflow skimage Matplotlib NumPy',
       },
       {
         name: 'HuggingFace space for generating specific handwritten digits using Conditional GAN',
         description:
-          '',
+          'Created a HuggingFace space for generating the number of hand-written digit samples for specified digit between 0 and 9 to showcase the use of Conditional GAN.',
         link: 'https://huggingface.co/spaces/keras-io/conditional-GAN',
         technology: 'Python Keras Gradio HuggingFace NumPy',
       },
       {
         name: 'Impact Analysis Engine for Microservices',
         description:
-          'Developed an utility to generate the dependency graphs for Microservices and calculate the impact score of a microservice on architecture if that microservice is down.',
+          'Developed and deployed an utility to generate the dependency graphs for Microservices using config files and log files to reduce the latency for component automatiion. This tool calculates the impact score of a microservice on architecture if that microservice is down depending on the weightage of microservice and bug severity.',
         link: '',
         technology: 'Python NetworkX GraphViz regex Plotly Pandas Jenkins CI/CD',
       },
       {
         name: 'Helmet Detection for Realtime Road Transport Video',
         description:
-          '',
+          'Built an API for detecting if a two wheeler user is wearing helmet while transporting using R-CNN with an AUC score of appromixately 85% to assure the safety of people and help maintain law',
         link: '',
         technology: 'Python Keras OpenCV NumPy Flask',
       },
       {
         name: 'Ecommerce Android Application',
         description:
-          '',
+          'Developed an ecommorce android application for local shops to help small-scale business and their customers in tough time of COVID-19 with functionality of placing orders, checking orders, adding product to carts, adding mutliple addresses, etc. in real-time.',
         link: 'https://github.com/rajrathi/EcommerceApplication',
         technology: 'Flutter Dart Firebase',
       },
       {
         name: 'Trading System',
         description:
-          '',
+          'Developed a mock stock trading platform with team, where I contributed for exchange connectivity between frontend and backend using REST API methods',
         link: '',
         technology: 'Python Flask JSON C++ SQlite',
       },
       {
         name: 'Terminal based Text Editor',
         description:
-          '',
+          'Developed a terminal based text-editor with functionalities like find, search and replace, delete line, save file, etc.',
         link: '',
         technology: 'C ncurses regex',
       },
@@ -108,21 +108,29 @@ module.exports = {
       {
         name: 'Languages & Frameworks',
         description:
-          'Python, C++, C, Flutter',
+          'Python, C++, C, Flutter, LaTeX, ReactJS, Tailwind CSS',
       },
       {
         name: 'Python libraries',
-        description: 'NumPy, Pandas, Matplotlib, scikit-learn, statsapi, PyTorch, TensorFlow, Keras, OpenCV, NetworkX, GraphViz'
+        description: 'PyTorch, TensorFlow, Keras, scikit-learn, statsapi, OpenCV, NetworkX, GraphViz, NumPy, Pandas, Matplotlib, Seaborn, Plotly, SQLite'
+      },
+      {
+        name: 'Machine Learning',
+        description: 'Linear Regression, Logistic Regression, Clustering (kNN, k-Means), Gradient Descent, Decision Trees, Ensembling (Random Forest, XGBoost), Regularization, Cross-Validation, Probability, Statistics'
+      },
+      {
+        name: 'Deep Learning',
+        description: 'ANN, CNN(AlexNet, VGG, ResNet, XceptionNet, EfficientNet, ConvNext, etc.), RNN, LSTM, GRU, Optimizers (Momentum, AdaGrad, Adam, etc.), Back Propogation, Multi-headed Self Attention, Vision Transformers'
       },
       {
         name: 'Databases and ETL',
-        description: 'SQLServer, MySQL, RedShift, Azure Data Factory, Informatica',
+        description: 'SQLServer, MySQL, RedShift, Firebase, Azure Data Factory',
       },
       
       {
-        name: 'Other',
+        name: 'Tools',
         description:
-          'Amazon Web Services (AWS), CI / CD (Jenkins), Agile / Scrum',
+          'Git, Amazon Web Services (AWS), Jenkins, JIRA, Postman, Jupyter Notebook, Google Colab',
       },
     ],
   },
