@@ -48,7 +48,7 @@ const SEO = ({ description, lang, meta, title }) => {
         },
         {
           property: `og:image`,
-          content: `https://rajrathi.github.io/${previewImage}`
+          content: `https://rajrathi.tech/${previewImage}`
         },
         {
           property: `twitter:card`,
