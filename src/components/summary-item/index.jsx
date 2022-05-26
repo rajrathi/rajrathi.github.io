@@ -5,7 +5,7 @@ const classes = {
   wrapper: 'mb-6',
   name: 'font-semibold text-lg text-black pb-1 text-xl',
   description: 'text-md text-gray-600 font-light space-y-1 mb-2',
-  code: 'flex md:flex-wrap box-decoration-slice space-x-4 text-blue-600 font-mono text-md text-sm'
+  code: 'flex md:container md:mx-auto md:flex-wrap space-x-4 text-blue-600 font-mono text-md text-sm'
 };
 
 const SummaryItem = ({ name, description, link = false, internal = false, technology = ''}) => {

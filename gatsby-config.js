@@ -5,7 +5,7 @@ module.exports = {
     // Your Name
     name: 'Rajeshwar Rathi',
     // Main Site Title
-    title: `Rajeshwar Rathi | Machine Learning Engineer and Researcher`,
+    title: `Rajeshwar Rathi | Machine Learning Researcher and Engineer`,
     // Description that goes under your name in main bio
     description: `Machine Learning Researcher and Engineer`,
     // Optional: Twitter account handle
@@ -35,7 +35,7 @@ module.exports = {
       {
         name: 'Impact Analysis Engine for Microservices',
         description:
-          'Developed and deployed an utility to generate the dependency graphs for Microservices using config files and log files to reduce the latency for component automatiion. This tool calculates the impact score of a microservice on architecture if that microservice is down depending on the weightage of microservice and bug severity.',
+          'Developed and deployed an utility to generate the dependency graphs for Microservices using config files and log files to reduce the latency for component automation. This tool calculates the impact score of a microservice on architecture if that microservice is down depending on the weightage of microservice and bug severity.',
         link: '',
         technology: 'Python NetworkX GraphViz regex Plotly Pandas Jenkins CI/CD',
       },
@@ -108,7 +108,7 @@ module.exports = {
       {
         name: 'Languages & Frameworks',
         description:
-          'Python, C++, C, Flutter, LaTeX, ReactJS, Tailwind CSS',
+          'Python, C++, C, Flutter, LaTeX, ReactJS, Tailwind CSS, GastbyJS',
       },
       {
         name: 'Python libraries',
@@ -130,7 +130,7 @@ module.exports = {
       {
         name: 'Tools',
         description:
-          'Git, Amazon Web Services (AWS), Jenkins, JIRA, Postman, Jupyter Notebook, Google Colab',
+          'Git, Amazon Web Services (AWS), Jupyter Notebook, Google Colab, Jenkins, JIRA, Postman, Android Studio',
       },
     ],
   },
