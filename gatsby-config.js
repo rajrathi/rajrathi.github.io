@@ -190,8 +190,6 @@ module.exports = {
         pluginConfig: {
           // Puts tracking script in the head instead of the body
           head: true,
-          // Defaults to https://www.googletagmanager.com
-          origin: "https://rajrathi.tech",
         },
       },
     },
