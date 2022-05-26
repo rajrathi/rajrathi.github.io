@@ -1,5 +1,5 @@
 {
-  "name": "rblogger",
+  "name": "rrblogger",
   "private": true,
   "description": "My Personal Blog Website about writning blogs on AI, ML and software development",
   "version": "0.1.0",
@@ -48,7 +48,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "deploy": "gatsby build && gh-pages -d public"
+    "deploy": "gatsby build && gh-pages -t -d public"
   },
   "repository": {
     "type": "git",

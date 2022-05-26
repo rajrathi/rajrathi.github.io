@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     // Site URL for when it goes live
-    siteUrl: `https://rajrathi.github.io`,
+    siteUrl: `https://rajrathi.tech`,
     // Your Name
     name: 'Rajeshwar Rathi',
     // Main Site Title
@@ -112,7 +112,7 @@ module.exports = {
       },
       {
         name: 'Python libraries',
-        description: 'PyTorch, TensorFlow, Keras, scikit-learn, statsapi, OpenCV, NetworkX, GraphViz, NumPy, Pandas, Matplotlib, Seaborn, Plotly, SQLite'
+        description: 'PyTorch, TensorFlow, Keras, scikit-learn, statsapi, OpenCV, NetworkX, GraphViz, NumPy, Pandas, Matplotlib, Seaborn, Plotly, Flask, SQLite'
       },
       {
         name: 'Machine Learning',
@@ -186,8 +186,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `devfolio`,
-        short_name: `devfolio`,
+        name: `rrblogger`,
+        short_name: `rrblogger`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`, // This color appears on mobile
