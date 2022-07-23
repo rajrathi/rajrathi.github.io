@@ -1,9 +1,7 @@
 ---
-title: "Machine Learning 101: Linear Regression"
+title: "Eigen Vectors and Values: What they do in ML?"
 date: '2022-05-22T12:00:00.00Z'
-description: 'Everything you need to know about Linear Regression'
+description: 'A complete guide on eigen vectors and values in perspective of Machine Learning'
 ---
 
-# Linear Regression
 
-For understanding Linear Regression let's take a simple example.  
