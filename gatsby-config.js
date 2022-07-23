@@ -72,7 +72,7 @@ module.exports = {
     experience: [
       {
         name: 'Bitwise Inc.',
-        description: 'Programmer (Data Engineer), Sep 2020 - Present',
+        description: 'Programmer (Machine Learning Engineer), Sep 2020 - Present',
         link: '',
       },
       {
