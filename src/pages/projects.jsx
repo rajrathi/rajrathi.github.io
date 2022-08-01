@@ -38,6 +38,7 @@ query {
         author
         github
         linkedin
+        medium
         projects {
             name
             description

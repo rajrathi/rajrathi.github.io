@@ -3,6 +3,10 @@ import get from 'lodash/get';
 import React from 'react';
 
 import profileImg from '../../images/profile.jpeg';
+import twitterIcon from '../../images/twitter.png';
+import linkedinIcon from '../../images/linkedin.png';
+import mediumIcon from '../../images/medium.png';
+import githubIcon from '../../images/github.png';
 
 const classes = {
   wrapper: 'block mb-6 md:flex',
@@ -11,16 +15,16 @@ const classes = {
   contentWrapper: 'flex-none pt-6 md:pt-1 md:flex-1 md:pl-20',
   name: 'text-5xl text-gray-900 font-bold leading-tight hover:text-black',
   description: 'text-gray-600',
-  list: 'mt-6 uppercase tracking-wider',
-  item: 'inline list-none pr-4',
-  link:
-    'inline-block py-2 font-semibold text-xs text-gray-600 hover:text-black',
+  mediaWrapper: 'inline-flex pt-6 space-x-4 md:flex-wrap',
+  iconWrapper: 'flex max-w-10 max-h-10',
+  icon: 'object-scale-down h-10 w-10 transform transition-all duration-150 hover:scale:105'
 };
 
 const Header = ({ metadata = {}, noBlog = false }) => {
   const twitter = get(metadata, 'author', false);
   const github = get(metadata, 'github', false);
   const linkedin = get(metadata, 'linkedin', false);
+  const medium = get(metadata, 'medium', false);
 
   return (
     <div className={classes.wrapper}>
@@ -34,39 +38,38 @@ const Header = ({ metadata = {}, noBlog = false }) => {
           <Link to="/">{metadata.name}</Link>
         </h1>
         <p className={classes.description}>{metadata.description}</p>
-        <ul className={classes.list}>
-          {twitter && (
-            <li className={classes.item}>
+        <div className = {classes.mediaWrapper}>
+          <div class = {classes.iconWrapper}>
+            {github &&(
+              <a href={github}>
+                <img class={classes.icon} src = {githubIcon} alt = "GitHub" />
+              </a>
+            )}
+          </div>
+          <div class = {classes.iconWrapper}>
+            {linkedin &&(
+              <a href={linkedin}>
+                <img class={classes.icon} src = {linkedinIcon} alt = "LinkedIn" />
+              </a>
+            )}
+          </div>
+          <div class = {classes.iconWrapper}>
+            {medium &&(
+              <a href={medium}>
+                <img class={classes.icon} src = {mediumIcon} alt = "Medium" />
+              </a>
+            )}
+          </div>
+          <div class = {classes.iconWrapper}>
+            {twitter &&(
               <a
-                className={classes.link}
-                href={`https://twitter.com/${twitter}`}
-              >
-                Twitter
+                 href={`https://twitter.com/${twitter}`}
+                >
+                  <img class={classes.icon} src = {twitterIcon} alt = "Twitter"/>
               </a>
-            </li>
-          )}
-          {github && (
-            <li className={classes.item}>
-              <a className={classes.link} href={github}>
-                GitHub
-              </a>
-            </li>
-          )}
-          {linkedin && (
-            <li className={classes.item}>
-              <a className={classes.link} href={linkedin}>
-                LinkedIn
-              </a>
-            </li>
-          )}
-          {!noBlog && (
-            <li className={classes.item}>
-              <Link className={classes.link} to="/blog">
-                Blog
-              </Link>
-            </li>
-          )}
-        </ul>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

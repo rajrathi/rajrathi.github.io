@@ -1,7 +1,7 @@
 ---
-title: "Eigen Vectors and Values: What they do in ML?"
+title: "CycleGAN: cycle-consistency is the key"
 date: '2022-05-22T12:00:00.00Z'
-description: 'A complete guide on eigen vectors and values in perspective of Machine Learning'
+description: 'Lets understand CycleGAN with a discussion and practice'
 ---
 
 
