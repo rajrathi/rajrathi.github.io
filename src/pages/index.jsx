@@ -4,6 +4,7 @@ import React from 'react';
 
 import Header from '../components/header';
 import Layout from '../components/layout';
+import NavBar from '../components/navbar';
 import SectionAbout from '../components/section-about';
 import SectionBlog from '../components/section-blog';
 import SectionEducation from '../components/section-education';

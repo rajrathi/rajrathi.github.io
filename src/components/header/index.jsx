@@ -1,6 +1,7 @@
 import { Link } from 'gatsby';
 import get from 'lodash/get';
 import React from 'react';
+import NavBar from '../navbar';
 
 import profileImg from '../../images/profile.jpeg';
 import twitterIcon from '../../images/twitter.png';
@@ -17,7 +18,7 @@ const classes = {
   description: 'text-gray-600',
   mediaWrapper: 'inline-flex pt-6 space-x-4 md:flex-wrap',
   iconWrapper: 'flex max-w-10 max-h-10',
-  icon: 'object-scale-down h-10 w-10 transform transition-all duration-150 hover:scale:105'
+  icon: 'object-scale-down h-10 w-10 transform transition-all duration-150 hover:scale:110'
 };
 
 const Header = ({ metadata = {}, noBlog = false }) => {

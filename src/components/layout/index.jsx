@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from '../navbar';
 
 const classes = {
   wrapper: 'p-8 relative max-w-screen-xl xs:p-24',
@@ -7,8 +8,11 @@ const classes = {
 
 const Layout = ({ children }) => {
   return (
-    <div className={classes.outerWrapper}>
-      <div className={classes.wrapper}>{children}</div>
+    <div>
+      <NavBar />
+      <div className={classes.outerWrapper}>
+        <div className={classes.wrapper}>{children}</div>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -8,6 +10,9 @@ module.exports = {
     extend: {
       screens: {
         xs: '480px',
+      },
+      colors: {
+        sky: colors.sky
       },
     },
   },
