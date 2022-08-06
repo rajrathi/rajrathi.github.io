@@ -1,3 +1,4 @@
+const { slate } = require('tailwindcss/colors');
 const colors = require('tailwindcss/colors')
 
 module.exports = {
@@ -12,7 +13,8 @@ module.exports = {
         xs: '480px',
       },
       colors: {
-        sky: colors.sky
+        sky: colors.sky,
+        slate: colors.slate
       },
     },
   },
