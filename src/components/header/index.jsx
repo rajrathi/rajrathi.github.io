@@ -17,8 +17,8 @@ const classes = {
   name: 'text-5xl text-gray-900 font-bold leading-tight hover:text-black',
   description: 'text-gray-600',
   mediaWrapper: 'inline-flex pt-6 space-x-4 md:flex-wrap',
-  iconWrapper: 'flex max-w-10 max-h-10',
-  icon: 'object-scale-down h-10 w-10 transform transition-all duration-150 hover:scale:110'
+  iconWrapper: 'flex max-w-10 max-h-10 ',
+  icon: 'object-scale-down h-10 w-10'
 };
 
 const Header = ({ metadata = {}, noBlog = false }) => {

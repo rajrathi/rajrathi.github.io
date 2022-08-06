@@ -110,7 +110,7 @@ module.exports = {
       {
         name: 'Languages & Frameworks',
         description:
-          'Python, C++, C, Flutter, LaTeX, ReactJS, Tailwind CSS, GastbyJS',
+          'Python, C++, C, Flutter, LaTeX, ReactJS, Tailwind CSS, GatsbyJS',
       },
       {
         name: 'Python libraries',
