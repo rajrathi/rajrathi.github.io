@@ -10,11 +10,11 @@ const Projects = ({ projects }) => {
     <Section title="All Projects">
       {projects.map((project) => (
         <SummaryItem
-        key={project.name}
-        name={project.name}
-        description={project.description}
-        link={project.link}
-        technology = {project.technology}
+          key={project.name}
+          name={project.name}
+          description={project.description}
+          link={project.link}
+          technology={project.technology}
         />
       ))}
     </Section>

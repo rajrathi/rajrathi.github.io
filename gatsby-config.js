@@ -21,14 +21,16 @@ module.exports = {
     // Optional: List your projects, they must have `name` and `description`. `link` is optional.
     projects: [
       {
-        name: 'Unpaired Image Translation for Brain MRI (T1 to T2 and vice-versa) using CycleGAN',
+        name:
+          'Unpaired Image Translation for Brain MRI (T1 to T2 and vice-versa) using CycleGAN',
         description:
           'Developed a deep learning model for creating Brain MRI of type T1 from type T2 and vice versa using CycleGAN fused with ResNet blocks to reduce the cost, time and efforts while taking two types of MRI.',
         link: 'https://github.com/rajrathi/image2imageBrainMRI',
         technology: 'Python Tensorflow skimage Matplotlib NumPy',
       },
       {
-        name: 'HuggingFace space for generating specific handwritten digits using Conditional GAN',
+        name:
+          'HuggingFace space for generating specific handwritten digits using Conditional GAN',
         description:
           'Created a HuggingFace space for generating the number of hand-written digit samples for specified digit between 0 and 9 to showcase the use of Conditional GAN.',
         link: 'https://huggingface.co/spaces/keras-io/conditional-GAN',
@@ -39,7 +41,8 @@ module.exports = {
         description:
           'Developed and deployed an utility to generate the dependency graphs for Microservices using config files and log files to reduce the latency for component automation. This tool calculates the impact score of a microservice on architecture if that microservice is down depending on the weightage of microservice and bug severity.',
         link: '',
-        technology: 'Python NetworkX GraphViz regex Plotly Pandas Jenkins CI/CD',
+        technology:
+          'Python NetworkX GraphViz regex Plotly Pandas Jenkins CI/CD',
       },
       {
         name: 'Helmet Detection for Realtime Road Transport Video',
@@ -74,7 +77,8 @@ module.exports = {
     experience: [
       {
         name: 'Bitwise Inc.',
-        description: 'Programmer (Machine Learning Engineer), Sep 2020 - Present',
+        description:
+          'Programmer (Machine Learning Engineer), Sep 2020 - Present',
         link: '',
       },
       {
@@ -92,18 +96,18 @@ module.exports = {
       {
         name: 'Liverpool John Moores University, Liverpool',
         description: 'M. Sc Data Science, Jan 2022 - Aug 2022',
-        link: ''
+        link: '',
       },
       {
         name: 'International Institute of Information Technology, Bangalore',
         description: 'PG Diploma Data Science, Jan 2021 - Jan 2022',
-        link: ''
+        link: '',
       },
       {
         name: 'College of Engineering, Pune',
         description: 'B. Tech Computer Science, Aug 2016 - Oct 2020',
-        link: ''
-      }
+        link: '',
+      },
     ],
     // Optional: List your skills, they must have `name` and `description`.
     skills: [
@@ -114,21 +118,25 @@ module.exports = {
       },
       {
         name: 'Python libraries',
-        description: 'PyTorch, TensorFlow, Keras, scikit-learn, statsapi, OpenCV, NetworkX, GraphViz, NumPy, Pandas, Matplotlib, Seaborn, Plotly, Flask, SQLite'
+        description:
+          'PyTorch, TensorFlow, Keras, scikit-learn, statsapi, OpenCV, NetworkX, GraphViz, NumPy, Pandas, Matplotlib, Seaborn, Plotly, Flask, SQLite',
       },
       {
         name: 'Machine Learning',
-        description: 'Linear Regression, Logistic Regression, Clustering (kNN, k-Means), Gradient Descent, Decision Trees, Ensembling (Random Forest, XGBoost), Regularization, Cross-Validation, Probability, Statistics'
+        description:
+          'Linear Regression, Logistic Regression, Clustering (kNN, k-Means), Gradient Descent, Decision Trees, Ensembling (Random Forest, XGBoost), Regularization, Cross-Validation, Probability, Statistics',
       },
       {
         name: 'Deep Learning',
-        description: 'ANN, CNN(AlexNet, VGG, ResNet, XceptionNet, EfficientNet, ConvNext, etc.), RNN, LSTM, GRU, Optimizers (Momentum, AdaGrad, Adam, etc.), Back Propogation, Multi-headed Self Attention, Vision Transformers'
+        description:
+          'ANN, CNN(AlexNet, VGG, ResNet, XceptionNet, EfficientNet, ConvNext, etc.), RNN, LSTM, GRU, Optimizers (Momentum, AdaGrad, Adam, etc.), Back Propogation, Multi-headed Self Attention, Vision Transformers',
       },
       {
         name: 'Databases and ETL',
-        description: 'SQLServer, MySQL, RedShift, Firebase, Azure Data Factory, S3, Airflow',
+        description:
+          'SQLServer, MySQL, RedShift, Firebase, Azure Data Factory, S3, Airflow',
       },
-      
+
       {
         name: 'Tools',
         description:
@@ -184,14 +192,14 @@ module.exports = {
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
         trackingIds: [
-          "G-XBJ3CG2MY0", // Google Analytics / GA
-         ],
+          'G-XBJ3CG2MY0', // Google Analytics / GA
+        ],
         // This object gets passed directly to the gtag config command
         // This config will be shared across all trackingIds
         // This object is used for configuration specific to this plugin
         pluginConfig: {
           // Puts tracking script in the head instead of the body
-          head: true, 
+          head: true,
         },
       },
     },

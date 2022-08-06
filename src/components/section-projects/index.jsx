@@ -9,15 +9,15 @@ const SectionProjects = ({ projects }) => {
 
   return (
     <Section title="Latest Projects">
-      {(projects.slice(0,5).map((project) => (
+      {projects.slice(0, 5).map((project) => (
         <SummaryItem
           key={project.name}
           name={project.name}
           description={project.description}
           link={project.link}
-          technology = {project.technology}
+          technology={project.technology}
         />
-      )))}
+      ))}
       {projects.length >= 5 && (
         <Link className="text-gray-500 text-sm hover:text-black" to="/projects">
           View all projects &rarr;

@@ -28,7 +28,7 @@ const Index = ({ data }) => {
 export default Index;
 
 export const pageQuery = graphql`
-query {
+  query {
     site {
       siteMetadata {
         name
@@ -40,12 +40,12 @@ query {
         linkedin
         medium
         projects {
-            name
-            description
-            link
-            technology
-          }
+          name
+          description
+          link
+          technology
+        }
       }
     }
-}
+  }
 `;

@@ -18,7 +18,7 @@ const classes = {
   description: 'text-gray-600',
   mediaWrapper: 'inline-flex pt-6 space-x-4 md:flex-wrap',
   iconWrapper: 'flex max-w-10 max-h-10 ',
-  icon: 'object-scale-down h-10 w-10'
+  icon: 'object-scale-down h-10 w-10',
 };
 
 const Header = ({ metadata = {}, noBlog = false }) => {
@@ -39,34 +39,32 @@ const Header = ({ metadata = {}, noBlog = false }) => {
           <Link to="/">{metadata.name}</Link>
         </h1>
         <p className={classes.description}>{metadata.description}</p>
-        <div className = {classes.mediaWrapper}>
-          <div class = {classes.iconWrapper}>
-            {github &&(
+        <div className={classes.mediaWrapper}>
+          <div class={classes.iconWrapper}>
+            {github && (
               <a href={github}>
-                <img class={classes.icon} src = {githubIcon} alt = "GitHub" />
+                <img class={classes.icon} src={githubIcon} alt="GitHub" />
               </a>
             )}
           </div>
-          <div class = {classes.iconWrapper}>
-            {linkedin &&(
+          <div class={classes.iconWrapper}>
+            {linkedin && (
               <a href={linkedin}>
-                <img class={classes.icon} src = {linkedinIcon} alt = "LinkedIn" />
+                <img class={classes.icon} src={linkedinIcon} alt="LinkedIn" />
               </a>
             )}
           </div>
-          <div class = {classes.iconWrapper}>
-            {medium &&(
+          <div class={classes.iconWrapper}>
+            {medium && (
               <a href={medium}>
-                <img class={classes.icon} src = {mediumIcon} alt = "Medium" />
+                <img class={classes.icon} src={mediumIcon} alt="Medium" />
               </a>
             )}
           </div>
-          <div class = {classes.iconWrapper}>
-            {twitter &&(
-              <a
-                 href={`https://twitter.com/${twitter}`}
-                >
-                  <img class={classes.icon} src = {twitterIcon} alt = "Twitter"/>
+          <div class={classes.iconWrapper}>
+            {twitter && (
+              <a href={`https://twitter.com/${twitter}`}>
+                <img class={classes.icon} src={twitterIcon} alt="Twitter" />
               </a>
             )}
           </div>

@@ -1,22 +1,22 @@
 import React from 'react';
-import { Disclosure} from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import {Link} from 'gatsby'
+import { Disclosure } from '@headlessui/react';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import { Link } from 'gatsby';
 
-import navLogo from '../../images/navlogo.png'
+import navLogo from '../../images/navlogo.png';
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'Projects', href: '/projects', current: false },
   { name: 'Blog', href: '/blog', current: false },
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 const NavBar = () => {
-    return (
+  return (
     <Disclosure as="nav" className="bg-slate-900">
       {({ open }) => (
         <>
@@ -35,7 +35,7 @@ const NavBar = () => {
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex max-w-auto max-h-12">
-                  <Link to='/'>
+                  <Link to="/">
                     <img
                       className="object-scale-down h-12 w-16"
                       src={navLogo}
@@ -50,7 +50,9 @@ const NavBar = () => {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-white hover:bg-gray-700 hover:text-white',
+                          item.current
+                            ? 'bg-gray-900 text-white'
+                            : 'text-white hover:bg-gray-700 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -72,7 +74,9 @@ const NavBar = () => {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    item.current
+                      ? 'bg-gray-700 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'block px-3 py-2 rounded-md text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
@@ -85,7 +89,7 @@ const NavBar = () => {
         </>
       )}
     </Disclosure>
-  )
-}
+  );
+};
 
 export default NavBar;

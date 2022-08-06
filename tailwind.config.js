@@ -1,5 +1,5 @@
 const { slate } = require('tailwindcss/colors');
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   future: {
@@ -14,7 +14,7 @@ module.exports = {
       },
       colors: {
         sky: colors.sky,
-        slate: colors.slate
+        slate: colors.slate,
       },
     },
   },
