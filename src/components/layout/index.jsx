@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from '../navbar';
 
 const classes = {
-  wrapper: 'p-8 relative max-w-screen-xl xs:p-24',
+  wrapper: 'ml-auto mr-auto relative max-w-screen-xl xs:p-24',
   outerWrapper: 'relative',
 };
 

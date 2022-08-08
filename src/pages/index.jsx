@@ -4,7 +4,7 @@ import React from 'react';
 
 import Header from '../components/header';
 import Layout from '../components/layout';
-import NavBar from '../components/navbar';
+//import NavBar from '../components/navbar';
 import SectionAbout from '../components/section-about';
 import SectionBlog from '../components/section-blog';
 import SectionEducation from '../components/section-education';
@@ -16,7 +16,7 @@ import SEO from '../components/seo';
 const Index = ({ data }) => {
   const about = get(data, 'site.siteMetadata.about', false);
   const projects = get(data, 'site.siteMetadata.projects', false);
-  const posts = data.allMarkdownRemark.edges;
+  const posts = data.allMdx.edges;
   const experience = get(data, 'site.siteMetadata.experience', false);
   const education = get(data, 'site.siteMetadata.education', false);
   const skills = get(data, 'site.siteMetadata.skills', false);
@@ -76,7 +76,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownRemark(
+    allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 5
     ) {

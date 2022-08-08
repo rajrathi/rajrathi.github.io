@@ -8,7 +8,7 @@ import SEO from '../components/seo';
 import NotFound from '../pages/404';
 
 const Index = ({ data }) => {
-  const posts = data.allMarkdownRemark.edges;
+  const posts = data.allMdx.edges;
   const noBlog = !posts || !posts.length;
 
   if (!posts || !posts.length) {
@@ -40,7 +40,7 @@ export const pageQuery = graphql`
         medium
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           excerpt

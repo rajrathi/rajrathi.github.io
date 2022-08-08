@@ -1,4 +1,3 @@
-const { slate } = require('tailwindcss/colors');
 const colors = require('tailwindcss/colors');
 
 module.exports = {
@@ -19,5 +18,7 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
