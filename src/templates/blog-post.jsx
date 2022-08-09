@@ -7,7 +7,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 
 const classes = {
-  title: 'text-4xl text-gray-900 font-bold',
+  title: 'text-4xl text-gray-900 font-bold font-Montserrat',
   date: 'm-4 text-gray-600 font-light',
 };
 
@@ -23,7 +23,7 @@ const BlogPost = ({ data }) => {
           <p className={classes.date}>
             Posted on {moment(post.frontmatter.date).format('MMMM D, YYYY')}
           </p>
-          <section itemProp="articleBody" className="prose prose-xl">
+          <section itemProp="articleBody" className="blog-content">
           <MDXRenderer>{post.body}</MDXRenderer>
         </section>
         </div>

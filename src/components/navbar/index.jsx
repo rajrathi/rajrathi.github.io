@@ -34,7 +34,7 @@ const NavBar = () => {
                 </Disclosure.Button>
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex max-w-auto max-h-12">
+                <div className="flex max-w-auto max-h-12 p-1">
                   <Link to="/">
                     <img
                       className="object-scale-down h-12 w-16"
@@ -44,7 +44,7 @@ const NavBar = () => {
                   </Link>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-4 ">
+                  <div className="flex p-2">
                     {navigation.map((item) => (
                       <a
                         key={item.name}

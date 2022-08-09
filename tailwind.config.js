@@ -11,6 +11,9 @@ module.exports = {
       screens: {
         xs: '480px',
       },
+      fontFamily: {
+        Montserrat: ["Montserrat", "sans-serif"]
+      },
       colors: {
         sky: colors.sky,
         slate: colors.slate,
