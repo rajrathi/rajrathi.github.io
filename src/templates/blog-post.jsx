@@ -7,8 +7,8 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 
 const classes = {
-  title: 'text-4xl text-gray-900 font-bold font-Montserrat',
-  date: 'm-4 text-gray-600 font-light',
+  title: 'text-4xl text-black font-bold font-Montserrat',
+  date: 'mt-4 mb-4 text-gray-500 font-Montserrat',
 };
 
 const BlogPost = ({ data }) => {
@@ -23,6 +23,7 @@ const BlogPost = ({ data }) => {
           <p className={classes.date}>
             Posted on {moment(post.frontmatter.date).format('MMMM D, YYYY')}
           </p>
+          <div class="border-b-8 border-sky-600"></div>
           <section itemProp="articleBody" className="blog-content">
           <MDXRenderer>{post.body}</MDXRenderer>
         </section>
