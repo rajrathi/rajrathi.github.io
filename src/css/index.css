@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,6 +10,9 @@
   .blog-content {
     @apply text-black;
     @apply max-w-screen-md;
+    @apply font-Playfair;
+    @apply tracking-wider;
+    @apply text-lg
   }
 
   .blog-content a {

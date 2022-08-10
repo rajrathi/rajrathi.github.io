@@ -12,7 +12,9 @@ module.exports = {
         xs: '480px',
       },
       fontFamily: {
-        Montserrat: ["Montserrat", "sans-serif"]
+        Montserrat: ["Montserrat", "sans-serif"],
+        RobotoMono: ["Roboto Mono", "monospace"],
+        Playfair: ["Playfair Display", "serif"]
       },
       colors: {
         sky: colors.sky,
