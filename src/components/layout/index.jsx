@@ -11,7 +11,8 @@ const classes = {
 const Layout = ({ children }) => {
   return (
     <div>
-      <div className='bg-center xs:bg-cover' style={{backgroundImage: `url(${background})`}}>
+      <div className='min-h-screen max-h-screen bg-cover bg-center bg-no-repeat' 
+      style={{backgroundImage: `url(${background})`}}>
         <div className='block max-w-screen-xl h-screen'>
           <NavBar />
         </div>
