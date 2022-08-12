@@ -50,11 +50,11 @@ const Header = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.contentWrapper}>
-        <p className='text-6xl font-bold font-Montserrat text-center'>Hello!</p>
+        <p className='text-7xl font-bold font-Montserrat text-center'>Hello!</p>
         <p className=' text-4xl mt-2 font-semibold font-Montserrat text-center'>
           I'm {name}
         </p>
-        <p className=' text-sm mt-2 font-Playfair text-center'>
+        <p className=' text-sm mt-2 font-Poppins text-center'>
         {description}
         </p>
         <div class="border-b-2 border-gray-500/40"></div>
