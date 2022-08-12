@@ -4,7 +4,6 @@ import React from 'react';
 
 import Header from '../components/header';
 import Layout from '../components/layout';
-//import NavBar from '../components/navbar';
 import SectionAbout from '../components/section-about';
 import SectionBlog from '../components/section-blog';
 import SectionEducation from '../components/section-education';
@@ -25,7 +24,7 @@ const Index = ({ data }) => {
   return (
     <Layout>
       <SEO />
-      <Header metadata={data.site.siteMetadata} noBlog={noBlog} />
+      {/* <Header metadata={data.site.siteMetadata} /> */}
       {about && <SectionAbout about={about} />}
       {projects && projects.length && <SectionProjects projects={projects} />}
       {!noBlog && <SectionBlog posts={posts} />}

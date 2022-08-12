@@ -1,20 +1,29 @@
 import React from 'react';
 import NavBar from '../navbar';
+import Header from '../header';
+
 
 import background from '../../images/bg.jpeg'
+
+
+
 
 const classes = {
   wrapper: 'ml-auto mr-auto relative max-w-screen-xl',
   outerWrapper: 'relative',
 };
 
-const Layout = ({ children }) => {
+const Layout = ({ children}) => {
+
   return (
     <div>
-      <div className='min-h-screen max-h-screen bg-cover bg-center bg-no-repeat' 
+      <div className='min-h-screen max-h-screen bg-cover bg-center bg-no-repeat xs:bg-fixed' 
       style={{backgroundImage: `url(${background})`}}>
-        <div className='block max-w-screen-xl h-screen'>
+        <div>
           <NavBar />
+        </div>
+        <div className='container max-w-full max-h-screen'>
+          <Header />
         </div>
       </div>
       <div className={classes.outerWrapper}>
@@ -27,3 +36,4 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+

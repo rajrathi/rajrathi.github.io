@@ -14,7 +14,8 @@ module.exports = {
       fontFamily: {
         Montserrat: ["Montserrat", "sans-serif"],
         RobotoMono: ["Roboto Mono", "monospace"],
-        Playfair: ["Playfair Display", "serif"]
+        Playfair: ["Playfair Display", "serif"],
+        Poppins: ["Poppins", "sans-serif"]
       },
       colors: {
         sky: colors.sky,
