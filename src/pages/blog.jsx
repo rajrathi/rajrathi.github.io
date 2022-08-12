@@ -37,7 +37,7 @@ export const pageQuery = graphql`
         author
         github
         linkedin
-        medium
+        mail
       }
     }
     allMdx(sort: { fields: [frontmatter___date], order: DESC }) {

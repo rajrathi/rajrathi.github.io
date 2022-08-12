@@ -38,7 +38,7 @@ export const pageQuery = graphql`
         author
         github
         linkedin
-        medium
+        mail
         projects {
           name
           description

@@ -3,8 +3,8 @@ import moment from 'moment';
 import React from 'react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-import Layout from '../components/layout';
 import SEO from '../components/seo';
+import NavBar from '../components/navbar';
 
 const classes = {
   title: 'text-4xl text-black font-bold font-Montserrat',
@@ -15,9 +15,10 @@ const BlogPost = ({ data }) => {
   const post = data.mdx;
 
   return (
-    <Layout>
+    <div>
+      <NavBar />
       <div class="flex h-screen">
-        <div class="ml-auto mr-auto max-w-2xl">
+        <div class="ml-auto mr-auto max-w-2xl p-6">
           <SEO title={post.frontmatter.title} />
           <h1 className={classes.title}>{post.frontmatter.title}</h1>
           <p className={classes.date}>
@@ -29,7 +30,7 @@ const BlogPost = ({ data }) => {
         </section>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 
@@ -46,7 +47,7 @@ export const pageQuery = graphql`
         author
         github
         linkedin
-        medium
+        mail
       }
     }
     mdx(fields: { slug: { eq: $slug } }) {

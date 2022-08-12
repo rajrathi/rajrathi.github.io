@@ -1,13 +1,14 @@
 import { Link } from 'gatsby';
 import get from 'lodash/get';
 import React from 'react';
-import NavBar from '../navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import {fas} from '@fortawesome/free-solid-svg-icons'
+
 
 import profileImg from '../../images/profile.jpeg';
-import twitterIcon from '../../images/twitter.png';
-import linkedinIcon from '../../images/linkedin.png';
-import mediumIcon from '../../images/medium.png';
-import githubIcon from '../../images/github.png';
+library.add(fab, fas)
 
 const classes = {
   wrapper: 'block mb-6 md:flex',
@@ -17,22 +18,20 @@ const classes = {
   name: 'text-5xl text-gray-900 font-bold leading-tight hover:text-black',
   description: 'text-gray-600',
   mediaWrapper: 'inline-flex pt-6 space-x-4 md:flex-wrap',
-  iconWrapper: 'flex max-w-6 max-h-6',
-  icon: 'object-scale-down h-6 w-6 hover:scale-110',
+  iconWrapper: 'flex max-w-10 max-h-10',
+  icon: 'object-scale-down h-8 w-8 hover:scale-110 hover:text-[#40D89B]',
 };
 
 const Header = ({ metadata = {}, noBlog = false }) => {
   const twitter = get(metadata, 'author', false);
   const github = get(metadata, 'github', false);
   const linkedin = get(metadata, 'linkedin', false);
-  const medium = get(metadata, 'medium', false);
+  const mail = get(metadata, 'mail', false);
 
   return (
     <div className={classes.wrapper}>
       <div className={classes.imageWrapper}>
-        <Link to="/">
-          <img className={classes.image} src={profileImg} alt={metadata.name} />
-        </Link>
+        <img className={classes.image} src={profileImg} alt={metadata.name} />
       </div>
       <div className={classes.contentWrapper}>
         <h1 className={classes.name}>
@@ -43,28 +42,28 @@ const Header = ({ metadata = {}, noBlog = false }) => {
           <div class={classes.iconWrapper}>
             {github && (
               <a href={github}>
-                <img class={classes.icon} src={githubIcon} alt="GitHub" />
+                <FontAwesomeIcon icon="fa-brands fa-github" className={classes.icon}/>
               </a>
             )}
           </div>
           <div class={classes.iconWrapper}>
             {linkedin && (
               <a href={linkedin}>
-                <img class={classes.icon} src={linkedinIcon} alt="LinkedIn" />
+                <FontAwesomeIcon icon="fa-brands fa-linkedin-in" className={classes.icon}/>
               </a>
             )}
           </div>
           <div class={classes.iconWrapper}>
-            {medium && (
-              <a href={medium}>
-                <img class={classes.icon} src={mediumIcon} alt="Medium" />
+            {mail && (
+              <a href={`mailto: ${mail}`}>
+                <FontAwesomeIcon icon="fa-solid fa-envelope" className={classes.icon}/>
               </a>
             )}
           </div>
           <div class={classes.iconWrapper}>
             {twitter && (
               <a href={`https://twitter.com/${twitter}`}>
-                <img class={classes.icon} src={twitterIcon} alt="Twitter" />
+                <FontAwesomeIcon icon="fa-brands fa-twitter" className={classes.icon}/>
               </a>
             )}
           </div>

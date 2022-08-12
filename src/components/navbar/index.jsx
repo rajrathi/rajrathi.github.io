@@ -66,7 +66,7 @@ const NavBar = () => {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden bg-black">
+          <Disclosure.Panel className="sm:hidden focus:outline-none bg-black/30">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Disclosure.Button
@@ -76,7 +76,7 @@ const NavBar = () => {
                   className={classNames(
                     item.current
                       ? 'text-black'
-                      : 'text-white hover:bg-gray-700 hover:text-white',
+                      : 'text-white hover:bg-black/[0.06] hover:text-white',
                     'block px-3 py-2 rounded-md text-xs tracking-wider font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
