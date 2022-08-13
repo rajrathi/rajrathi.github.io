@@ -3,8 +3,8 @@ import React from 'react';
 
 const classes = {
   wrapper: 'mb-6',
-  name: 'font-semibold text-lg text-black pb-1 text-xl',
-  description: 'text-md text-gray-600 font-light space-y-1 mb-2 text-justify',
+  name: 'font-semibold text-md text-gray-900 pb-1 text-xl',
+  description: 'text-base text-white font-light space-y-1 text-justify',
   code: 'flex flex-wrap space-x-4 text-blue-600 font-mono text-sm space-y-px',
 };
 
@@ -43,7 +43,6 @@ const SummaryItem = ({
         {link ? linkContent : name}
       </h3>
       <p className={classes.description}>{description}</p>
-      <p></p>
       <p>
         <span>
           <div className={classes.code}>{techs}</div>

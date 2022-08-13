@@ -7,6 +7,8 @@ import SEO from '../components/seo';
 import NavBar from '../components/navbar';
 
 const classes = {
+  outerWrapper: 'flex h-screen',
+  wrapper: 'ml-auto mr-auto max-w-2xl p-6',
   title: 'text-4xl text-black font-bold font-Montserrat',
   date: 'mt-4 mb-4 text-gray-800 font-Montserrat text-base',
 };
@@ -16,15 +18,15 @@ const BlogPost = ({ data }) => {
 
   return (
     <div>
+      <SEO title={post.frontmatter.title} />
       <NavBar />
-      <div class="flex h-screen">
-        <div class="ml-auto mr-auto max-w-2xl p-6">
-          <SEO title={post.frontmatter.title} />
+      <div className={classes.outerWrapper}>
+        <div className={classes.wrapper}>
           <h1 className={classes.title}>{post.frontmatter.title}</h1>
           <p className={classes.date}>
             Posted on {moment(post.frontmatter.date).format('MMMM D, YYYY')}
           </p>
-          <div class="border-b-8 border-sky-600 mb-8"></div>
+          <div class="border-b-8 border-sky-400 mb-8"></div>
           <section itemProp="articleBody" className="blog-content">
           <MDXRenderer>{post.body}</MDXRenderer>
         </section>

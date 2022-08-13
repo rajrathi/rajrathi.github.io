@@ -6,10 +6,8 @@ import Header from '../header';
 import background from '../../images/bg.jpeg'
 
 
-
-
 const classes = {
-  wrapper: 'ml-auto mr-auto relative max-w-screen-xl',
+  wrapper: 'ml-auto mr-auto relative max-w-screen-xl bg-gradient-to-r from-cyan-500 to-blue-900',
   outerWrapper: 'relative',
 };
 
@@ -17,7 +15,7 @@ const Layout = ({ children}) => {
 
   return (
     <div>
-      <div className='min-h-screen max-h-screen bg-cover bg-center bg-no-repeat xs:bg-fixed' 
+      <div className='min-h-screen overflow-auto overscroll-auto max-h-screen bg-cover bg-center bg-no-repeat' 
       style={{backgroundImage: `url(${background})`}}>
         <div>
           <NavBar />

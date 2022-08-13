@@ -76,7 +76,7 @@ const NavBar = () => {
                   className={classNames(
                     item.current
                       ? 'text-black'
-                      : 'text-white hover:bg-black/[0.06] hover:text-white',
+                      : 'text-black hover:bg-stone-100/[0.01] hover:text-white',
                     'block px-3 py-2 rounded-md text-xs tracking-wider font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}

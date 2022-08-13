@@ -7,7 +7,10 @@ module.exports = {
     // Main Site Title
     title: `Rajeshwar Rathi | Machine Learning Researcher and Engineer`,
     // Description that goes under your name in main bio
-    description: `Machine Learning Researcher and Engineer`,
+    description: `A full-time Machine Learning Engineer at Bitwise and 
+    part-time Data Science grad student at LJMU, UK with research interests 
+    in computer vision, vision transformers, generative models, attention 
+    models and exploring neuroscience based Machine Learning.`,
     // Optional: Twitter account handle
     author: `@rajeshwar_rathi`,
     // Optional: Github account URL
@@ -17,7 +20,14 @@ module.exports = {
     //Optional: Email ID
     mail: `rajeshwar.r.rathi@gmail.com`,
     // Content of the About Me section
-    about: `I am a curious and motivated Machine Learning Researcher aiming to solve the social and ecological problems affecting humans and the environment. I expertise in Machine Learning algorithms and Deep Learning architectures, especially in Vision tasks such as image classification, object detection, segmentation, etc. My main priority is to make ML accessible to as many humans as possible and make even children understand the basics of ML. Though I love spending time on ML, I also work on software development to automate stuff.`,
+    about: `I am a curious and motivated Machine Learning Researcher aiming 
+    to solve the social and ecological problems affecting humans and the 
+    environment. I expertise in Machine Learning algorithms and Deep Learning 
+    architectures, especially in Vision tasks such as image classification, 
+    object detection, segmentation, etc. My main priority is to make ML 
+    accessible to as many humans as possible and make even children understand 
+    the basics of ML. Though I love spending time on ML, I also work on software 
+    development to automate stuff.`,
     // Optional: List your projects, they must have `name` and `description`. `link` is optional.
     projects: [
       {
@@ -78,7 +88,7 @@ module.exports = {
       {
         name: 'Bitwise Inc.',
         description:
-          'Programmer (Machine Learning Engineer), Sep 2020 - Present',
+          'Programmer (Machine Learning), Sep 2020 - Present',
         link: '',
       },
       {
@@ -95,12 +105,7 @@ module.exports = {
     education: [
       {
         name: 'Liverpool John Moores University, Liverpool',
-        description: 'M. Sc Data Science, Jan 2022 - Aug 2022',
-        link: '',
-      },
-      {
-        name: 'International Institute of Information Technology, Bangalore',
-        description: 'PG Diploma Data Science, Jan 2021 - Jan 2022',
+        description: 'M. Sc Data Science, Jan 2021',
         link: '',
       },
       {

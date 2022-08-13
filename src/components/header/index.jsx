@@ -11,12 +11,12 @@ library.add(fab, fas)
 
 const classes = {
   wrapper: 'flex h-screen text-black',
-  contentWrapper: 'ml-auto mr-auto xs:max-w-lg max-w-xs mt-10',
-  name: 'text-5xl text-gray-900 font-bold leading-tight hover:text-black',
-  description: 'text-gray-600',
+  contentWrapper: 'ml-auto mr-auto mt-32  xs:mt-auto xs:max-w-2xl max-w-xs h-screen p-6',
+  name: 'text-2xl md:text-4xl mt-6 font-semibold font-Montserrat text-center',
+  description: 'text-base md:text-lg mt-2 font-medium font-Playfair text-justify',
   mediaWrapper: 'inline-flex mt-2 space-x-4 mr-auto ml-auto justify-center',
   iconWrapper: 'flex max-w-10 max-h-10',
-  icon: 'object-scale-down h-6 w-6 hover:scale-120 hover:text-blue-200',
+  icon: 'object-scale-down h-6 w-6 hover:scale-120 hover:text-blue-100',
 };
 
 const Header = () => {
@@ -50,15 +50,11 @@ const Header = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.contentWrapper}>
-        <p className='text-6xl font-bold font-Montserrat text-center'>Hello!</p>
-        <p className=' text-2xl mt-2 font-semibold font-Montserrat text-center'>
-          I'm {name}
-        </p>
-        <p className=' text-sm mt-2 font-semibold font-Poppins text-center'>
-        {description}
-        </p>
-        <div class="border-b-2 border-gray-500/40"></div>
-        <div className='flex h-auto items-center'>
+        <div><h1 className='text-3xl md:text-8xl font-bold font-Montserrat text-center'>Hello!</h1></div>
+        <div><h2 className={classes.name}>I'm {name}</h2></div>
+        <div><h3 className={classes.description}>{description}</h3></div>
+        <div class="border-b-2 border-gray-500/40 mt-2"></div>
+        <div className='flex h-auto items-center mb-4'>
           <div className={classes.mediaWrapper}>
             <div class={classes.iconWrapper}>
               {github && (
