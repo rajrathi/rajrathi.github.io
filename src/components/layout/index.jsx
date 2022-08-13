@@ -7,7 +7,7 @@ import background from '../../images/bg.jpeg'
 
 
 const classes = {
-  wrapper: 'ml-auto mr-auto relative max-w-screen-xl bg-gradient-to-r from-cyan-500 to-blue-900',
+  wrapper: 'ml-auto mr-auto relative max-w-screen-xl bg-gray-600/80',
   outerWrapper: 'relative',
 };
 
@@ -26,7 +26,7 @@ const Layout = ({ children}) => {
       </div>
       <div className={classes.outerWrapper}>
         <div className={classes.wrapper}>
-          <div class="p-6 xs:p-24">{children}</div>
+          <div class="p-6 xs:p-8">{children}</div>
         </div>
       </div>
     </div>

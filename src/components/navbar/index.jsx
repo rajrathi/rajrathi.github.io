@@ -53,7 +53,7 @@ const NavBar = () => {
                           item.current
                             ? 'text-black'
                             : 'text-black hover:scale-110',
-                          'font-RobotoMono tracking-wider text-xs font-medium px-4 focus:outline-none'
+                          'font-RobotoMono tracking-wider text-sm font-medium px-4 focus:outline-none'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >

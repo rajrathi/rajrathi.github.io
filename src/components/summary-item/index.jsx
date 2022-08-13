@@ -3,8 +3,8 @@ import React from 'react';
 
 const classes = {
   wrapper: 'mb-6',
-  name: 'font-semibold text-md text-gray-900 pb-1 text-xl',
-  description: 'text-base text-white font-light space-y-1 text-justify',
+  name: 'font-semibold text-lg text-gray-900 pb-1 text-xl',
+  description: 'text-md text-white font-light space-y-1 text-justify',
   code: 'flex flex-wrap space-x-4 text-blue-600 font-mono text-sm space-y-px',
 };
 

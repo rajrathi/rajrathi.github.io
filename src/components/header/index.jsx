@@ -13,7 +13,7 @@ const classes = {
   wrapper: 'flex h-screen text-black',
   contentWrapper: 'ml-auto mr-auto mt-32  xs:mt-auto xs:max-w-2xl max-w-xs h-screen p-6',
   name: 'text-2xl md:text-4xl mt-6 font-semibold font-Montserrat text-center',
-  description: 'text-base md:text-lg mt-2 font-medium font-Playfair text-justify',
+  description: 'text-base md:text-lg mt-2 font-medium font-Playfair text-center',
   mediaWrapper: 'inline-flex mt-2 space-x-4 mr-auto ml-auto justify-center',
   iconWrapper: 'flex max-w-10 max-h-10',
   icon: 'object-scale-down h-6 w-6 hover:scale-120 hover:text-blue-100',
