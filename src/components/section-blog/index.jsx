@@ -2,13 +2,13 @@ import { Link } from 'gatsby';
 import React from 'react';
 
 import Section from '../section';
-import SummaryItem from '../summary-item';
+import BlogSummaryItem from '../blog-summary-item';
 
 const SectionBlog = ({ posts }) => {
   return (
     <Section title="Latest Posts">
       {posts.map((post) => (
-        <SummaryItem
+        <BlogSummaryItem
           key={post.node.fields.slug}
           name={post.node.frontmatter.title}
           description={post.node.frontmatter.description}

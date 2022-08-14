@@ -1,9 +1,9 @@
 import React from 'react';
 
 const classes = {
-  wrapper: 'ml-auto mr-auto max-w-3xl p-4',
+  wrapper: 'ml-auto mr-auto p-2',
   title: 'pb-2',
-  heading:'font-semibold tracking-widest text-3xl text-violet-700 leading-normal uppercase',
+  heading:'font-semibold tracking-widest text-xl text-sky-400 leading-normal uppercase',
   content: 'flex-none text-lg text-white font-light md:flex-1',
 };
 

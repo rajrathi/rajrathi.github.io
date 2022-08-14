@@ -11,7 +11,7 @@ library.add(fab, fas)
 
 const classes = {
   wrapper: 'flex h-screen text-black',
-  contentWrapper: 'ml-auto mr-auto mt-32  xs:mt-auto xs:max-w-2xl max-w-xs h-screen p-6',
+  contentWrapper: 'ml-auto mr-auto place-items-center justify-center xs:mt-auto xs:max-w-2xl max-w-xs h-screen p-6',
   name: 'text-2xl md:text-4xl mt-6 font-semibold font-Montserrat text-center',
   description: 'text-base md:text-lg mt-2 font-medium font-Playfair text-center',
   mediaWrapper: 'inline-flex mt-2 space-x-4 mr-auto ml-auto justify-center',

@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Section from '../section';
-import SummaryItem from '../summary-item';
+import BlogSummaryItem from '../blog-summary-item';
 
 const BlogPosts = ({ posts }) => {
   return (
     <Section title="Blog">
       {posts.map((post) => (
-        <SummaryItem
+        <BlogSummaryItem
           key={post.node.fields.slug}
           name={post.node.frontmatter.title}
           description={post.node.frontmatter.description}

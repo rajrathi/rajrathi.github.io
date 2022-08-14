@@ -7,8 +7,8 @@ import background from '../../images/bg.jpeg'
 
 
 const classes = {
-  wrapper: 'ml-auto mr-auto relative max-w-screen-xl bg-gray-600/80',
-  outerWrapper: 'relative',
+  wrapper: 'ml-auto mr-auto relative max-w-screen-2xl',
+  outerWrapper: 'relative bg-gray-800',
 };
 
 const Layout = ({ children}) => {
