@@ -14,7 +14,7 @@ import SEO from '../components/seo';
 const classes = {
   wrapper: 'max-w-xs xs:max-w-4xl flex ml-auto mr-auto flex-row',
   imageWrapper: 'hidden xs:flex block max-w-150 h-40 justify-start',
-  image: 'rounded-full transform transition-all duration-150 hover:scale-105',
+  image: 'rounded-full transform transition-all duration-150 hover:scale-105 mt-6',
 };
 
 const Index = ({ data }) => {
