@@ -1,12 +1,14 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 const classes = {
-  wrapper: 'mb-6',
+  wrapper: 'flex flex-wrap xs:flex-row mb-6',
   name: 'font-semibold text-base text-purple-700 pb-1',
   description: 'text-sm text-gray-700 font-light space-y-2 text-justify mb-2',
   code: 'flex flex-wrap space-x-4 text-blue-600 font-mono text-sm space-y-px',
 };
+
 
 const ProjectSummaryItem = ({
   name,
@@ -14,6 +16,7 @@ const ProjectSummaryItem = ({
   link = false,
   internal = false,
   technology = '',
+  thumb
 }) => {
   let linkContent;
   let techstack = technology.toString().split(' ');
@@ -35,19 +38,24 @@ const ProjectSummaryItem = ({
   }
   return (
     <div className={classes.wrapper}>
-      <h3
-        className={`${classes.name} ${
-          link ? 'hover:underline hover:text-gray-800' : ''
-        }`}
-      >
-        {link ? linkContent : name}
-      </h3>
-      <p className={classes.description}>{description}</p>
-      <p>
-        <span>
-          <div className={classes.code}>{techs}</div>
-        </span>
-      </p>
+      <div>
+          <GatsbyImage image={thumb} className='h-32 w-32 object-scale-down'/>
+      </div>
+      <div className='ml-4'>
+        <h3
+          className={`${classes.name} ${
+            link ? 'hover:underline hover:text-gray-800' : ''
+          }`}
+        >
+          {link ? linkContent : name}
+        </h3>
+        <p className={classes.description}>{description}</p>
+        <p>
+          <span>
+            <div className={classes.code}>{techs}</div>
+          </span>
+        </p>
+      </div>
     </div>
   );
 };

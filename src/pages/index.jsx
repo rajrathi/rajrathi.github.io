@@ -72,6 +72,7 @@ export const pageQuery = graphql`
           description
           link
           technology
+          id
         }
         experience {
           name
@@ -101,11 +102,26 @@ export const pageQuery = graphql`
           }
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
-            title
             description
+            title
+            thumb {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
           }
         }
       }
     }
+    allFile(filter: {dir: {regex: "/static/project-thumb/"}, }) {
+      edges {
+        node {
+          name
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+    }    
   }
 `;

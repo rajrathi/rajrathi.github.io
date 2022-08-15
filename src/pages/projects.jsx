@@ -15,6 +15,7 @@ const classes = {
 const Index = ({ data }) => {
   const projects = get(data, 'site.siteMetadata.projects', false);
   const noProjects = !projects || !projects.length;
+  const imageFiles = data.allFile.edges;
 
   if (!projects || !projects.length) {
     return <NotFound />;
@@ -25,7 +26,7 @@ const Index = ({ data }) => {
       <SEO title="Projects" />
       <NavBar />
       <div className={classes.outerWrapper}>
-        <div className={classes.wrapper}>{!noProjects && <Projects projects={projects} />}</div>
+        <div className={classes.wrapper}>{!noProjects && <Projects projects={projects} thumbs={imageFiles}/>}</div>
       </div>
     </div>
   );
@@ -50,6 +51,17 @@ export const pageQuery = graphql`
           description
           link
           technology
+          id
+        }
+      }
+    }
+    allFile(filter: {dir: {regex: "/static/project-thumb/"}, }) {
+      edges {
+        node {
+          name
+          childImageSharp {
+            gatsbyImageData
+          }
         }
       }
     }

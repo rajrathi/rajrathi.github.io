@@ -2,7 +2,7 @@ import React from 'react';
 
 const classes = {
   wrapper: 'ml-auto mr-auto p-2',
-  title: 'pb-2',
+  title: 'pb-6',
   heading:'font-semibold tracking-widest text-xl text-sky-400 leading-normal uppercase',
   content: 'flex-none text-lg text-white font-light md:flex-1',
 };

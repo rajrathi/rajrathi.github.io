@@ -37,6 +37,7 @@ module.exports = {
           'Developed a deep learning model for creating Brain MRI of type T1 from type T2 and vice versa using CycleGAN fused with ResNet blocks to reduce the cost, time and efforts while taking two types of MRI.',
         link: 'https://github.com/rajrathi/image2imageBrainMRI',
         technology: 'Python Tensorflow skimage Matplotlib NumPy',
+        id: '01',
       },
       {
         name:
@@ -45,14 +46,15 @@ module.exports = {
           'Created a HuggingFace space for generating the number of hand-written digit samples for specified digit between 0 and 9 to showcase the use of Conditional GAN.',
         link: 'https://huggingface.co/spaces/keras-io/conditional-GAN',
         technology: 'Python Keras Gradio HuggingFace NumPy',
+        id: '02',
       },
       {
         name: 'Impact Analysis Engine for Microservices',
         description:
           'Developed and deployed an utility to generate the dependency graphs for Microservices using config files and log files to reduce the latency for component automation. This tool calculates the impact score of a microservice on architecture if that microservice is down depending on the weightage of microservice and bug severity.',
         link: '',
-        technology:
-          'Python NetworkX GraphViz regex Plotly Pandas Jenkins CI/CD',
+        technology: 'Python NetworkX GraphViz regex Plotly Pandas Jenkins CI/CD',
+        id: '03', 
       },
       {
         name: 'Helmet Detection for Realtime Road Transport Video',
@@ -60,6 +62,7 @@ module.exports = {
           'Built an API for detecting if a two wheeler user is wearing helmet while transporting using R-CNN with an AUC score of appromixately 85% to assure the safety of people and help maintain law',
         link: '',
         technology: 'Python Keras OpenCV NumPy Flask',
+        id: '04',
       },
       {
         name: 'Ecommerce Android Application',
@@ -67,6 +70,7 @@ module.exports = {
           'Developed an ecommorce android application for local shops to help small-scale business and their customers in tough time of COVID-19 with functionality of placing orders, checking orders, adding product to carts, adding mutliple addresses, etc. in real-time.',
         link: 'https://github.com/rajrathi/EcommerceApplication',
         technology: 'Flutter Dart Firebase',
+        id: '05',
       },
       {
         name: 'Trading System',
@@ -74,6 +78,7 @@ module.exports = {
           'Developed a mock stock trading platform with team, where I contributed for exchange connectivity between frontend and backend using REST API methods',
         link: '',
         technology: 'Python Flask JSON C++ SQlite',
+        id: '06',
       },
       {
         name: 'Terminal based Text Editor',
@@ -81,6 +86,7 @@ module.exports = {
           'Developed a terminal based text-editor with functionalities like find, search and replace, delete line, save file, etc.',
         link: '',
         technology: 'C ncurses regex',
+        id: '07',
       },
     ],
     // Optional: List your experience, they must have `name` and `description`. `link` is optional.
@@ -151,11 +157,12 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/static`,
       },
     },
     {
@@ -245,9 +252,16 @@ module.exports = {
                     html
                     fields { slug }
                     frontmatter {
-                      title
                       date
                       description
+                      title
+                      thumb {
+                        childImageSharp {
+                          fluid {
+                            ...GatsbyImageSharpFluid
+                          }
+                        }
+                      }
                     }
                   }
                 }
