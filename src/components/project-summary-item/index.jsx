@@ -38,10 +38,10 @@ const ProjectSummaryItem = ({
   }
   return (
     <div className={classes.wrapper}>
-      <div>
+      <div className='max-w-xs'>
           <GatsbyImage image={thumb} className='h-32 w-32 object-scale-down'/>
       </div>
-      <div className='ml-4'>
+      <div className='ml-4 flex max-w-xs xs:max-w-lg flex-col'>
         <h3
           className={`${classes.name} ${
             link ? 'hover:underline hover:text-gray-800' : ''

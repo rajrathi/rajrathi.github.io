@@ -12,7 +12,7 @@ const BlogPosts = ({ posts }) => {
           name={post.node.frontmatter.title}
           description={post.node.frontmatter.description}
           link={post.node.fields.slug}
-          thumb={post.node.frontmatter.thumb.childImageSharp.gatsbyImagedata}
+          thumb={post.node.frontmatter.thumb.childImageSharp.gatsbyImageData}
           internal
         />
       ))}
