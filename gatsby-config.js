@@ -255,9 +255,7 @@ module.exports = {
                       title
                       thumb {
                         childImageSharp {
-                          fluid {
-                            ...GatsbyImageSharpFluid
-                          }
+                          gatsbyImageData
                         }
                       }
                     }
