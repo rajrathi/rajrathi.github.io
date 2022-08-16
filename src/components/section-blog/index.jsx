@@ -6,7 +6,7 @@ import BlogSummaryItem from '../blog-summary-item';
 
 const SectionBlog = ({ posts }) => {
   return (
-    <Section title="Latest Posts">
+    <Section title="Latest Blog">
       {posts.slice(0, 3).map((post) => (
         <BlogSummaryItem
           key={post.node.fields.slug}
@@ -19,7 +19,7 @@ const SectionBlog = ({ posts }) => {
       ))}
       {posts.length >= 3 && (
         <Link className="text-gray-500 text-xs hover:text-black" to="/blog">
-          View all articles &rarr;
+          View all posts &rarr;
         </Link>
       )}
     </Section>

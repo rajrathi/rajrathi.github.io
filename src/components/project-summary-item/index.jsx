@@ -4,7 +4,7 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 
 const classes = {
   wrapper: 'flex flex-wrap xs:flex-row mb-6',
-  name: 'font-semibold text-base text-purple-700 pb-1',
+  name: 'font-semibold text-base font-Montserrat text-purple-700 pb-1',
   description: 'text-sm text-gray-700 font-light space-y-2 text-justify mb-2',
   code: 'flex flex-wrap space-x-4 text-blue-600 font-mono text-sm space-y-px',
 };
