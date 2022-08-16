@@ -7,18 +7,19 @@ import BlogSummaryItem from '../blog-summary-item';
 const SectionBlog = ({ posts }) => {
   return (
     <Section title="Latest Posts">
-      {posts.map((post) => (
+      {posts.slice(0, 3).map((post) => (
         <BlogSummaryItem
           key={post.node.fields.slug}
           name={post.node.frontmatter.title}
           description={post.node.frontmatter.description}
           link={post.node.fields.slug}
+          thumb={post.node.frontmatter.thumb.childImageSharp.gatsbyImageData}
           internal
         />
       ))}
-      {posts.length >= 5 && (
-        <Link className="text-gray-500 text-sm hover:text-black" to="/blog">
-          View all posts &rarr;
+      {posts.length >= 3 && (
+        <Link className="text-gray-500 text-xs hover:text-black" to="/blog">
+          View all articles &rarr;
         </Link>
       )}
     </Section>

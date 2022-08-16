@@ -23,10 +23,10 @@ const BlogSummaryItem = ({
   }
   return (
     <div className={classes.wrapper}>
-      <div className='max-w-xs'>
-        <GatsbyImage image={thumb} className='h-32 w-32 object-scale-down'/>
+      <div className='mb-4 max-w-xs'>
+        <GatsbyImage image={thumb} className=' w-fit h-fit xs:h-32 xs:w-48 p-2' objectFit='scale-down' objectPosition='50% 50%'/>
       </div>
-      <div className='ml-4 flex max-w-xs xs:max-w-lg flex-col'>
+      <div className='mb-4 ml-4 flex max-w-xs xs:max-w-lg flex-col'>
         <h3
           className={`${classes.name} ${
             link ? 'hover:underline hover:text-black' : ''

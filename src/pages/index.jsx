@@ -8,6 +8,8 @@ import Layout from '../components/layout';
 import SectionAbout from '../components/section-about';
 import SectionEducation from '../components/section-education';
 import SectionExperience from '../components/section-experience';
+import SectionProjects from '../components/section-projects';
+import SectionBlog from '../components/section-blog';
 import SectionSkills from '../components/section-skills';
 import SEO from '../components/seo';
 
@@ -24,8 +26,10 @@ const Index = ({ data }) => {
   const education = get(data, 'site.siteMetadata.education', false);
   const skills = get(data, 'site.siteMetadata.skills', false);
   const projects = get(data, 'site.siteMetadata.projects', false);
+  const imageFiles = data.allFile.edges;
 
   return (
+    <div>
     <Layout>
       <SEO />
       <div className={classes.wrapper}>
@@ -50,6 +54,11 @@ const Index = ({ data }) => {
         </div>
       </div>
     </Layout>
+    <div className='ml-auto mr-auto max-w-3xl p-6'>
+        {posts && posts.length && <SectionBlog posts={posts} />}
+        {projects && projects.length && <SectionProjects projects={projects} thumbs={imageFiles}/>}
+      </div>
+    </div>
   );
 };
 
