@@ -220,7 +220,7 @@ module.exports = {
                 author
                 github
                 linkedin
-                medium
+                mail
               }
             }
           }
