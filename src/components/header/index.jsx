@@ -10,10 +10,10 @@ import {fas} from '@fortawesome/free-solid-svg-icons'
 library.add(fab, fas)
 
 const classes = {
-  wrapper: 'flex h-screen text-black',
-  contentWrapper: 'ml-auto mr-auto place-items-center justify-center xs:mt-auto xs:max-w-2xl max-w-xs h-screen p-6',
-  name: 'text-2xl md:text-4xl mt-6 font-semibold font-Montserrat text-center',
-  description: 'text-base md:text-lg mt-2 font-medium font-Playfair text-center',
+  wrapper: 'flex max-h-max text-black place-content-center',
+  contentWrapper: 'ml-auto mr-auto place-items-center justify-center xs:max-w-2xl max-w-xs max-h-max mb-4 p-6',
+  name: 'text-2xl xs:text-4xl mt-6 font-semibold font-Montserrat text-center',
+  description: 'text-base xs:text-lg mt-2 font-medium tracking-wider font-Poppins text-center',
   mediaWrapper: 'inline-flex mt-2 space-x-4 mr-auto ml-auto justify-center',
   iconWrapper: 'flex max-w-10 max-h-10',
   icon: 'object-scale-down h-6 w-6 hover:scale-120 hover:text-blue-100',

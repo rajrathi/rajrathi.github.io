@@ -15,12 +15,12 @@ const Layout = ({ children}) => {
 
   return (
     <div>
-      <div className='min-h-screen overflow-auto overscroll-auto max-h-screen bg-cover bg-center bg-no-repeat' 
+      <div className='min-h-screen max-h-max bg-cover bg-center bg-no-repeat' 
       style={{backgroundImage: `url(${background})`}}>
         <div>
           <NavBar />
         </div>
-        <div className='container max-w-full max-h-screen'>
+        <div className='container max-w-full max-h-max'>
           <Header />
         </div>
       </div>

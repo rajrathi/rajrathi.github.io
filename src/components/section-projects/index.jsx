@@ -28,7 +28,7 @@ const SectionProjects = ({ projects, thumbs }) => {
         />
       ))}
       {projects.length >= 3 && (
-        <Link className="text-gray-500 text-xs hover:text-black" to="/projects">
+        <Link className="text-gray-500 text-sm hover:text-black" to="/projects">
           View all projects &rarr;
         </Link>
       )}
