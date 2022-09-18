@@ -18,7 +18,7 @@ module.exports = {
     // Optional: LinkedIn account URL
     linkedin: `https://www.linkedin.com/in/rajeshwarrathi/`,
     //Optional: Email ID
-    mail: `rajeshwar.r.rathi@gmail.com`,
+    mail: `mailsforrajeshwar@gmail.com`,
     // Content of the About Me section
     about: `I graduated from the College of Engineering, Pune, majoring in 
     Computer Science and Engineering in 2020. During my undergrad, 
