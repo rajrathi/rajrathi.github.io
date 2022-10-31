@@ -7,8 +7,7 @@ module.exports = {
     // Main Site Title
     title: `Rajeshwar Rathi | Machine Learning Researcher and Engineer`,
     // Description that goes under your name in main bio
-    description: `A full-time Machine Learning Engineer at Bitwise and 
-    part-time Data Science grad student at LJMU, UK with research interests 
+    description: `A full-time Machine Learning Engineer at Bitwise with research interests 
     in computer vision, convolutional nets, vision transformers, generative models, attention 
     models and exploring neuroscience based Machine Learning.`,
     // Optional: Twitter account handle
@@ -30,9 +29,7 @@ module.exports = {
     I have two years of experience in data engineering
     for two of the clients and currently working as an ML engineer for the
     payment technology firm, a client of Bitwise. As my interests inclined
-    toward Machine Learning, I enrolled on an online M. Sc Data Science
-    course at Liverpool John Moores University, UK, where I am currently working on my 
-    Thesis (in the domain of computer vision) under the supervision of Mr Bharat Kumar Bholla.
+    toward Machine Learning, I completed on an online PG Diploma course in Data Science at IIIT, Bangalore.
     `,
     // Optional: List your projects, they must have `name` and `description`. `link` is optional.
     projects: [
@@ -108,8 +105,8 @@ module.exports = {
     ],
     education: [
       {
-        name: 'Liverpool John Moores University, Liverpool',
-        description: 'M. Sc Data Science, Jan 2021',
+        name: 'International Institute of Information Technology, Bangalore',
+        description: 'PG Diploma Data Science, Jan 2021 - Jan 2022',
         link: '',
       },
       {
