@@ -7,9 +7,7 @@ module.exports = {
     // Main Site Title
     title: `Rajeshwar Rathi | Machine Learning Researcher and Engineer`,
     // Description that goes under your name in main bio
-    description: `A full-time Machine Learning Engineer at Bitwise with research interests 
-    in computer vision, convolutional nets, vision transformers, generative models, attention 
-    models and exploring neuroscience based Machine Learning.`,
+    description: `A full-time Software Engineer at Bitwise with 3+ years of experience in Python, Machine Learning, Cloud Computing and Data Engineering.`,
     // Optional: Twitter account handle
     author: `@rajeshwar_rathi`,
     // Optional: Github account URL
