@@ -7,7 +7,7 @@ module.exports = {
     // Main Site Title
     title: `Rajeshwar Rathi | Machine Learning Researcher and Engineer`,
     // Description that goes under your name in main bio
-    description: `A full-time Software Engineer at Bitwise with 3+ years of experience in Python, Machine Learning, Cloud Computing and Data Engineering.`,
+    description: `Software Engineer at Bitwise with 3+ years of experience in Python, Machine Learning, Cloud Computing and Data Engineering.`,
     // Optional: Twitter account handle
     author: `@rajeshwar_rathi`,
     // Optional: Github account URL
@@ -87,19 +87,20 @@ module.exports = {
       {
         name: 'Bitwise Inc.',
         description:
-          'Programmer (Machine Learning), Sep 2020 - Present',
+          'Programmer Analyst, Nov 2023 - Present',
+        link: '',
+      },
+      {
+        name: 'Bitwise Inc.',
+        description:
+          'Programmer, Sep 2020 - Oct 2023',
         link: '',
       },
       {
         name: 'Veritas LLC',
         description: 'SDE Intern, Jan 2020 - Jun 2020',
         link: '',
-      },
-      {
-        name: 'VInvent Tech',
-        description: 'SDE Intern (Machine Learning), May 2019 - Jul 2019',
-        link: '',
-      },
+      }
     ],
     education: [
       {
@@ -109,7 +110,7 @@ module.exports = {
       },
       {
         name: 'College of Engineering, Pune',
-        description: 'B. Tech Computer Science, Aug 2016 - Oct 2020',
+        description: 'B. Tech Computer Science, Aug 2016 - Nov 2020',
         link: '',
       },
     ],
@@ -123,7 +124,7 @@ module.exports = {
       {
         name: 'Python libraries',
         description:
-          'PyTorch, TensorFlow, Keras, scikit-learn, statsapi, OpenCV, NetworkX, GraphViz, NumPy, Pandas, Matplotlib, Seaborn, Plotly, Flask',
+          'Pandas, scikit-learn, statsapi, Azure SDK, boto3, PySpark, NetworkX, GraphViz, NumPy, PyTorch, TensorFlow, Keras,Matplotlib, Seaborn, Plotly, Flask',
       },
       {
         name: 'Machine Learning',
@@ -131,20 +132,24 @@ module.exports = {
           'Linear Regression, Logistic Regression, Clustering (kNN, k-Means), Gradient Descent, Decision Trees, Ensembling (Random Forest, XGBoost), Regularization, Cross-Validation, Hyperparameter-Tuning',
       },
       {
-        name: 'Deep Learning',
-        description:
-          'CNN(AlexNet, VGG, ResNet, XceptionNet, EfficientNet, ConvNext, etc.), GANs, VAEs, Vision Transformers & Attention Models, Optimizers (Momentum, AdaGrad, Adam, etc.), RNN, LSTM, GRU'
-      },
-      {
         name: 'Databases and ETL',
         description:
-          'S3, RedShift, Apache Airflow, Snowflake, Azure Data Factory, Firebase, SQL',
+          'SQL, Spark, S3, RedShift, Apache Airflow, Snowflake, Azure Data Factory, Firebase, ',
       },
+      {
+        name:'Cloud Computing',
+        description: 'Azure (Batch, Function, Azure Data Factory, Keyvault, Blob Storage), Amazon Web Services (SageMaker, EC2, S3, Redshit, IAM, Airflow)'
 
+      },
+      {
+        name: 'Deep Learning',
+        description:
+          'CNN, GANs, VAEs, Vision Transformers, Optimizers (Momentum, AdaGrad, Adam, etc.), RNN, LSTM, GRU'
+      },
       {
         name: 'Tools',
         description:
-          'Git, Amazon Web Services (AWS), Jenkins, JIRA, Postman',
+          'Version Control (GIT), Azure DevOps, Jenkins, JIRA, Agile(Scrum), Postman, Docker',
       },
     ],
   },

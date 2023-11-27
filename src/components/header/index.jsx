@@ -82,7 +82,7 @@ const Header = () => {
               <div class={classes.iconWrapper}>
                 {twitter && (
                   <a href={`https://twitter.com/${twitter}`}>
-                    <FontAwesomeIcon icon="fa-brands fa-twitter" className={classes.icon}/>
+                    <FontAwesomeIcon icon="fa-brands fa-x-twitter" className={classes.icon}/>
                   </a>
                 )}
               </div>
