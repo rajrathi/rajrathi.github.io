@@ -19,7 +19,7 @@ const NavBar = () => {
     <Disclosure as="nav">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="max-w-8xl mx-auto px-2 bg-slate-500 sm:px-6 lg:px-8 ">
             <div className="relative flex items-center justify-between h-12">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -76,7 +76,7 @@ const NavBar = () => {
                   className={classNames(
                     item.current
                       ? 'text-black'
-                      : 'text-black hover:bg-stone-100/[0.01] hover:text-white',
+                      : 'text-white hover:bg-stone-100/[0.01] hover:text-white',
                     'block px-3 py-2 rounded-md text-xs tracking-wider font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
