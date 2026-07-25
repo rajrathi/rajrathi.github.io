@@ -8,18 +8,19 @@
 name: Rajeshwar Rathi
 
 # Short role label. Appears under your name and in the browser title.
-role: Machine Learning & Data Engineer
+role: Data Scientist · ML & Data Engineering
 
 # The one-liner in the hero. Keep it to a sentence — it is the first thing
 # anyone reads. Rendered inside a terminal-style prompt.
 tagline: >-
-  Software engineer with 5+ years building machine learning systems, data
-  pipelines and cloud infrastructure in Python.
+  Data scientist with 5+ years building machine learning systems, retrieval and
+  data pipelines in Python.
 
 # Used for <meta name="description">, Open Graph and the RSS channel description.
 description: >-
-  Rajeshwar Rathi — machine learning and data engineer. Notes on AI, data
-  science and cloud, plus a record of the things I have shipped.
+  Rajeshwar Rathi — data scientist working on GraphRAG-based product
+  intelligence and search. Notes on AI, data science and cloud, plus a record of
+  the things I have shipped.
 
 # Absolute URL of the deployed site. Must match `site` in astro.config.mjs.
 url: https://rajrathi.github.io

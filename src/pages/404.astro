@@ -53,6 +53,15 @@ find: no matches
     opacity: 0.85;
   }
 
+  /* Same gradient, same magenta problem as the hero name — and at 9rem it is
+     the biggest thing on the page. Solid walnut in light mode to match. */
+  :global(:root[data-theme='light']) .notfound__code {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: var(--heading);
+  }
+
   .notfound__title {
     margin: var(--space-s) 0;
     font-size: var(--step-3);

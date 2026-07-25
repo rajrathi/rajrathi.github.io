@@ -81,6 +81,13 @@ const email = site.social.email;
       var(--surface);
   }
 
+  /* Light theme drops the wash and keeps the plain surface: the border and
+     card shadow already separate this panel from the page, and on beige the
+     magenta end of the gradient reads as a stain rather than as light. */
+  :global(:root[data-theme='light']) .contact {
+    background: var(--surface);
+  }
+
   @media (min-width: 52rem) {
     .contact {
       grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);

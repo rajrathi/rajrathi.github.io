@@ -154,19 +154,37 @@ const pixelGlitch = true;
   }
 
   .hero::before {
+    --wash: var(--accent);
+    --wash-strength: 17%;
     background: radial-gradient(
       40rem 22rem at 12% 8%,
-      color-mix(in srgb, var(--accent) 17%, transparent),
+      color-mix(in srgb, var(--wash) var(--wash-strength), transparent),
       transparent 70%
     );
   }
 
   .hero::after {
+    --wash: var(--accent-2);
+    --wash-strength: 15%;
     background: radial-gradient(
       34rem 20rem at 88% 22%,
-      color-mix(in srgb, var(--accent-2) 15%, transparent),
+      color-mix(in srgb, var(--wash) var(--wash-strength), transparent),
       transparent 70%
     );
+  }
+
+  /* The warm light theme keeps exactly one wash: amber, top-left, as a soft
+     focal point. Neon over beige does not work — 17% teal composites to a cool
+     sage grey, and the magenta corner to a pink that reads as a stain on paper
+     rather than as light. So the cyan corner turns amber and the magenta one
+     is dropped outright. Dark mode keeps both, untouched. */
+  :global(:root[data-theme='light']) .hero::before {
+    --wash: var(--accent-3);
+    --wash-strength: 13%;
+  }
+
+  :global(:root[data-theme='light']) .hero::after {
+    display: none;
   }
 
   /* Dark mode only: the washes stutter like a failing neon tube. Only opacity
@@ -287,6 +305,18 @@ const pixelGlitch = true;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  /* Light theme drops the gradient entirely. It terminates in --accent-2, and
+     magenta over beige is the same stain that came out of the corner washes,
+     the About photo and the Contact card — leaving it in the largest text on
+     the page would be the one place the decision was not followed through.
+     Solid walnut instead, the same ink as the section headings. */
+  :global(:root[data-theme='light']) .hero__title {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: var(--heading);
   }
 
   /* Dark mode only: an RGB-split glitch on the name. Two flat-colour copies of

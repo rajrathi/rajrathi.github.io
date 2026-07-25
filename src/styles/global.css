@@ -100,6 +100,9 @@
   --text: #eaeaf4;
   --text-muted: #a2a2ba;
   --text-faint: #6f6f8a;
+  /* Headings get their own ink token purely so the light theme can run them
+     warm. Here it resolves to --text, so dark mode is unaffected. */
+  --heading: var(--text);
 
   /* -- Lines and glows ---------------------------------------------------- */
   --border: #262638;
@@ -150,29 +153,47 @@
 }
 
 /* -- Light theme ----------------------------------------------------------
-   Accents are darkened so they stay AA-legible on a pale background, and the
-   CRT effects are dialled almost to nothing (they read as dirt on white).     */
+   Warm paper rather than cool white: this site's whole vocabulary is CRT and
+   terminal, and warm paper belongs to that world in a way blue-white does not.
+
+   Every neutral here is warm on purpose — red channel above blue. That is not
+   decoration, it is the thing that makes the theme cohere: a warm background
+   under the cool blue-greys this block used to carry reads as muddy, like a
+   stale screenshot. The ramp has to rotate together or not at all.
+
+   Accents stay darkened for AA on a pale ground. Cyan is deliberately the one
+   cool thing on the page — teal against cream is a classic pairing, and the
+   accent should oppose the neutrals rather than dissolve into them.          */
 :root[data-theme='light'] {
-  --neon-cyan: #067d78;
-  --neon-magenta: #bd1f8f;
-  --neon-amber: #8a5300;
+  --neon-cyan: #06706c;
+  --neon-magenta: #a8197e;
+  --neon-amber: #7a4700;
 
-  --bg: #fbfbfd;
-  --bg-elev: #ffffff;
-  --surface: #ffffff;
-  --surface-hover: #f4f4f9;
+  --bg: #f7f3ea;
+  --bg-elev: #fffdf8;
+  --surface: #fffdf8;
+  --surface-hover: #f1ebdd;
 
-  --text: #14141d;
-  --text-muted: #4f4f66;
-  --text-faint: #77778e;
+  --text: #1c1710;
+  --text-muted: #54493a;
+  /* Walnut. Brown belongs on warm paper, but only as *heading* ink — brown
+     body copy on cream goes monochrome and reads as a faded scan. Kept clear
+     of --accent-3 below, which is far more saturated (R-B +122 vs +43) and
+     turns to rust at headline size; that one stays on small meta text. */
+  --heading: #4d3722;
+  /* Was #77778e, which measured 4.22:1 — under AA, and used for exactly the
+     small meta text where that hurts most. This lands at 5.35:1. */
+  --text-faint: #6f6252;
 
-  --border: #e2e2ec;
-  --border-strong: #c6c6d6;
-  --grid-line: rgba(60, 70, 130, 0.06);
+  --border: #e6ddc9;
+  --border-strong: #c7b99e;
+  --grid-line: rgba(120, 85, 30, 0.07);
   --glow: none;
   --glow-magenta: none;
-  --scanline-opacity: 0;
-  --shadow-card: 0 1px 2px rgba(20, 20, 40, 0.05), 0 12px 28px -18px rgba(20, 20, 60, 0.28);
+  /* Scanlines were off here because on white they read as dirt. On warm paper
+     the same texture reads as grain, so they come back — faintly. */
+  --scanline-opacity: 0.1;
+  --shadow-card: 0 1px 2px rgba(60, 45, 20, 0.06), 0 12px 28px -18px rgba(70, 50, 20, 0.26);
 
   color-scheme: light;
 }
@@ -277,6 +298,14 @@ h4 {
   letter-spacing: -0.02em;
   margin: 0 0 var(--space-s);
   text-wrap: balance;
+}
+
+/* Page and section headings only. h3/h4 stay in body ink: they sit close to
+   the prose in role, and browning every level flattens the hierarchy back out
+   into a single warm smear. */
+h1,
+h2 {
+  color: var(--heading);
 }
 
 h1 {

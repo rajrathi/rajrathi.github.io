@@ -26,6 +26,17 @@
 - group: Deep Learning
   items: [CNNs, GANs, VAEs, Vision Transformers, RNN / LSTM / GRU, Optimizers]
 
+# TODO: fill in the actual stack — which vector store, which model provider, and
+# the graph database behind the knowledge graph. Right now this lists only what
+# GraphRAG implies rather than what you are really using day to day.
+- group: LLMs & Retrieval
+  items:
+    - GraphRAG
+    - Retrieval-augmented generation
+    - Knowledge graphs
+    - Embeddings & vector search
+    - Semantic search
+
 - group: Data & ETL
   items:
     - PySpark

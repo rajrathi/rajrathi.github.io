@@ -15,10 +15,28 @@
 #   tags     (optional) tech used, shown as small chips
 # ---------------------------------------------------------------------------
 
+- role: Data Scientist
+  company: Medline Industries
+  start: Jul 2025
+  end: Present
+  location: Pune, India
+  summary: >-
+    Building product intelligence and search over the product catalogue with
+    GraphRAG.
+  bullets:
+    - Build product intelligence and search capabilities on top of the product
+      catalogue, using GraphRAG to combine a knowledge graph of product
+      relationships with LLM-based retrieval.
+    # TODO: add the specifics once you are happy sharing them — catalogue size,
+    # which model and vector store, and how search quality is measured.
+    - "PLACEHOLDER: add a concrete outcome (e.g. 'lifted top-5 search relevance
+      from X% to Y% over the previous keyword search')."
+  tags: [Python, GraphRAG, LLMs, Knowledge Graphs, RAG, Search]
+
 - role: Programmer Analyst
   company: Bitwise Inc.
   start: Nov 2023
-  end: Present
+  end: Jun 2025
   location: Pune, India
   url: https://www.bitwiseglobal.com/
   summary: >-
@@ -62,6 +80,7 @@
   start: Jan 2020
   end: Jun 2020
   location: Pune, India
+  url: https://www.veritas.com/
   summary: >-
     Built an impact-analysis engine that mapped dependencies between
     microservices.

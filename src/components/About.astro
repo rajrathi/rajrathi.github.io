@@ -155,6 +155,13 @@ const [skills, education] = await Promise.all([getSkills(), getEducation()]);
     mix-blend-mode: overlay;
   }
 
+  /* The duotone is a dark-theme device: over warm paper the magenta half of it
+     tints the photo pink, which reads as a colour-managed screenshot rather
+     than as a treatment. The photo goes untinted in light mode instead. */
+  :global(:root[data-theme='light']) .about__figure::after {
+    display: none;
+  }
+
   .about__block-title,
   .skills__title {
     margin: 0 0 var(--space-s);
