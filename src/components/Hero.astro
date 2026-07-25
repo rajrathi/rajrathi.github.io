@@ -29,7 +29,19 @@ const firstName = site.name.split(' ')[0] ?? site.name;
         {current ? `${current.data.role} · ${current.data.company}` : site.role}
       </p>
 
-      <h1 class="hero__title" id="hero-title" data-reveal data-reveal-delay="60">
+      {
+        /* `data-text` feeds the glitch copies drawn in ::before/::after;
+          `aria-label` pins the accessible name so screen readers that announce
+          generated content do not read it three times over. */
+      }
+      <h1
+        class="hero__title"
+        id="hero-title"
+        data-text={site.name}
+        aria-label={site.name}
+        data-reveal
+        data-reveal-delay="60"
+      >
         {site.name}
       </h1>
 
@@ -124,25 +136,88 @@ const firstName = site.name.split(' ')[0] ?? site.name;
     overflow: hidden;
   }
 
-  /* Two soft neon washes behind the hero — the only large colour on the page. */
-  .hero::before {
+  /* Two soft neon washes behind the hero — the only large colour on the page.
+     They live on separate pseudo-elements so each corner can flicker on its
+     own clock; one layer would force them to twitch in lockstep. */
+  .hero::before,
+  .hero::after {
     content: '';
     position: absolute;
     inset: -30% -10% auto;
     height: 120%;
     z-index: -1;
     pointer-events: none;
-    background:
-      radial-gradient(
-        40rem 22rem at 12% 8%,
-        color-mix(in srgb, var(--accent) 13%, transparent),
-        transparent 70%
-      ),
-      radial-gradient(
-        34rem 20rem at 88% 22%,
-        color-mix(in srgb, var(--accent-2) 11%, transparent),
-        transparent 70%
-      );
+  }
+
+  .hero::before {
+    background: radial-gradient(
+      40rem 22rem at 12% 8%,
+      color-mix(in srgb, var(--accent) 17%, transparent),
+      transparent 70%
+    );
+  }
+
+  .hero::after {
+    background: radial-gradient(
+      34rem 20rem at 88% 22%,
+      color-mix(in srgb, var(--accent-2) 15%, transparent),
+      transparent 70%
+    );
+  }
+
+  /* Dark mode only: the washes stutter like a failing neon tube. Only opacity
+     animates, so the hues above are untouched. Light mode is deliberately
+     excluded — its glows are near-invisible already, and a flicker on a pale
+     background reads as a rendering bug rather than an effect.
+
+     `steps(1, end)` is what sells it: each keyframe segment holds its value
+     instead of cross-fading, so the dips snap on and off electrically. */
+  @keyframes glow-twitch {
+    0%,
+    38% {
+      opacity: 1;
+    }
+    39% {
+      opacity: 0.45;
+    }
+    40% {
+      opacity: 1;
+    }
+    41.5% {
+      opacity: 0.6;
+    }
+    42.5% {
+      opacity: 1;
+    }
+    /* Long calm stretch, then a second, messier burst. */
+    73% {
+      opacity: 1;
+    }
+    73.8% {
+      opacity: 0.3;
+    }
+    74.6% {
+      opacity: 0.85;
+    }
+    75.4% {
+      opacity: 0.5;
+    }
+    76.4%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Mismatched durations plus a negative delay keep the two corners from
+       ever settling into a visible pattern together. */
+    :global(:root[data-theme='dark']) .hero::before {
+      animation: glow-twitch 9s steps(1, end) infinite;
+    }
+
+    :global(:root[data-theme='dark']) .hero::after {
+      animation: glow-twitch 13s steps(1, end) -4s infinite;
+    }
   }
 
   .hero__inner {
@@ -195,6 +270,7 @@ const firstName = site.name.split(' ')[0] ?? site.name;
   }
 
   .hero__title {
+    position: relative;
     margin: 0;
     font-size: var(--step-5);
     letter-spacing: -0.045em;
@@ -207,6 +283,128 @@ const firstName = site.name.split(' ')[0] ?? site.name;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  /* Dark mode only: an RGB-split glitch on the name. Two flat-colour copies of
+     the text sit exactly on top of the real h1; bursts tear horizontal bands
+     out of them and shove those bands sideways, then snap back. The h1 itself
+     never moves and keeps its gradient fill, so the name stays readable the
+     whole time — the glitch reads as interference over it, not as the name
+     falling apart. Light mode is left alone: cyan/magenta fringing on a pale
+     background looks like a broken font, not a CRT. */
+  :global(:root[data-theme='dark']) .hero__title::before,
+  :global(:root[data-theme='dark']) .hero__title::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* The h1 clips its background to the glyphs and paints the text
+       transparent. These copies want the opposite: no clipping, flat colour. */
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    opacity: 0.85;
+    /* Fully clipped away. Each burst opens bands out of this resting state,
+       which is why no opacity animation is needed. */
+    clip-path: inset(0 0 100% 0);
+  }
+
+  :global(:root[data-theme='dark']) .hero__title::before {
+    color: var(--accent);
+  }
+
+  :global(:root[data-theme='dark']) .hero__title::after {
+    color: var(--accent-2);
+  }
+
+  /* Both copies run on the same 7s clock so their bursts land together — that
+     simultaneity is what makes the offset colours read as one glitch event
+     rather than two unrelated flickers. Only the band positions and the
+     direction of the shove differ between them. */
+  @keyframes glitch-cyan {
+    0%,
+    40% {
+      clip-path: inset(0 0 100% 0);
+      transform: translate3d(0, 0, 0);
+    }
+    40.4% {
+      clip-path: inset(14% 0 62% 0);
+      transform: translate3d(-0.05em, 0.01em, 0);
+    }
+    41.2% {
+      clip-path: inset(52% 0 30% 0);
+      transform: translate3d(0.04em, -0.01em, 0);
+    }
+    42% {
+      clip-path: inset(76% 0 6% 0);
+      transform: translate3d(-0.02em, 0, 0);
+    }
+    42.8%,
+    88% {
+      clip-path: inset(0 0 100% 0);
+      transform: translate3d(0, 0, 0);
+    }
+    88.6% {
+      clip-path: inset(30% 0 48% 0);
+      transform: translate3d(0.06em, 0, 0);
+    }
+    89.4% {
+      clip-path: inset(8% 0 74% 0);
+      transform: translate3d(-0.04em, 0.01em, 0);
+    }
+    90.2%,
+    100% {
+      clip-path: inset(0 0 100% 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes glitch-magenta {
+    0%,
+    40% {
+      clip-path: inset(0 0 100% 0);
+      transform: translate3d(0, 0, 0);
+    }
+    40.4% {
+      clip-path: inset(20% 0 54% 0);
+      transform: translate3d(0.05em, -0.01em, 0);
+    }
+    41.2% {
+      clip-path: inset(44% 0 40% 0);
+      transform: translate3d(-0.05em, 0.01em, 0);
+    }
+    42% {
+      clip-path: inset(68% 0 14% 0);
+      transform: translate3d(0.03em, 0, 0);
+    }
+    42.8%,
+    88% {
+      clip-path: inset(0 0 100% 0);
+      transform: translate3d(0, 0, 0);
+    }
+    88.6% {
+      clip-path: inset(36% 0 40% 0);
+      transform: translate3d(-0.06em, 0, 0);
+    }
+    89.4% {
+      clip-path: inset(2% 0 80% 0);
+      transform: translate3d(0.04em, -0.01em, 0);
+    }
+    90.2%,
+    100% {
+      clip-path: inset(0 0 100% 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(:root[data-theme='dark']) .hero__title::before {
+      animation: glitch-cyan 7s steps(1, end) infinite;
+    }
+
+    :global(:root[data-theme='dark']) .hero__title::after {
+      animation: glitch-magenta 7s steps(1, end) infinite;
+    }
   }
 
   .hero__role {
