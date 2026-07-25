@@ -1,0 +1,164 @@
+---
+/**
+ * A blog post summary. Used on the home page, the blog index and tag archives.
+ *
+ * The whole card is clickable via a stretched link on the title, which keeps a
+ * single, meaningfully-named link in the tab order instead of three.
+ */
+import type { Post } from '~/lib/content';
+import { formatDate, isoDate, getReadingTime } from '~/lib/content';
+import { postUrl, tagUrl, url } from '~/lib/url';
+
+interface Props {
+  post: Post;
+  /** Drop the cover image — used in the tighter home-page list. */
+  compact?: boolean;
+}
+
+const { post, compact = false } = Astro.props;
+const { title, date, summary, tags, cover, coverAlt, draft } = post.data;
+---
+
+<article class:list={['card post-card', { 'post-card--compact': compact }]}>
+  {
+    cover && !compact && (
+      <div class="post-card__media">
+        <img
+          src={url(cover)}
+          alt={coverAlt ?? ''}
+          class="post-card__img"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    )
+  }
+
+  <div class="post-card__body">
+    <p class="post-card__meta">
+      <time datetime={isoDate(date)}>{formatDate(date)}</time>
+      <span class="post-card__sep" aria-hidden="true">·</span>
+      <span>{getReadingTime(post)}</span>
+      {draft && <span class="post-card__draft">draft</span>}
+    </p>
+
+    <h3 class="post-card__title">
+      <a href={postUrl(post.id)} class="post-card__link">{title}</a>
+    </h3>
+
+    <p class="post-card__summary">{summary}</p>
+
+    {
+      tags.length > 0 && (
+        <ul class="chip-list post-card__tags">
+          {tags.map((tag) => (
+            <li>
+              {/* Above the stretched link, so tag chips stay independently clickable. */}
+              <a href={tagUrl(tag)} class="chip post-card__tag">
+                {tag}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .post-card__media {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-elev);
+    overflow: hidden;
+  }
+
+  .post-card__img {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    filter: saturate(0.9);
+    transition: transform 500ms var(--ease);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .post-card:hover .post-card__img {
+      transform: scale(1.03);
+    }
+  }
+
+  .post-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--space-m);
+  }
+
+  .post-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    margin: 0 0 var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-faint);
+  }
+
+  .post-card__sep {
+    color: var(--border-strong);
+  }
+
+  .post-card__draft {
+    padding: 0.05rem 0.4rem;
+    border: 1px solid var(--accent-3);
+    border-radius: var(--radius-s);
+    color: var(--accent-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .post-card__title {
+    margin: 0 0 var(--space-xs);
+    font-size: var(--step-1);
+    letter-spacing: -0.02em;
+  }
+
+  .post-card__link {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* Stretched link: the card is one big hit target, but only the title is
+     announced as a link. */
+  .post-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .post-card:hover .post-card__link,
+  .post-card__link:focus-visible {
+    color: var(--accent);
+  }
+
+  .post-card__summary {
+    margin: 0 0 var(--space-m);
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+
+  .post-card__tags {
+    margin-top: auto;
+  }
+
+  /* Lift the tag links above the stretched overlay so they remain clickable. */
+  .post-card__tag {
+    position: relative;
+    z-index: 1;
+  }
+</style>

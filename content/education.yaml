@@ -1,0 +1,25 @@
+# ---------------------------------------------------------------------------
+# Education. Same shape as experience.yaml, rendered as a compact list.
+# Delete this file's entries (leave an empty list `[]`) to hide the section.
+#
+#   degree      (required)
+#   institution (required)
+#   start / end (required) free text
+#   url         (optional)
+#   note        (optional) one line — specialisation, thesis, honours
+# ---------------------------------------------------------------------------
+
+- degree: PG Diploma, Data Science
+  institution: International Institute of Information Technology, Bangalore
+  start: Jan 2021
+  end: Jan 2022
+  url: https://www.iiitb.ac.in/
+  note: >-
+    Machine learning, deep learning and statistics, taken alongside full-time
+    work.
+
+- degree: B.Tech, Computer Science & Engineering
+  institution: College of Engineering, Pune
+  start: Aug 2016
+  end: Nov 2020
+  url: https://www.coep.org.in/

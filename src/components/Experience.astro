@@ -1,0 +1,228 @@
+---
+/**
+ * Vertical timeline generated from content/experience.yaml.
+ * Add a job by adding an entry to that file — nothing here changes.
+ */
+import { getExperience } from '~/lib/content';
+import SectionHeading from './SectionHeading.astro';
+
+const experience = await getExperience();
+---
+
+{
+  experience.length > 0 && (
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <SectionHeading index="02" title="Experience" id="experience-title" />
+
+        <ol class="timeline">
+          {experience.map((job, index) => (
+            <li class="timeline__item" data-reveal data-reveal-delay={index * 60}>
+              <div class="timeline__marker" aria-hidden="true">
+                <span class="timeline__dot" />
+              </div>
+
+              <article class="timeline__card">
+                <p class="timeline__dates">
+                  <time>{job.data.start}</time>
+                  <span aria-hidden="true"> — </span>
+                  <span class="sr-only">to </span>
+                  <time class={job.data.end === 'Present' ? 'timeline__now' : undefined}>
+                    {job.data.end}
+                  </time>
+                  {job.data.location && (
+                    <span class="timeline__location"> · {job.data.location}</span>
+                  )}
+                </p>
+
+                <h3 class="timeline__role">
+                  {job.data.role}
+                  <span class="timeline__at"> at </span>
+                  {job.data.url ? (
+                    <a
+                      href={job.data.url}
+                      rel="noopener"
+                      target="_blank"
+                      class="timeline__company"
+                    >
+                      {job.data.company}
+                    </a>
+                  ) : (
+                    <span class="timeline__company">{job.data.company}</span>
+                  )}
+                </h3>
+
+                {job.data.summary && <p class="timeline__summary">{job.data.summary}</p>}
+
+                {job.data.bullets.length > 0 && (
+                  <ul class="timeline__bullets">
+                    {job.data.bullets.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                )}
+
+                {job.data.tags.length > 0 && (
+                  <ul class="chip-list timeline__tags">
+                    {job.data.tags.map((tag) => (
+                      <li>
+                        <span class="chip">{tag}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 56rem;
+  }
+
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    gap: var(--space-m);
+  }
+
+  /* The rail: a vertical line drawn through the marker column. */
+  .timeline__marker {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .timeline__marker::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  /* Trim the rail at the ends so it does not overshoot the first/last entry. */
+  .timeline__item:first-child .timeline__marker::before {
+    top: 0.75rem;
+  }
+
+  .timeline__item:last-child .timeline__marker::before {
+    bottom: auto;
+    height: 0.75rem;
+  }
+
+  .timeline__dot {
+    position: relative;
+    margin-top: 0.55rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border-strong);
+    transition:
+      border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+
+  /* The current role gets the live accent treatment. */
+  .timeline__item:first-child .timeline__dot {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+
+  .timeline__item:hover .timeline__dot {
+    border-color: var(--accent-2);
+  }
+
+  .timeline__card {
+    padding-bottom: var(--space-xl);
+  }
+
+  .timeline__item:last-child .timeline__card {
+    padding-bottom: 0;
+  }
+
+  .timeline__dates {
+    margin: 0 0 var(--space-2xs);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent-3);
+  }
+
+  .timeline__now::after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: 0.4em;
+    border-radius: 50%;
+    background: var(--accent);
+    translate: 0 -0.1em;
+  }
+
+  .timeline__location {
+    color: var(--text-faint);
+  }
+
+  .timeline__role {
+    margin: 0 0 var(--space-xs);
+    font-size: var(--step-1);
+    letter-spacing: -0.015em;
+  }
+
+  .timeline__at {
+    color: var(--text-faint);
+    font-weight: 400;
+  }
+
+  .timeline__company {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a.timeline__company:hover {
+    color: var(--accent-2);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .timeline__summary {
+    margin: 0 0 var(--space-s);
+    color: var(--text-muted);
+    max-width: var(--measure);
+  }
+
+  .timeline__bullets {
+    margin: 0 0 var(--space-s);
+    padding-left: 1.1rem;
+    max-width: var(--measure);
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+
+  .timeline__bullets li {
+    padding-left: 0.2rem;
+  }
+
+  .timeline__bullets li::marker {
+    content: '▸ ';
+    color: var(--accent-2);
+  }
+
+  .timeline__bullets li + li {
+    margin-top: var(--space-2xs);
+  }
+
+  .timeline__tags {
+    margin-top: var(--space-s);
+  }
+</style>

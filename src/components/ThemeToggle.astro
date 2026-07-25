@@ -1,0 +1,86 @@
+---
+/**
+ * Light/dark switch.
+ *
+ * The theme itself is applied before first paint by the inline script in
+ * BaseHead.astro; this component only flips it and remembers the choice.
+ */
+import Icon from './Icon.astro';
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  id="theme-toggle"
+  aria-label="Switch to light theme"
+  aria-live="polite"
+>
+  {
+    /*
+    Wrapped in spans rather than passing a class straight to <Icon>: Astro's
+    scoped styles only attach to elements in *this* component's template, so a
+    class handed to a child component would never match the rules below.
+  */
+  }
+  <span class="theme-toggle__icon theme-toggle__icon--sun"><Icon name="sun" /></span>
+  <span class="theme-toggle__icon theme-toggle__icon--moon"><Icon name="moon" /></span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    background: var(--bg-elev);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition:
+      color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+  }
+
+  .theme-toggle:hover {
+    color: var(--accent-3);
+    border-color: var(--accent-3);
+  }
+
+  /* Both icons occupy the same grid cell; only one is shown at a time. */
+  .theme-toggle__icon {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+  }
+
+  :global(:root[data-theme='dark']) .theme-toggle__icon--moon,
+  :global(:root[data-theme='light']) .theme-toggle__icon--sun {
+    display: none;
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+
+  /** Keep the accessible name describing the *action*, not the current state. */
+  function syncLabel() {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    toggle?.setAttribute('aria-label', `Switch to ${next} theme`);
+  }
+
+  syncLabel();
+
+  toggle?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      /* storage unavailable — the choice just will not persist */
+    }
+    syncLabel();
+  });
+</script>

@@ -1,0 +1,287 @@
+---
+/**
+ * Blog index with tag filtering.
+ *
+ * The filter chips are real links to the tag archives, so they work with
+ * JavaScript disabled. When JS is available they are upgraded into an in-place
+ * filter that syncs with the URL hash (so Back works and links are shareable).
+ */
+import Base from '~/layouts/Base.astro';
+import PostCard from '~/components/PostCard.astro';
+import Icon from '~/components/Icon.astro';
+import { getPosts, getTags } from '~/lib/content';
+import { url, tagUrl, tagSlug } from '~/lib/url';
+import { site } from '~/lib/site';
+
+const posts = await getPosts();
+const tags = await getTags();
+---
+
+<Base
+  title="Blog"
+  description={`Writing on AI, data science and cloud engineering by ${site.name}.`}
+>
+  <div class="container blog-index">
+    <header class="blog-header">
+      <p class="blog-header__eyebrow">
+        <span aria-hidden="true">~/</span>blog
+      </p>
+      <h1 class="blog-header__title">Writing</h1>
+      <p class="blog-header__lead">
+        Notes on applied machine learning, data engineering and cloud — mostly things I had
+        to work out the hard way.
+      </p>
+      <p class="blog-header__feed">
+        <a href={url('/rss.xml')} class="blog-header__rss">
+          <Icon name="rss" size={15} />
+          Subscribe via RSS
+        </a>
+      </p>
+    </header>
+
+    {
+      tags.length > 0 && (
+        <nav class="tag-filter" aria-label="Filter posts by tag">
+          <h2 class="sr-only">Filter by tag</h2>
+          <ul class="tag-filter__list">
+            <li>
+              <a
+                href={url('/blog')}
+                class="tag-filter__chip"
+                data-filter="all"
+                aria-current="true"
+              >
+                All
+                <span class="tag-filter__count">{posts.length}</span>
+              </a>
+            </li>
+            {tags.map((tag) => (
+              <li>
+                <a href={tagUrl(tag.label)} class="tag-filter__chip" data-filter={tag.slug}>
+                  {tag.label}
+                  <span class="tag-filter__count">{tag.count}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    {
+      posts.length > 0 ? (
+        <>
+          {/* Sits between the page h1 and the h3 post titles so the heading
+              order is unbroken, and so the list is not nested under the
+              filter's heading. Visually hidden — the page reads fine without it. */}
+          <h2 class="sr-only">All posts</h2>
+
+          <ul class="post-list" id="post-list">
+            {posts.map((post, index) => (
+              <li
+                class="post-list__item"
+                data-post-tags={post.data.tags.map(tagSlug).join(' ')}
+                data-reveal
+                data-reveal-delay={(index % 2) * 70}
+              >
+                <PostCard post={post} />
+              </li>
+            ))}
+          </ul>
+
+          {/* Announced when a filter empties the list. */}
+          <p class="post-list__empty" id="filter-empty" hidden role="status">
+            No posts with that tag yet.
+          </p>
+        </>
+      ) : (
+        <p class="post-list__empty">
+          No posts yet. Add a Markdown file to <code>content/blog/</code> to get started.
+        </p>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .blog-index {
+    padding-block: var(--space-xl) var(--space-2xl);
+  }
+
+  .blog-header {
+    max-width: var(--measure);
+    margin-bottom: var(--space-xl);
+  }
+
+  .blog-header__eyebrow {
+    margin: 0 0 var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent);
+  }
+
+  .blog-header__title {
+    margin: 0 0 var(--space-s);
+    font-size: var(--step-4);
+  }
+
+  .blog-header__lead {
+    margin: 0 0 var(--space-m);
+    color: var(--text-muted);
+    font-size: var(--step-1);
+  }
+
+  .blog-header__feed {
+    margin: 0;
+  }
+
+  .blog-header__rss {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-decoration: none;
+  }
+
+  .blog-header__rss:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  /* -- Filter -------------------------------------------------------------- */
+  .tag-filter {
+    margin-bottom: var(--space-l);
+    padding-bottom: var(--space-m);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tag-filter__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tag-filter__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.32rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-elev);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-decoration: none;
+    transition:
+      color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+
+  .tag-filter__chip:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+
+  .tag-filter__chip[aria-current='true'] {
+    color: var(--bg);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  :global(:root[data-theme='light']) .tag-filter__chip[aria-current='true'] {
+    color: #fff;
+  }
+
+  .tag-filter__count {
+    font-size: 0.72rem;
+    opacity: 0.65;
+  }
+
+  /* -- List ---------------------------------------------------------------- */
+  .post-list {
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .post-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .post-list__item[hidden] {
+    display: none;
+  }
+
+  .post-list__empty {
+    margin-top: var(--space-l);
+    padding: var(--space-l);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-l);
+    text-align: center;
+    color: var(--text-muted);
+  }
+</style>
+
+<script>
+  /* --------------------------------------------------------------------------
+     Progressive enhancement: turn the tag links into an in-place filter.
+     Without this script the same chips still work — they navigate to the
+     dedicated tag archive pages.
+     ------------------------------------------------------------------------ */
+  const chips = document.querySelectorAll<HTMLAnchorElement>('[data-filter]');
+  const items = document.querySelectorAll<HTMLLIElement>('.post-list__item');
+  const empty = document.getElementById('filter-empty');
+
+  if (chips.length && items.length) {
+    function apply(tag: string) {
+      let shown = 0;
+
+      items.forEach((item) => {
+        const tags = (item.dataset.postTags ?? '').split(' ');
+        const match = tag === 'all' || tags.includes(tag);
+        item.hidden = !match;
+        if (match) shown += 1;
+      });
+
+      chips.forEach((chip) => {
+        if (chip.dataset.filter === tag) chip.setAttribute('aria-current', 'true');
+        else chip.removeAttribute('aria-current');
+      });
+
+      if (empty) empty.hidden = shown > 0;
+    }
+
+    /** The hash is the source of truth, so Back/Forward and deep links work. */
+    function fromHash() {
+      const tag = decodeURIComponent(location.hash.replace(/^#/, '')) || 'all';
+      const known = [...chips].some((chip) => chip.dataset.filter === tag);
+      apply(known ? tag : 'all');
+    }
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', (event) => {
+        // Let modified clicks (new tab, etc.) fall through to the tag page.
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+        event.preventDefault();
+        const tag = chip.dataset.filter ?? 'all';
+        history.pushState(null, '', tag === 'all' ? location.pathname : `#${tag}`);
+        apply(tag);
+      });
+    });
+
+    window.addEventListener('hashchange', fromHash);
+    window.addEventListener('popstate', fromHash);
+    fromHash();
+  }
+</script>

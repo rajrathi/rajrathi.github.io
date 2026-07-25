@@ -1,0 +1,70 @@
+# -----------------------------------------------------------------------------
+# Build the Astro site and publish it to GitHub Pages.
+#
+# One-time setup in the repo: Settings → Pages → "Build and deployment" →
+# Source: **GitHub Actions**. After that, every push to the branches below
+# rebuilds and redeploys the site automatically.
+# -----------------------------------------------------------------------------
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    # `source` is this repo's working branch; `main` is here so the workflow
+    # keeps working if you rename or switch. Drop whichever you do not use.
+    branches: [main, source]
+  # Lets you redeploy by hand from the Actions tab without pushing a commit.
+  workflow_dispatch:
+
+# Permissions the deploy action needs. Nothing more.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deploys at once; let a newer push finish rather than cancelling
+# a deploy that is already mid-flight.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # `npm ci` installs exactly what package-lock.json pins — reproducible,
+      # and it fails loudly if the lockfile and package.json disagree.
+      - name: Install dependencies
+        run: npm ci
+
+      # `npm run build` runs `astro check` first, so a broken content file or a
+      # type error stops the deploy instead of shipping a broken page.
+      - name: Build
+        run: npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

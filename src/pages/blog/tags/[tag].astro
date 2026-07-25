@@ -1,0 +1,137 @@
+---
+/**
+ * Tag archive: /blog/tags/<tag>/
+ *
+ * Generated from whatever tags appear in post frontmatter — add a new tag to a
+ * post and its archive page appears on the next build. These pages are also the
+ * no-JavaScript fallback for the filter on /blog.
+ */
+import type { GetStaticPaths } from 'astro';
+import Base from '~/layouts/Base.astro';
+import PostCard from '~/components/PostCard.astro';
+import { getTags, getPostsByTag } from '~/lib/content';
+import { url, tagUrl } from '~/lib/url';
+import { site } from '~/lib/site';
+
+export const getStaticPaths = (async () => {
+  const tags = await getTags();
+
+  return Promise.all(
+    tags.map(async (tag) => ({
+      params: { tag: tag.slug },
+      props: { label: tag.label, posts: await getPostsByTag(tag.slug) },
+    }))
+  );
+}) satisfies GetStaticPaths;
+
+const { label, posts } = Astro.props;
+const allTags = await getTags();
+---
+
+<Base
+  title={`Posts tagged “${label}”`}
+  description={`${posts.length} post${posts.length === 1 ? '' : 's'} about ${label} by ${site.name}.`}
+>
+  <div class="container tag-page">
+    <header class="tag-page__header">
+      <p class="tag-page__eyebrow">
+        <a href={url('/blog')}>~/blog</a>/tags/
+      </p>
+      <h1 class="tag-page__title">{label}</h1>
+      <p class="tag-page__count">
+        {posts.length} post{posts.length === 1 ? '' : 's'}
+      </p>
+    </header>
+
+    <nav class="tag-page__nav" aria-label="Other tags">
+      <ul class="chip-list">
+        <li><a href={url('/blog')} class="chip">All posts</a></li>
+        {
+          allTags
+            .filter((tag) => tag.label !== label)
+            .map((tag) => (
+              <li>
+                <a href={tagUrl(tag.label)} class="chip">
+                  {tag.label} <span class="tag-page__n">{tag.count}</span>
+                </a>
+              </li>
+            ))
+        }
+      </ul>
+    </nav>
+
+    {
+      /* Keeps the heading order h1 → h2 → h3 (post titles) unbroken for screen
+        readers, without adding a visible heading the page does not need. */
+    }
+    <h2 class="sr-only">Posts tagged {label}</h2>
+
+    <ul class="post-list">
+      {
+        posts.map((post, index) => (
+          <li data-reveal data-reveal-delay={(index % 2) * 70}>
+            <PostCard post={post} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .tag-page {
+    padding-block: var(--space-xl) var(--space-2xl);
+  }
+
+  .tag-page__header {
+    margin-bottom: var(--space-m);
+  }
+
+  .tag-page__eyebrow {
+    margin: 0 0 var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--text-faint);
+  }
+
+  .tag-page__eyebrow a {
+    text-decoration: none;
+  }
+
+  .tag-page__title {
+    margin: 0;
+    font-size: var(--step-4);
+  }
+
+  .tag-page__count {
+    margin: var(--space-2xs) 0 0;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent-3);
+  }
+
+  .tag-page__nav {
+    margin-bottom: var(--space-l);
+    padding-bottom: var(--space-m);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tag-page__n {
+    opacity: 0.6;
+  }
+
+  .post-list {
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .post-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

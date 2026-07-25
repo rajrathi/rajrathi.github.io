@@ -1,0 +1,98 @@
+---
+/**
+ * 404. GitHub Pages serves /404.html automatically for unknown paths.
+ */
+import Base from '~/layouts/Base.astro';
+import Icon from '~/components/Icon.astro';
+import { url } from '~/lib/url';
+---
+
+<Base title="404 — Not found" description="That page does not exist." noindex>
+  <div class="container notfound">
+    <p class="notfound__code" aria-hidden="true">404</p>
+    <h1 class="notfound__title">Signal lost</h1>
+    <p class="notfound__text">
+      That page does not exist — it may have been renamed, or the link may be wrong. Nothing
+      is broken on your end.
+    </p>
+    <pre
+      class="notfound__terminal"
+      aria-hidden="true"><code>~ $ find . -name "<span class="notfound__path" id="notfound-path">the-page-you-wanted</span>"
+find: no matches
+~ $ cd /</code></pre>
+    <p class="notfound__actions">
+      <a href={url('/')} class="btn btn--primary">
+        Back home
+        <Icon name="arrow-right" size={16} />
+      </a>
+      <a href={url('/blog')} class="btn">Read the blog</a>
+    </p>
+  </div>
+</Base>
+
+<style>
+  .notfound {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding-block: var(--space-2xl);
+    min-height: 60svh;
+  }
+
+  .notfound__code {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: clamp(4rem, 2rem + 14vw, 9rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    color: transparent;
+    background: linear-gradient(100deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    opacity: 0.85;
+  }
+
+  .notfound__title {
+    margin: var(--space-s) 0;
+    font-size: var(--step-3);
+  }
+
+  .notfound__text {
+    max-width: 46ch;
+    margin: 0 0 var(--space-l);
+    color: var(--text-muted);
+  }
+
+  .notfound__terminal {
+    margin: 0 0 var(--space-l);
+    padding: var(--space-m);
+    max-width: 100%;
+    overflow-x: auto;
+    text-align: left;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: var(--step--1);
+    line-height: 1.7;
+  }
+
+  .notfound__path {
+    color: var(--accent-2);
+  }
+
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    justify-content: center;
+    margin: 0;
+  }
+</style>
+
+<script>
+  // Show the path that was actually requested — friendlier than a generic message.
+  const slot = document.getElementById('notfound-path');
+  if (slot) slot.textContent = location.pathname.replace(/^\/|\/$/g, '') || 'that-page';
+</script>

@@ -1,0 +1,155 @@
+---
+/**
+ * Everything that goes in <head>: SEO, Open Graph, icons, feed discovery and
+ * the anti-flash theme script.
+ *
+ * Each page passes its own title/description; sensible defaults come from
+ * content/site.yaml.
+ */
+import { site, socialProfileUrls } from '~/lib/site';
+import { url, absoluteUrl } from '~/lib/url';
+
+interface Props {
+  /** Page title. Rendered as "<title> · Rajeshwar Rathi", or alone on the home page. */
+  title?: string;
+  description?: string;
+  /** Path inside /public to a share image, e.g. "/img/cover.png". */
+  image?: string;
+  /** "website" for pages, "article" for blog posts. */
+  type?: 'website' | 'article';
+  publishedDate?: Date;
+  modifiedDate?: Date;
+  tags?: string[];
+  /** Keep a page out of search results (used by 404). */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = site.description,
+  image = site.ogImage,
+  type = 'website',
+  publishedDate,
+  modifiedDate,
+  tags = [],
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.role}`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).toString();
+const ogImage = absoluteUrl(image, Astro.site ?? site.url);
+
+/**
+ * Structured data. `Person` on every page so search engines can connect the
+ * profile to the social accounts; `BlogPosting` additionally on posts.
+ */
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  jobTitle: site.role,
+  description: site.description,
+  sameAs: socialProfileUrls,
+};
+
+const articleSchema = publishedDate
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description,
+      image: ogImage,
+      datePublished: publishedDate.toISOString(),
+      dateModified: (modifiedDate ?? publishedDate).toISOString(),
+      author: { '@type': 'Person', name: site.name, url: site.url },
+      keywords: tags.join(', '),
+      mainEntityOfPage: canonical,
+    }
+  : null;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, follow" />}
+
+{
+  /* Icons + theme colour. The colour is the page background, so mobile browser
+    chrome blends into the site instead of banding against it. */
+}
+<link rel="icon" href={url('/favicon.png')} type="image/png" />
+<link rel="apple-touch-icon" href={url('/favicon.png')} />
+<meta name="theme-color" content="#0a0a11" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
+
+{/* Feed + sitemap discovery */}
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={`${site.name} — Blog`}
+  href={absoluteUrl('/rss.xml', Astro.site ?? site.url)}
+/>
+<link rel="sitemap" href={url('/sitemap-index.xml')} />
+
+{/* Open Graph */}
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={title ?? site.name} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={`${site.name} — ${site.role}`} />
+<meta property="og:locale" content="en_GB" />
+{
+  publishedDate && (
+    <>
+      <meta property="article:published_time" content={publishedDate.toISOString()} />
+      <meta property="article:author" content={site.name} />
+      {tags.map((tag) => (
+        <meta property="article:tag" content={tag} />
+      ))}
+    </>
+  )
+}
+
+{/* Twitter / X */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title ?? site.name} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<meta name="generator" content={Astro.generator} />
+
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
+{
+  articleSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} is:inline />
+  )
+}
+
+{
+  /*
+  Theme bootstrap. This runs before first paint, so a returning visitor who
+  chose light mode never sees a black flash. It also stamps `.js` on <html>,
+  which is what enables the scroll-reveal hidden state — without JS, content is
+  visible by default.
+*/
+}
+<script is:inline>
+  (function () {
+    var root = document.documentElement;
+    root.classList.add('js');
+    var stored = null;
+    try {
+      stored = localStorage.getItem('theme');
+    } catch (e) {
+      /* private mode / storage disabled — fall back to the OS preference */
+    }
+    var prefersLight =
+      window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    root.dataset.theme = stored || (prefersLight ? 'light' : 'dark');
+  })();
+</script>

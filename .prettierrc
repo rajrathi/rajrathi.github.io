@@ -1,0 +1,16 @@
+{
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 92,
+  "plugins": ["prettier-plugin-astro"],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": { "parser": "astro" }
+    },
+    {
+      "files": ["*.md", "*.yaml", "*.yml"],
+      "options": { "printWidth": 80, "proseWrap": "preserve" }
+    }
+  ]
+}

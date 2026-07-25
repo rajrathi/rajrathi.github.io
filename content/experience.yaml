@@ -1,0 +1,89 @@
+# ---------------------------------------------------------------------------
+# Work experience. Rendered as a vertical timeline, newest first.
+#
+# To add a job: copy a block below, paste it at the TOP of the list, edit it.
+# Nothing else needs to change.
+#
+#   role     (required) your job title
+#   company  (required) where
+#   start    (required) free text — "Sep 2020", "2020", whatever reads well
+#   end      (required) use "Present" for your current role
+#   location (optional)
+#   url      (optional) company website; turns the company name into a link
+#   summary  (optional) one line under the title
+#   bullets  (optional) list of accomplishments
+#   tags     (optional) tech used, shown as small chips
+# ---------------------------------------------------------------------------
+
+- role: Programmer Analyst
+  company: Bitwise Inc.
+  start: Nov 2023
+  end: Present
+  location: Pune, India
+  url: https://www.bitwiseglobal.com/
+  summary: >-
+    Machine learning engineer on a payment technology client, taking models from
+    notebook to production.
+  bullets:
+    - Build and productionise machine learning models for a payment technology
+      client, covering feature engineering, training and deployment.
+    - Run training and batch inference workloads on managed cloud services
+      (AWS SageMaker, Azure Batch) rather than hand-rolled infrastructure.
+    - Work with the data engineering team to turn ad-hoc analytical queries into
+      scheduled, monitored pipelines.
+    # TODO: replace with a concrete result — model, metric moved, and by how much.
+    - "PLACEHOLDER: add a headline outcome here (e.g. 'cut fraud-review queue
+      volume by X% by replacing a rules engine with a gradient-boosted model')."
+  tags: [Python, PyTorch, scikit-learn, SageMaker, Azure, MLOps]
+
+- role: Programmer
+  company: Bitwise Inc.
+  start: Sep 2020
+  end: Oct 2023
+  location: Pune, India
+  url: https://www.bitwiseglobal.com/
+  summary: >-
+    Data engineering across two client platforms — ingestion, transformation and
+    warehousing.
+  bullets:
+    - Built and maintained ETL pipelines in Python and PySpark, orchestrated with
+      Apache Airflow and Azure Data Factory.
+    - Modelled and loaded analytical data into Redshift and Snowflake, including
+      the incremental-load and data-quality checks around them.
+    - Automated recurring delivery work with Jenkins and Azure DevOps so releases
+      stopped depending on any one person being online.
+    # TODO: replace with a concrete result — scale, runtime saved, or cost saved.
+    - "PLACEHOLDER: add a headline outcome here (e.g. 'reduced a nightly batch
+      window from 6h to 90m by repartitioning the Spark job')."
+  tags: [Python, PySpark, Airflow, Snowflake, Redshift, Azure Data Factory, S3]
+
+- role: SDE Intern
+  company: Veritas LLC
+  start: Jan 2020
+  end: Jun 2020
+  location: Pune, India
+  summary: >-
+    Built an impact-analysis engine that mapped dependencies between
+    microservices.
+  bullets:
+    - Parsed service configuration and log files to generate a dependency graph
+      of a microservice architecture using NetworkX and GraphViz.
+    - Derived an impact score for each service — how much of the system degrades
+      if it goes down — weighted by service centrality and bug severity.
+    - Wired the tool into CI so the graph regenerated on every build instead of
+      being redrawn by hand.
+  tags: [Python, NetworkX, GraphViz, Plotly, Jenkins]
+
+- role: Computer Vision Intern
+  company: VInventTech
+  start: 2019
+  end: 2019
+  location: Pune, India
+  summary: >-
+    Helmet-detection model for real-time road transport video.
+  bullets:
+    - Trained an R-CNN based detector to identify two-wheeler riders without
+      helmets in live video, reaching roughly 85% AUC.
+    - Wrapped the model in a Flask API so it could be called from the client's
+      existing monitoring stack.
+  tags: [Python, Keras, OpenCV, Flask]

@@ -1,0 +1,99 @@
+---
+/**
+ * The document shell every page uses: <html>, head, skip link, nav, footer,
+ * and the one small global script (scroll reveal + heading anchors).
+ */
+import BaseHead from '~/components/BaseHead.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import { site } from '~/lib/site';
+import '~/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedDate?: Date;
+  modifiedDate?: Date;
+  tags?: string[];
+  noindex?: boolean;
+}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang={site.lang} data-theme="dark">
+  <head>
+    <BaseHead {...props} />
+  </head>
+  <body id="top">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Nav />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      /* ------------------------------------------------------------------
+         Scroll reveal.
+         One observer for every [data-reveal] element. Elements unobserve
+         themselves once shown, so this costs nothing after the first pass.
+         The hidden state is CSS-scoped to `.js`, so no-JS visitors are
+         unaffected, and `prefers-reduced-motion` short-circuits it entirely.
+      ------------------------------------------------------------------ */
+      const reveals = document.querySelectorAll('[data-reveal]');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              // Stagger siblings slightly for a sense of sequence.
+              const delay = Number((entry.target as HTMLElement).dataset.revealDelay ?? 0);
+              window.setTimeout(() => entry.target.classList.add('is-visible'), delay);
+              observer.unobserve(entry.target);
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 }
+        );
+        reveals.forEach((el) => observer.observe(el));
+      }
+
+      /* ------------------------------------------------------------------
+         Heading anchors for prose. Adds a linkable "#" to every h2/h3 that
+         has an id, so readers can deep-link into a post.
+      ------------------------------------------------------------------ */
+      document
+        .querySelectorAll<HTMLElement>('.prose h2[id], .prose h3[id]')
+        .forEach((h) => {
+          const anchor = document.createElement('a');
+          anchor.href = `#${h.id}`;
+          anchor.className = 'heading-anchor';
+          anchor.textContent = '#';
+          anchor.setAttribute('aria-label', `Link to section: ${h.textContent?.trim()}`);
+          h.appendChild(anchor);
+        });
+
+      /* ------------------------------------------------------------------
+         Wrap prose tables so they scroll on narrow screens instead of
+         forcing the whole page to scroll sideways.
+      ------------------------------------------------------------------ */
+      document.querySelectorAll('.prose table').forEach((table) => {
+        if (table.parentElement?.classList.contains('table-wrap')) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'table-wrap';
+        wrap.setAttribute('role', 'region');
+        wrap.setAttribute('tabindex', '0');
+        wrap.setAttribute('aria-label', 'Table, scrollable');
+        table.parentNode?.insertBefore(wrap, table);
+        wrap.appendChild(table);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+# ---------------------------------------------------------------------------
+# Projects. Rendered as a responsive card grid, in the order listed here.
+#
+# To add a project: copy a block, paste it where you want it to appear, edit it.
+#
+#   title       (required)
+#   description (required) 1-3 sentences
+#   tags        (optional) shown as chips under the description
+#   image       (optional) path inside /public, e.g. /project-thumb/07.png
+#   imageAlt    (optional) describe the image for screen readers
+#   featured    (optional) true = larger card, pinned to the top of the grid
+#   year        (optional) shown in the card corner
+#   links       (optional) list of { label, href }. Use label "Source" / "Live"
+#                          / "Demo" / "Paper" — the icon is picked from it.
+# ---------------------------------------------------------------------------
+
+- title: Unpaired Image Translation for Brain MRI
+  year: 2022
+  featured: true
+  description: >-
+    A CycleGAN fused with ResNet blocks that synthesises a T2-weighted brain MRI
+    from a T1-weighted scan and vice versa. Because the training is unpaired, it
+    does not need the same patient scanned twice — which is the whole point: one
+    acquisition instead of two saves scanner time, cost and patient discomfort.
+  image: /project-thumb/07.png
+  imageAlt: Side-by-side T1 and T2 weighted brain MRI slices produced by the model
+  tags: [Python, TensorFlow, CycleGAN, scikit-image, NumPy, Matplotlib]
+  links:
+    - label: Source
+      href: https://github.com/rajrathi/image2imageBrainMRI
+
+- title: Conditional GAN for Handwritten Digits
+  year: 2022
+  featured: true
+  description: >-
+    A Hugging Face Space that generates handwritten samples of any digit you ask
+    for, 0 through 9. Built to make the difference between a plain GAN and a
+    conditional one tangible — you steer the output instead of taking what you
+    are given.
+  image: /project-thumb/06.png
+  imageAlt: Grid of generated handwritten digits
+  tags: [Python, Keras, Gradio, Hugging Face, NumPy]
+  links:
+    - label: Demo
+      href: https://huggingface.co/spaces/keras-io/conditional-GAN
+
+- title: Impact Analysis Engine for Microservices
+  year: 2020
+  description: >-
+    A utility that reads service config and log files and builds a live
+    dependency graph of a microservice architecture. Each service gets an impact
+    score — how much of the system degrades if it goes down — weighted by its
+    position in the graph and the severity of open bugs against it. Cut the
+    latency of component-automation decisions considerably.
+  image: /project-thumb/05.png
+  imageAlt: Directed dependency graph of microservices
+  tags: [Python, NetworkX, GraphViz, Plotly, Pandas, Jenkins, CI/CD]
+
+- title: Helmet Detection for Real-time Traffic Video
+  year: 2019
+  description: >-
+    An R-CNN based detector that identifies two-wheeler riders travelling without
+    a helmet in live road-transport video, at roughly 85% AUC, exposed as a Flask
+    API for a road-safety monitoring pipeline.
+  image: /project-thumb/04.jpg
+  imageAlt: Traffic camera frame with detection boxes over riders
+  tags: [Python, Keras, OpenCV, NumPy, Flask]
+
+- title: Mock Trading System
+  year: 2019
+  description: >-
+    A team-built stock trading platform. I owned exchange connectivity — the REST
+    layer that moved orders and fills between the front end and the matching
+    engine.
+  image: /project-thumb/02.png
+  imageAlt: Trading platform order book screen
+  tags: [Python, Flask, C++, SQLite, REST]
+
+- title: Terminal Text Editor
+  year: 2018
+  description: >-
+    A modal text editor for the terminal written in C against ncurses, with find,
+    search-and-replace, line operations and file I/O. The kind of project that
+    teaches you what a buffer really is.
+  image: /project-thumb/01.webp
+  imageAlt: Terminal text editor showing a file open
+  tags: [C, ncurses, regex]

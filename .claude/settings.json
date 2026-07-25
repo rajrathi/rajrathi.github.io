@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(./shot.sh \"/blog\" mobile-blog.png 520 1500 light)",
+      "Bash(python3 /private/tmp/claude-501/-Users-rajrathi-Developer-code-rajrathi-github-io/48b8e7a7-7a47-4a71-9524-73d9802852fa/scratchpad/make_og.py)",
+      "Bash(lsof -ti:4321,4322 -sTCP:LISTEN)",
+      "Bash(npm run *)",
+      "Bash(python3 -)",
+      "Bash(perl -pi -e \"s/^tags: \\\\[Cloud, BrandNewTag\\\\]/tags: [Cloud, BrandNewTag]\\\\ndraft: true/\" content/blog/smoke-test-post.md)",
+      "Bash(perl -pi -e \"s/^date: 2026-07-24/date: not-a-date/\" content/blog/smoke-test-post.md)",
+      "Bash(grep -c '```' content/blog/_template.md content/blog/making-batch-jobs-boring.md)",
+      "Bash(git check-ignore *)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
+    ]
+  }
+}

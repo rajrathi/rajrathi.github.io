@@ -1,0 +1,781 @@
+/* ==========================================================================
+   Design tokens + global styles
+   --------------------------------------------------------------------------
+   "Modern retro": a near-black base, a fine terminal grid, and three neon
+   accents used as punctuation rather than decoration. Dark is the default;
+   the light theme is a first-class equivalent, not an afterthought.
+
+   All colour, spacing and type decisions live in the token block below. If you
+   want to restyle the site, start there — almost nothing downstream hard-codes
+   a value.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Fonts
+   --------------------------------------------------------------------------
+   Self-hosted variable fonts — no external requests, no third-party tracking,
+   no render-blocking round trip to a CDN.
+
+   These @font-face rules are written by hand rather than importing the
+   Fontsource stylesheets, because those pull in Cyrillic, Greek and Vietnamese
+   subsets this site never uses. Declaring only the Latin ranges keeps the
+   deployed payload to four files (~130 KB) instead of twelve.
+
+   If you ever need another script, import the package stylesheet instead:
+     @import '@fontsource-variable/inter';
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap; /* text is readable immediately, in the fallback face */
+  font-weight: 100 900;
+  src: url('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2')
+    format('woff2-variations');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2')
+    format('woff2-variations');
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2')
+    format('woff2-variations');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-ext-wght-normal.woff2')
+    format('woff2-variations');
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* -- Neon accents. Same hues in both themes, re-tuned for contrast. ------ */
+  --neon-cyan: #35e6e0;
+  --neon-magenta: #ff5fd2;
+  --neon-amber: #ffc23d;
+
+  /* -- Semantic accent roles. Swap these to re-skin the site. -------------- */
+  --accent: var(--neon-cyan); /* primary: links, CTAs, focus */
+  --accent-2: var(--neon-magenta); /* secondary: headings marker, hovers */
+  --accent-3: var(--neon-amber); /* tertiary: dates, meta, counters */
+
+  /* -- Surfaces ----------------------------------------------------------- */
+  --bg: #0a0a11;
+  --bg-elev: #10101b;
+  --surface: #141422;
+  --surface-hover: #1b1b2d;
+
+  /* -- Ink ---------------------------------------------------------------- */
+  --text: #eaeaf4;
+  --text-muted: #a2a2ba;
+  --text-faint: #6f6f8a;
+
+  /* -- Lines and glows ---------------------------------------------------- */
+  --border: #262638;
+  --border-strong: #3a3a52;
+  --grid-line: rgba(120, 130, 190, 0.07);
+  --glow: 0 0 0.6em rgba(53, 230, 224, 0.35);
+  --glow-magenta: 0 0 0.6em rgba(255, 95, 210, 0.35);
+  --scanline-opacity: 0.5;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.5), 0 12px 32px -16px rgba(0, 0, 0, 0.8);
+
+  /* -- Type --------------------------------------------------------------- */
+  --font-sans:
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:
+    'JetBrains Mono Variable', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+
+  /* Fluid scale: min at 360px viewport, max at ~1200px. */
+  --step--1: clamp(0.82rem, 0.79rem + 0.13vw, 0.89rem);
+  --step-0: clamp(1rem, 0.96rem + 0.18vw, 1.09rem);
+  --step-1: clamp(1.2rem, 1.13rem + 0.33vw, 1.4rem);
+  --step-2: clamp(1.44rem, 1.32rem + 0.56vw, 1.8rem);
+  --step-3: clamp(1.73rem, 1.53rem + 0.9vw, 2.32rem);
+  --step-4: clamp(2.07rem, 1.75rem + 1.4vw, 3rem);
+  --step-5: clamp(2.49rem, 1.98rem + 2.2vw, 3.88rem);
+
+  /* -- Space + geometry --------------------------------------------------- */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-s: 0.75rem;
+  --space-m: 1.25rem;
+  --space-l: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: clamp(3.5rem, 2rem + 6vw, 6.5rem);
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 14px;
+
+  --measure: 68ch; /* comfortable reading width for prose */
+  --container: 1120px;
+  --container-narrow: 760px;
+  --nav-h: 60px;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur: 220ms;
+
+  color-scheme: dark;
+}
+
+/* -- Light theme ----------------------------------------------------------
+   Accents are darkened so they stay AA-legible on a pale background, and the
+   CRT effects are dialled almost to nothing (they read as dirt on white).     */
+:root[data-theme='light'] {
+  --neon-cyan: #067d78;
+  --neon-magenta: #bd1f8f;
+  --neon-amber: #8a5300;
+
+  --bg: #fbfbfd;
+  --bg-elev: #ffffff;
+  --surface: #ffffff;
+  --surface-hover: #f4f4f9;
+
+  --text: #14141d;
+  --text-muted: #4f4f66;
+  --text-faint: #77778e;
+
+  --border: #e2e2ec;
+  --border-strong: #c6c6d6;
+  --grid-line: rgba(60, 70, 130, 0.06);
+  --glow: none;
+  --glow-magenta: none;
+  --scanline-opacity: 0;
+  --shadow-card: 0 1px 2px rgba(20, 20, 40, 0.05), 0 12px 28px -18px rgba(20, 20, 60, 0.28);
+
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------------------
+   2. Base
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Anchors land below the sticky nav instead of underneath it. */
+  scroll-padding-top: calc(var(--nav-h) + var(--space-m));
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* -- Retro layer 1: a faint terminal grid, faded out toward the bottom ----- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 52px 52px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 120% 70% at 50% 0%,
+    #000 20%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(ellipse 120% 70% at 50% 0%, #000 20%, transparent 75%);
+}
+
+/* -- Retro layer 2: CRT scanlines. Deliberately near-subliminal. ----------- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: var(--scanline-opacity);
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.14) 0 1px,
+    transparent 1px 4px
+  );
+}
+
+/* Readers who ask for less motion also tend to want fewer visual artefacts. */
+@media (prefers-reduced-motion: reduce) {
+  body::after {
+    display: none;
+  }
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   3. Typography
+   -------------------------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-s);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-5);
+}
+h2 {
+  font-size: var(--step-3);
+}
+h3 {
+  font-size: var(--step-1);
+}
+h4 {
+  font-size: var(--step-0);
+}
+
+p,
+ul,
+ol {
+  margin: 0 0 var(--space-m);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: color var(--dur) var(--ease);
+}
+
+a:hover {
+  color: var(--accent-2);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* --------------------------------------------------------------------------
+   4. Accessibility primitives
+   -------------------------------------------------------------------------- */
+
+/* A single, consistent, high-contrast focus ring everywhere. */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-s);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-s);
+  top: var(--space-s);
+  z-index: 200;
+  transform: translateY(-200%);
+  padding: var(--space-xs) var(--space-m);
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--step--1);
+  border-radius: var(--radius-m);
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   5. Layout
+   -------------------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-m);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+.section {
+  padding-block: var(--space-2xl);
+  /* Sections are anchor targets; give them room under the sticky nav. */
+  scroll-margin-top: var(--nav-h);
+}
+
+.section + .section {
+  padding-top: 0;
+}
+
+.stack > * + * {
+  margin-top: var(--space-m);
+}
+
+/* --------------------------------------------------------------------------
+   6. Shared components
+   -------------------------------------------------------------------------- */
+
+/* -- Section heading: "// 02 · experience" -------------------------------- */
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-s);
+  margin-bottom: var(--space-l);
+}
+
+.section-heading__index {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--accent-3);
+  letter-spacing: 0.08em;
+  flex: none;
+}
+
+.section-heading__title {
+  font-size: var(--step-3);
+  margin: 0;
+}
+
+.section-heading__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border-strong), transparent);
+  align-self: center;
+}
+
+/* -- Buttons -------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-m);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #05050a;
+}
+
+:root[data-theme='light'] .btn--primary {
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+  color: #05050a;
+  box-shadow: var(--glow-magenta);
+}
+
+:root[data-theme='light'] .btn--primary:hover {
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* -- Chips (tags, skills) ------------------------------------------------- */
+.chip {
+  display: inline-block;
+  padding: 0.16rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+a.chip {
+  text-decoration: none;
+  transition:
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+a.chip:hover,
+a.chip:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-xs);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* -- Cards ---------------------------------------------------------------- */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  transition:
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(-3px);
+  }
+}
+
+/* A hairline of neon along the top edge, revealed on hover. */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent), var(--accent-2));
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.card:hover::before,
+.card:focus-within::before {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   7. Scroll-reveal
+   --------------------------------------------------------------------------
+   The hidden state is scoped to `.js`, which the inline head script adds. With
+   JavaScript disabled the content is simply visible — never blank.            */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 620ms var(--ease),
+    transform 620ms var(--ease);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Prose (rendered Markdown: blog posts + about)
+   -------------------------------------------------------------------------- */
+
+.prose {
+  max-width: var(--measure);
+  font-size: var(--step-0);
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.prose > * + * {
+  margin-top: var(--space-m);
+}
+
+.prose h2 {
+  margin-top: var(--space-xl);
+  font-size: var(--step-2);
+  scroll-margin-top: calc(var(--nav-h) + var(--space-m));
+}
+
+.prose h3 {
+  margin-top: var(--space-l);
+  font-size: var(--step-1);
+  scroll-margin-top: calc(var(--nav-h) + var(--space-m));
+}
+
+/* Heading anchors: a neon "#" that appears on hover, keyboard reachable. */
+.prose .heading-anchor {
+  margin-left: 0.4em;
+  color: var(--accent-3);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.prose :is(h2, h3):hover .heading-anchor,
+.prose .heading-anchor:focus-visible {
+  opacity: 1;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+}
+
+.prose li + li {
+  margin-top: var(--space-2xs);
+}
+
+.prose li::marker {
+  color: var(--accent-3);
+}
+
+.prose strong {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.prose blockquote {
+  margin: var(--space-l) 0;
+  padding: var(--space-s) var(--space-m);
+  border-left: 2px solid var(--accent-2);
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.prose blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.prose :not(pre) > code {
+  padding: 0.12em 0.38em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  background: var(--bg-elev);
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.prose pre {
+  margin: var(--space-l) 0;
+  padding: var(--space-m);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  overflow-x: auto;
+  line-height: 1.6;
+  font-size: var(--step--1);
+  /* Shiki sets its own background; keep the scroll container tidy. */
+  tab-size: 2;
+}
+
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.prose img {
+  border-radius: var(--radius-m);
+  border: 1px solid var(--border);
+  margin-inline: auto;
+}
+
+.prose hr {
+  border: 0;
+  height: 1px;
+  margin: var(--space-xl) 0;
+  background: linear-gradient(to right, transparent, var(--border-strong), transparent);
+}
+
+/* Tables scroll horizontally on small screens rather than breaking the page. */
+.prose .table-wrap {
+  overflow-x: auto;
+  margin: var(--space-l) 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+
+.prose :is(th, td) {
+  padding: var(--space-xs) var(--space-s);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose th {
+  font-family: var(--font-mono);
+  color: var(--accent-3);
+  white-space: nowrap;
+}
+
+.prose tr:last-child td {
+  border-bottom: 0;
+}
+
+/* -- Shiki dual-theme switching ------------------------------------------
+   Astro emits the light theme inline and the dark theme as CSS variables.
+   Dark mode swaps them; `prefers-color-scheme` covers the first paint before
+   the toggle has been read from localStorage.                                */
+:root[data-theme='dark'] .astro-code,
+:root[data-theme='dark'] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Print
+   -------------------------------------------------------------------------- */
+
+@media print {
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .site-nav,
+  .site-footer,
+  .back-to-top,
+  .theme-toggle,
+  .tag-filter {
+    display: none !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,320 @@
+---
+/**
+ * Sticky site navigation.
+ *
+ * Links come from `nav:` in content/site.yaml — add an entry there and it
+ * appears here. On the home page, in-page links get scroll-spy highlighting.
+ */
+import { site } from '~/lib/site';
+import { url } from '~/lib/url';
+import Icon from './Icon.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+/** Mark section links live only on the home page; page links match by prefix. */
+function isCurrent(href: string): boolean {
+  if (href.startsWith('/#')) return false;
+  const target = url(href).replace(/\/+$/, '') || '/';
+  return target === '/' ? path === '/' : path.startsWith(target);
+}
+---
+
+<header class="site-nav" id="site-nav">
+  <div class="container site-nav__inner">
+    <a href={url('/')} class="site-nav__brand" aria-label={`${site.name} — home`}>
+      <span class="site-nav__prompt" aria-hidden="true">~/</span>
+      <span class="site-nav__name">{site.name.split(' ')[0]?.toLowerCase()}</span>
+      <span class="site-nav__cursor" aria-hidden="true"></span>
+    </a>
+
+    <button
+      type="button"
+      class="site-nav__burger"
+      id="nav-burger"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      aria-label="Open navigation menu"
+    >
+      {/* Wrapped in spans so Astro's scoped styles apply — see ThemeToggle. */}
+      <span class="burger-icon burger-icon--open"><Icon name="menu" /></span>
+      <span class="burger-icon burger-icon--close"><Icon name="close" /></span>
+    </button>
+
+    <nav id="nav-menu" class="site-nav__menu" aria-label="Main">
+      <ul class="site-nav__list">
+        {
+          site.nav.map((item) => (
+            <li>
+              <a
+                href={url(item.href)}
+                class="site-nav__link"
+                data-nav-link
+                data-target={item.href.startsWith('/#') ? item.href.slice(2) : undefined}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="site-nav__actions">
+        <ThemeToggle />
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color var(--dur) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+
+  /* A border only once the page has scrolled, so the hero reads edge-to-edge. */
+  .site-nav.is-scrolled {
+    border-bottom-color: var(--border);
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+  }
+
+  .site-nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+    min-height: var(--nav-h);
+  }
+
+  /* -- Brand: a terminal prompt with a blinking block cursor --------------- */
+  .site-nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.1em;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--step-0);
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+  }
+
+  .site-nav__prompt {
+    color: var(--accent);
+  }
+
+  .site-nav__brand:hover .site-nav__name {
+    color: var(--accent);
+  }
+
+  .site-nav__cursor {
+    width: 0.5em;
+    height: 1.05em;
+    margin-left: 0.15em;
+    background: var(--accent-2);
+    translate: 0 0.12em;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .site-nav__cursor {
+      animation: blink 1.15s steps(2, jump-none) infinite;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* -- Links --------------------------------------------------------------- */
+  .site-nav__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-nav__link {
+    display: block;
+    padding: 0.4rem 0.7rem;
+    border-radius: var(--radius-m);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      color var(--dur) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+
+  .site-nav__link:hover {
+    color: var(--text);
+    background: var(--surface-hover);
+  }
+
+  .site-nav__link[aria-current='page'],
+  .site-nav__link.is-active {
+    color: var(--accent);
+    text-shadow: var(--glow);
+  }
+
+  .site-nav__menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+  }
+
+  .site-nav__burger {
+    display: none;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    background: var(--bg-elev);
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .burger-icon {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .site-nav__burger[aria-expanded='false'] .burger-icon--close,
+  .site-nav__burger[aria-expanded='true'] .burger-icon--open {
+    display: none;
+  }
+
+  /* -- Mobile -------------------------------------------------------------- */
+  @media (max-width: 47.99rem) {
+    .site-nav__burger {
+      display: grid;
+      order: 3;
+    }
+
+    .site-nav__menu {
+      /* `hidden` beats `display:flex` in the cascade, so the panel is genuinely
+         removed from the accessibility tree when closed. */
+      display: none;
+      order: 4;
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-s);
+      padding: var(--space-s) 0 var(--space-m);
+      border-top: 1px solid var(--border);
+    }
+
+    .site-nav__menu.is-open {
+      display: flex;
+    }
+
+    .site-nav__inner {
+      flex-wrap: wrap;
+    }
+
+    .site-nav__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .site-nav__link {
+      padding: 0.65rem 0.7rem;
+      font-size: var(--step-0);
+    }
+
+    .site-nav__actions {
+      padding-left: 0.7rem;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('site-nav');
+  const burger = document.getElementById('nav-burger');
+  const menu = document.getElementById('nav-menu');
+
+  /* -- Border-on-scroll --------------------------------------------------- */
+  const onScroll = () => nav?.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* -- Mobile menu -------------------------------------------------------- */
+  function setMenu(open: boolean) {
+    menu?.classList.toggle('is-open', open);
+    burger?.setAttribute('aria-expanded', String(open));
+    burger?.setAttribute(
+      'aria-label',
+      open ? 'Close navigation menu' : 'Open navigation menu'
+    );
+  }
+
+  burger?.addEventListener('click', () => {
+    setMenu(burger.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Close after choosing a destination, and on Escape.
+  menu?.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement).closest('a')) setMenu(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && burger?.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      burger.focus();
+    }
+  });
+
+  /* -- Scroll spy ---------------------------------------------------------
+     Highlights the nav link for whichever section is currently in view. Only
+     runs on pages that actually contain the target sections.                */
+  const sectionLinks = new Map<string, HTMLAnchorElement>();
+  document
+    .querySelectorAll<HTMLAnchorElement>('[data-nav-link][data-target]')
+    .forEach((link) => {
+      const id = link.dataset.target;
+      if (id && document.getElementById(id)) sectionLinks.set(id, link);
+    });
+
+  if (sectionLinks.size > 0) {
+    const visible = new Set<string>();
+
+    const spy = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        }
+        // Highlight the first visible section in document order.
+        let matched = false;
+        for (const [id, link] of sectionLinks) {
+          const active = !matched && visible.has(id);
+          link.classList.toggle('is-active', active);
+          if (active) matched = true;
+        }
+      },
+      { rootMargin: '-25% 0px -60% 0px' }
+    );
+
+    sectionLinks.forEach((_, id) => {
+      const section = document.getElementById(id);
+      if (section) spy.observe(section);
+    });
+  }
+</script>

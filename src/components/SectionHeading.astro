@@ -1,0 +1,29 @@
+---
+/**
+ * The "// 02 · Experience" heading used to open every section.
+ * The index is decorative — screen readers get the title only.
+ */
+interface Props {
+  /** Two-digit counter shown before the title. */
+  index?: string;
+  title: string;
+  /** Used as the section's `id`, so #experience etc. resolve. */
+  id?: string;
+  /** Renders as an <h2> by default; the blog index uses <h1>. */
+  as?: 'h1' | 'h2';
+}
+
+const { index, title, id, as: Tag = 'h2' } = Astro.props;
+---
+
+<div class="section-heading">
+  {
+    index && (
+      <span class="section-heading__index" aria-hidden="true">
+        // {index}
+      </span>
+    )
+  }
+  <Tag class="section-heading__title" id={id}>{title}</Tag>
+  <span class="section-heading__rule" aria-hidden="true"></span>
+</div>

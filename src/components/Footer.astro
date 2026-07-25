@@ -1,0 +1,174 @@
+---
+import { site, socialLinks } from '~/lib/site';
+import { url } from '~/lib/url';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+
+const quickLinks = [...site.nav, { label: 'RSS', href: '/rss.xml' }];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <p class="site-footer__name">{site.name}</p>
+      <p class="site-footer__role">{site.role}</p>
+      <ul class="site-footer__social" aria-label="Social links">
+        {
+          socialLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="site-footer__icon"
+                rel={link.external ? 'me noopener' : undefined}
+                target={link.external ? '_blank' : undefined}
+              >
+                <Icon name={link.key} size={19} label={link.label} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <nav class="site-footer__links" aria-label="Footer">
+      <h2 class="site-footer__heading">Elsewhere on this site</h2>
+      <ul>
+        {
+          quickLinks.map((item) => (
+            <li>
+              <a href={url(item.href)}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container site-footer__bar">
+    <p class="site-footer__legal">
+      <span aria-hidden="true">©</span>
+      {year}
+      {site.name}. Built with{' '}
+      <a href="https://astro.build" rel="noopener" target="_blank">Astro</a>, hosted on
+      GitHub Pages.
+    </p>
+    <a href="#top" class="back-to-top">
+      Back to top
+      <Icon name="arrow-up" size={15} />
+    </a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    /* No top margin: the last section already ends with its own bottom
+       padding, and stacking the two leaves a conspicuous dead band. */
+    border-top: 1px solid var(--border);
+    background: var(--bg-elev);
+    font-size: var(--step--1);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    padding-block: var(--space-xl) var(--space-l);
+  }
+
+  .site-footer__name {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: var(--step-1);
+    color: var(--text);
+  }
+
+  .site-footer__role {
+    margin: 0 0 var(--space-m);
+    color: var(--text-muted);
+  }
+
+  .site-footer__social {
+    display: flex;
+    gap: var(--space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-footer__icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    color: var(--text-muted);
+    transition:
+      color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+
+  .site-footer__icon:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: var(--glow);
+  }
+
+  .site-footer__heading {
+    margin: 0 0 var(--space-xs);
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .site-footer__links ul {
+    display: grid;
+    gap: var(--space-2xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-footer__links a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .site-footer__links a:hover {
+    color: var(--accent);
+  }
+
+  .site-footer__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+    padding-block: var(--space-m);
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+  }
+
+  .site-footer__legal {
+    margin: 0;
+  }
+
+  .back-to-top {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .back-to-top:hover {
+    color: var(--accent);
+  }
+</style>

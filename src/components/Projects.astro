@@ -1,0 +1,225 @@
+---
+/**
+ * Project card grid generated from content/projects.yaml.
+ * Entries marked `featured: true` render as a wider card at the top.
+ */
+import { getProjects } from '~/lib/content';
+import { url } from '~/lib/url';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+const projects = await getProjects();
+
+/** Pick an icon from the link label, falling back to a generic external arrow. */
+type LinkIcon = 'source' | 'demo' | 'paper' | 'live' | 'external';
+
+const iconFor = (label: string): LinkIcon => {
+  const key = label.toLowerCase();
+  if (key.includes('source') || key.includes('code') || key.includes('repo'))
+    return 'source';
+  if (key.includes('demo') || key.includes('space')) return 'demo';
+  if (key.includes('paper') || key.includes('doc')) return 'paper';
+  if (key.includes('live') || key.includes('site')) return 'live';
+  return 'external';
+};
+---
+
+{
+  projects.length > 0 && (
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <SectionHeading index="03" title="Projects" id="projects-title" />
+
+        <ul class="projects">
+          {projects.map((project, index) => (
+            <li
+              class:list={[
+                'projects__item',
+                { 'projects__item--featured': project.data.featured },
+              ]}
+              data-reveal
+              data-reveal-delay={(index % 3) * 70}
+            >
+              <article class="card project">
+                {project.data.image && (
+                  <div class="project__media">
+                    <img
+                      src={url(project.data.image)}
+                      alt={project.data.imageAlt ?? ''}
+                      class="project__img"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                )}
+
+                <div class="project__body">
+                  <div class="project__head">
+                    <h3 class="project__title">{project.data.title}</h3>
+                    {project.data.year && (
+                      <span class="project__year">{project.data.year}</span>
+                    )}
+                  </div>
+
+                  <p class="project__desc">{project.data.description}</p>
+
+                  {project.data.tags.length > 0 && (
+                    <ul class="chip-list project__tags">
+                      {project.data.tags.map((tag) => (
+                        <li>
+                          <span class="chip">{tag}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {project.data.links.length > 0 && (
+                    <ul class="project__links">
+                      {project.data.links.map((link) => (
+                        <li>
+                          <a
+                            href={link.href}
+                            class="project__link"
+                            rel="noopener"
+                            target="_blank"
+                          >
+                            <Icon name={iconFor(link.label)} size={15} />
+                            {link.label}
+                            {/* Context for screen readers, since "Source" alone
+                                repeats across cards. */}
+                            <span class="sr-only"> — {project.data.title}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .projects {
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 40rem) {
+    .projects {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .projects {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    /* Featured projects take two of the three columns. */
+    .projects__item--featured {
+      grid-column: span 2;
+    }
+  }
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .project__media {
+    background: var(--bg-elev);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .project__img {
+    width: 100%;
+    /* Fixed ratio reserves the space, so images never shift the layout. */
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    filter: saturate(0.9);
+    transition:
+      transform 500ms var(--ease),
+      filter var(--dur) var(--ease);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card:hover .project__img {
+      transform: scale(1.03);
+      filter: saturate(1.05);
+    }
+  }
+
+  .project__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--space-m);
+  }
+
+  .project__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-s);
+  }
+
+  .project__title {
+    margin: 0 0 var(--space-xs);
+    font-size: var(--step-0);
+    letter-spacing: -0.01em;
+  }
+
+  .project__year {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-3);
+  }
+
+  .project__desc {
+    margin: 0 0 var(--space-m);
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+
+  .project__tags {
+    margin-bottom: var(--space-m);
+  }
+
+  /* Links sit at the bottom regardless of description length. */
+  .project__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    list-style: none;
+    margin: auto 0 0;
+    padding: var(--space-s) 0 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .project__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .project__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+</style>

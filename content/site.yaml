@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------------------
+# Global site settings. Everything here is used across every page:
+# the hero, the <title> tags, the footer, the RSS feed and the social links.
+# Edit freely — nothing in src/ needs to change.
+# ---------------------------------------------------------------------------
+
+# Your name, shown in the hero, the nav logo and the copyright line.
+name: Rajeshwar Rathi
+
+# Short role label. Appears under your name and in the browser title.
+role: Machine Learning & Data Engineer
+
+# The one-liner in the hero. Keep it to a sentence — it is the first thing
+# anyone reads. Rendered inside a terminal-style prompt.
+tagline: >-
+  Software engineer with 5+ years building machine learning systems, data
+  pipelines and cloud infrastructure in Python.
+
+# Used for <meta name="description">, Open Graph and the RSS channel description.
+description: >-
+  Rajeshwar Rathi — machine learning and data engineer. Notes on AI, data
+  science and cloud, plus a record of the things I have shipped.
+
+# Absolute URL of the deployed site. Must match `site` in astro.config.mjs.
+url: https://rajrathi.github.io
+
+# Default social share image, relative to /public. 1200x630 works best.
+ogImage: /img/og-default.png
+
+# Photo shown in the About section (in /public). Leave blank to hide it.
+avatar: /img/profile.jpeg
+avatarAlt: Portrait of Rajeshwar Rathi
+
+# Language tag for <html lang="...">.
+lang: en
+
+# ---------------------------------------------------------------------------
+# Contact + socials. Delete any line you do not want shown; the icons and the
+# contact card are generated from whatever is left here.
+# Supported keys: email, github, linkedin, twitter, huggingface, scholar, website
+# ---------------------------------------------------------------------------
+social:
+  email: mailsforrajeshwar@gmail.com
+  github: https://github.com/rajrathi
+  linkedin: https://www.linkedin.com/in/rajeshwarrathi/
+  twitter: https://twitter.com/rajeshwar_rathi
+  huggingface: https://huggingface.co/rajrathi
+
+# A short line above the contact buttons. Optional.
+contactBlurb: >-
+  I am always up for talking about applied ML, data platforms, or a good
+  retro-computing rabbit hole. The fastest way to reach me is email.
+
+# ---------------------------------------------------------------------------
+# Main navigation. Add or remove entries and the nav bar updates itself.
+# Links starting with "/#" scroll smoothly to a section on the home page.
+# ---------------------------------------------------------------------------
+nav:
+  - label: About
+    href: /#about
+  - label: Experience
+    href: /#experience
+  - label: Projects
+    href: /#projects
+  - label: Blog
+    href: /blog
+  - label: Contact
+    href: /#contact
+
+# ---------------------------------------------------------------------------
+# Hero call-to-action buttons. The first one gets the solid "primary" styling.
+# ---------------------------------------------------------------------------
+cta:
+  - label: View Work
+    href: /#projects
+    primary: true
+  - label: Read the Blog
+    href: /blog
+  - label: Get in Touch
+    href: /#contact
+
+# ---------------------------------------------------------------------------
+# Optional: a résumé/CV file. Drop the PDF in /public and point at it here.
+# Comment the whole block out to hide the button.
+# ---------------------------------------------------------------------------
+# resume:
+#   label: Download CV
+#   href: /rajeshwar-rathi-cv.pdf

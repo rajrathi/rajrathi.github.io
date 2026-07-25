@@ -1,0 +1,288 @@
+---
+/**
+ * Individual blog post.
+ *
+ * One route generates every post: the slug is the Markdown file name, so
+ * `content/blog/my-post.md` becomes `/blog/my-post/`.
+ */
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Icon from '~/components/Icon.astro';
+import { getPosts, formatDate, isoDate, getReadingTime } from '~/lib/content';
+import { url, tagUrl } from '~/lib/url';
+import { site } from '~/lib/site';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPosts(); // already sorted newest-first
+
+  return posts.map((post, index) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      // Chronological neighbours, for the footer navigation.
+      newer: posts[index - 1] ?? null,
+      older: posts[index + 1] ?? null,
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post, newer, older } = Astro.props;
+const { Content } = await render(post);
+const { title, date, summary, tags, cover, coverAlt, draft } = post.data;
+---
+
+<Base
+  title={title}
+  description={summary}
+  image={cover ?? site.ogImage}
+  type="article"
+  publishedDate={date}
+  tags={tags}
+  noindex={draft}
+>
+  <article class="post">
+    <div class="container container--narrow">
+      <p class="post__back">
+        <a href={url('/blog')} class="post__back-link">
+          <span aria-hidden="true">←</span> All posts
+        </a>
+      </p>
+
+      <header class="post__header">
+        {draft && <p class="post__draft-banner">Draft — not listed publicly.</p>}
+
+        <h1 class="post__title">{title}</h1>
+
+        <p class="post__meta">
+          <time datetime={isoDate(date)}>{formatDate(date)}</time>
+          <span aria-hidden="true">·</span>
+          <span>{getReadingTime(post)}</span>
+          <span aria-hidden="true">·</span>
+          <span>{post.data.author ?? site.name}</span>
+        </p>
+
+        {
+          tags.length > 0 && (
+            <ul class="chip-list post__tags">
+              {tags.map((tag) => (
+                <li>
+                  <a href={tagUrl(tag)} class="chip">
+                    {tag}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </header>
+
+      {
+        cover && (
+          <figure class="post__cover">
+            <img
+              src={url(cover)}
+              alt={coverAlt ?? ''}
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </figure>
+        )
+      }
+
+      <div class="post__body prose">
+        <Content />
+      </div>
+
+      <footer class="post__footer">
+        <nav class="post-nav" aria-label="More posts">
+          {
+            older ? (
+              <a
+                href={url(`/blog/${older.id}/`)}
+                class="post-nav__link post-nav__link--prev"
+              >
+                <span class="post-nav__label">
+                  <span aria-hidden="true">←</span> Older
+                </span>
+                <span class="post-nav__title">{older.data.title}</span>
+              </a>
+            ) : (
+              <span />
+            )
+          }
+          {
+            newer && (
+              <a
+                href={url(`/blog/${newer.id}/`)}
+                class="post-nav__link post-nav__link--next"
+              >
+                <span class="post-nav__label">
+                  Newer <span aria-hidden="true">→</span>
+                </span>
+                <span class="post-nav__title">{newer.data.title}</span>
+              </a>
+            )
+          }
+        </nav>
+
+        <p class="post__cta">
+          Found this useful, or think it is wrong?{' '}
+          {
+            site.social.email ? (
+              <a href={`mailto:${site.social.email}?subject=${encodeURIComponent(title)}`}>
+                Tell me about it
+              </a>
+            ) : (
+              'Get in touch'
+            )
+          }. You can also{' '}
+          <a href={url('/rss.xml')}>
+            subscribe by RSS <Icon name="rss" size={13} />
+          </a>.
+        </p>
+      </footer>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .post {
+    padding-block: var(--space-l) var(--space-2xl);
+  }
+
+  .post__back {
+    margin: 0 0 var(--space-l);
+  }
+
+  .post__back-link {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-decoration: none;
+  }
+
+  .post__back-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .post__header {
+    margin-bottom: var(--space-l);
+    padding-bottom: var(--space-m);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post__draft-banner {
+    display: inline-block;
+    margin: 0 0 var(--space-s);
+    padding: 0.25rem 0.7rem;
+    border: 1px solid var(--accent-3);
+    border-radius: var(--radius-m);
+    color: var(--accent-3);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+  }
+
+  .post__title {
+    margin: 0 0 var(--space-s);
+    font-size: var(--step-4);
+    letter-spacing: -0.035em;
+  }
+
+  .post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--text-faint);
+  }
+
+  .post__tags {
+    margin-top: var(--space-m);
+  }
+
+  .post__cover {
+    margin: 0 0 var(--space-xl);
+  }
+
+  .post__cover img {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-l);
+  }
+
+  .post__body {
+    /* The narrow container already sets the measure; let prose fill it. */
+    max-width: none;
+  }
+
+  .post__footer {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-l);
+    border-top: 1px solid var(--border);
+  }
+
+  .post-nav {
+    display: grid;
+    gap: var(--space-m);
+    margin-bottom: var(--space-l);
+  }
+
+  @media (min-width: 40rem) {
+    .post-nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .post-nav__link {
+    display: grid;
+    gap: var(--space-2xs);
+    padding: var(--space-m);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    text-decoration: none;
+    transition:
+      border-color var(--dur) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+
+  .post-nav__link:hover {
+    border-color: var(--accent);
+    background: var(--surface-hover);
+  }
+
+  .post-nav__link--next {
+    text-align: right;
+  }
+
+  .post-nav__label {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-3);
+  }
+
+  .post-nav__title {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .post__cta {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+
+  .post__cta :global(svg) {
+    display: inline;
+    vertical-align: -0.1em;
+  }
+</style>

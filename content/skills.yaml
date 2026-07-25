@@ -1,0 +1,49 @@
+# ---------------------------------------------------------------------------
+# Skills, grouped. Rendered as a set of labelled chip groups.
+#
+#   group (required) the heading
+#   items (required) a list of strings
+#
+# Add, reorder or delete groups freely. To hide the section entirely, leave the
+# file as an empty list: []
+# ---------------------------------------------------------------------------
+
+- group: Languages
+  items: [Python, C++, C, SQL, JavaScript, LaTeX]
+
+- group: Machine Learning
+  items:
+    - PyTorch
+    - TensorFlow
+    - Keras
+    - scikit-learn
+    - Regression & classification
+    - Ensembles (Random Forest, XGBoost)
+    - Clustering (k-NN, k-Means)
+    - Regularisation & cross-validation
+    - Hyperparameter tuning
+
+- group: Deep Learning
+  items: [CNNs, GANs, VAEs, Vision Transformers, RNN / LSTM / GRU, Optimizers]
+
+- group: Data & ETL
+  items:
+    - PySpark
+    - Apache Airflow
+    - Azure Data Factory
+    - Snowflake
+    - Redshift
+    - S3
+    - Pandas
+    - NumPy
+
+- group: Cloud
+  items:
+    - Azure (Batch, Functions, Data Factory, Key Vault, Blob Storage)
+    - AWS (SageMaker, EC2, S3, Redshift, IAM, MWAA)
+
+- group: Tooling
+  items: [Git, Docker, Jenkins, Azure DevOps, JIRA, Agile / Scrum, Postman]
+
+- group: Visualisation
+  items: [Matplotlib, Seaborn, Plotly, NetworkX, GraphViz]

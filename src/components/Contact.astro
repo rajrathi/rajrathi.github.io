@@ -1,0 +1,168 @@
+---
+/**
+ * Contact section. Everything here comes from the `social:` block in
+ * content/site.yaml — remove a key there and the button disappears.
+ */
+import { site, socialLinks } from '~/lib/site';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+const email = site.social.email;
+---
+
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <SectionHeading index="05" title="Contact" id="contact-title" />
+
+    <div class="contact" data-reveal>
+      <div class="contact__intro">
+        <p class="contact__lead">
+          <span class="contact__prompt" aria-hidden="true">&gt;</span>
+          Let's build something.
+        </p>
+        {site.contactBlurb && <p class="contact__blurb">{site.contactBlurb}</p>}
+      </div>
+
+      <div class="contact__actions">
+        {
+          email && (
+            <a href={`mailto:${email}`} class="btn btn--primary contact__email">
+              <Icon name="email" size={17} />
+              {email}
+            </a>
+          )
+        }
+
+        <ul class="contact__list">
+          {
+            socialLinks
+              .filter((link) => link.key !== 'email')
+              .map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="contact__social"
+                    rel={link.external ? 'me noopener' : undefined}
+                    target={link.external ? '_blank' : undefined}
+                  >
+                    <Icon name={link.key} size={18} />
+                    <span>{link.label}</span>
+                    {/* Wrapped so the scoped hover styles apply — see ThemeToggle. */}
+                    <span class="contact__arrow">
+                      <Icon name="arrow-right" size={15} />
+                    </span>
+                  </a>
+                </li>
+              ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    display: grid;
+    gap: var(--space-xl);
+    padding: var(--space-l);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-l);
+    /* A soft neon wash corner to corner. A linear gradient rather than a
+       radial one: at this size a radial reads as a smudge in one corner. */
+    background:
+      linear-gradient(
+        115deg,
+        color-mix(in srgb, var(--accent) 7%, transparent),
+        transparent 45%,
+        color-mix(in srgb, var(--accent-2) 8%, transparent)
+      ),
+      var(--surface);
+  }
+
+  @media (min-width: 52rem) {
+    .contact {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+      gap: var(--space-2xl);
+      align-items: center;
+      padding: var(--space-xl);
+    }
+  }
+
+  .contact__lead {
+    margin: 0 0 var(--space-s);
+    font-family: var(--font-mono);
+    font-size: var(--step-2);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+
+  .contact__prompt {
+    color: var(--accent-2);
+    margin-right: 0.3em;
+  }
+
+  .contact__blurb {
+    margin: 0;
+    max-width: 44ch;
+    color: var(--text-muted);
+  }
+
+  .contact__actions {
+    display: grid;
+    gap: var(--space-m);
+  }
+
+  .contact__email {
+    justify-content: center;
+    /* Long addresses should wrap rather than overflow the card. */
+    word-break: break-all;
+    text-align: center;
+  }
+
+  .contact__list {
+    display: grid;
+    gap: var(--space-2xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .contact__social {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.5rem 0.7rem;
+    border-radius: var(--radius-m);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-decoration: none;
+    transition:
+      color var(--dur) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+
+  .contact__social:hover {
+    color: var(--accent);
+    background: var(--surface-hover);
+  }
+
+  .contact__arrow {
+    display: grid;
+    place-items: center;
+    margin-left: auto;
+    opacity: 0;
+    transition:
+      opacity var(--dur) var(--ease),
+      transform var(--dur) var(--ease);
+  }
+
+  .contact__social:hover .contact__arrow,
+  .contact__social:focus-visible .contact__arrow {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+</style>

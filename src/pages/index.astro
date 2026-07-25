@@ -1,0 +1,74 @@
+---
+/**
+ * Home page. Sections are assembled here; each one reads its own content file,
+ * so this file rarely needs to change.
+ */
+import Base from '~/layouts/Base.astro';
+import Hero from '~/components/Hero.astro';
+import About from '~/components/About.astro';
+import Experience from '~/components/Experience.astro';
+import Projects from '~/components/Projects.astro';
+import Contact from '~/components/Contact.astro';
+import SectionHeading from '~/components/SectionHeading.astro';
+import PostCard from '~/components/PostCard.astro';
+import Icon from '~/components/Icon.astro';
+import { getPosts } from '~/lib/content';
+import { url } from '~/lib/url';
+
+const latest = (await getPosts()).slice(0, 3);
+---
+
+<Base>
+  <Hero />
+  <About />
+  <Experience />
+  <Projects />
+
+  {
+    latest.length > 0 && (
+      <section class="section" id="writing" aria-labelledby="writing-title">
+        <div class="container">
+          <SectionHeading index="04" title="Latest writing" id="writing-title" />
+
+          <ul class="latest">
+            {latest.map((post, index) => (
+              <li data-reveal data-reveal-delay={index * 70}>
+                <PostCard post={post} compact />
+              </li>
+            ))}
+          </ul>
+
+          <p class="latest__more" data-reveal>
+            <a href={url('/blog')} class="btn">
+              All posts
+              <Icon name="arrow-right" size={16} />
+            </a>
+          </p>
+        </div>
+      </section>
+    )
+  }
+
+  <Contact />
+</Base>
+
+<style>
+  .latest {
+    display: grid;
+    gap: var(--space-m);
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 46rem) {
+    .latest {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .latest__more {
+    margin: var(--space-l) 0 0;
+  }
+</style>

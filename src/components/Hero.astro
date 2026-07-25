@@ -1,0 +1,367 @@
+---
+/**
+ * Landing hero: name, tagline, CTAs, and a decorative terminal panel whose
+ * contents are generated from real data rather than hard-coded.
+ */
+import { site, socialLinks } from '~/lib/site';
+import { url } from '~/lib/url';
+import { getExperience, getSkills } from '~/lib/content';
+import Icon from './Icon.astro';
+
+const [experience, skills] = await Promise.all([getExperience(), getSkills()]);
+const current = experience[0];
+
+// A short "stack" line for the terminal panel, taken from the first two skill
+// groups so it stays true to skills.yaml.
+const stack = skills
+  .slice(0, 2)
+  .flatMap((group) => group.data.items.slice(0, 3))
+  .join(', ');
+
+const firstName = site.name.split(' ')[0] ?? site.name;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <p class="hero__eyebrow" data-reveal>
+        <span class="hero__status" aria-hidden="true"></span>
+        {current ? `${current.data.role} · ${current.data.company}` : site.role}
+      </p>
+
+      <h1 class="hero__title" id="hero-title" data-reveal data-reveal-delay="60">
+        {site.name}
+      </h1>
+
+      <p class="hero__role" data-reveal data-reveal-delay="110">{site.role}</p>
+
+      <p class="hero__tagline" data-reveal data-reveal-delay="160">
+        <span class="hero__prompt" aria-hidden="true">$</span>
+        {site.tagline}
+      </p>
+
+      <div class="hero__actions" data-reveal data-reveal-delay="220">
+        {
+          site.cta.map((action) => (
+            <a
+              href={url(action.href)}
+              class={`btn${action.primary ? ' btn--primary' : ''}`}
+            >
+              {action.label}
+              <Icon name="arrow-right" size={16} />
+            </a>
+          ))
+        }
+        {
+          site.resume && (
+            <a href={url(site.resume.href)} class="btn">
+              {site.resume.label}
+            </a>
+          )
+        }
+      </div>
+
+      <ul
+        class="hero__social"
+        aria-label="Social links"
+        data-reveal
+        data-reveal-delay="280"
+      >
+        {
+          socialLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="hero__social-link"
+                rel={link.external ? 'me noopener' : undefined}
+                target={link.external ? '_blank' : undefined}
+              >
+                <Icon name={link.key} size={20} label={link.label} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {
+      /* Decorative terminal panel. Hidden from assistive tech: every fact in it
+        already appears as real text elsewhere on the page. */
+    }
+    <div class="hero__terminal" aria-hidden="true" data-reveal data-reveal-delay="120">
+      <div class="terminal">
+        <div class="terminal__bar">
+          <span class="terminal__dot terminal__dot--1"></span>
+          <span class="terminal__dot terminal__dot--2"></span>
+          <span class="terminal__dot terminal__dot--3"></span>
+          <span class="terminal__title">{firstName.toLowerCase()}@portfolio — zsh</span>
+        </div>
+        <pre
+          class="terminal__body"><code><span class="t-prompt">~ $</span> whoami
+<span class="t-out">{site.name.toLowerCase()}</span>
+
+<span class="t-prompt">~ $</span> cat role.txt
+<span class="t-out">{current ? `${current.data.role} @ ${current.data.company}` : site.role}</span>
+
+<span class="t-prompt">~ $</span> ls ./stack
+<span class="t-out">{stack}</span>
+
+<span class="t-prompt">~ $</span> ./now --status
+<span class="t-ok">● shipping ML systems &amp; writing about it</span>
+
+<span class="t-prompt">~ $</span> <span class="t-cursor" /></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    /* Light bottom padding — the About section supplies its own generous top
+       padding, and doubling them opens a dead band under the hero. */
+    padding-block: clamp(2.5rem, 1rem + 8vw, 6rem) var(--space-m);
+    overflow: hidden;
+  }
+
+  /* Two soft neon washes behind the hero — the only large colour on the page. */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -30% -10% auto;
+    height: 120%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        40rem 22rem at 12% 8%,
+        color-mix(in srgb, var(--accent) 13%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        34rem 20rem at 88% 22%,
+        color-mix(in srgb, var(--accent-2) 11%, transparent),
+        transparent 70%
+      );
+  }
+
+  .hero__inner {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  @media (min-width: 62rem) {
+    .hero__inner {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: var(--space-2xl);
+    }
+  }
+
+  /* -- Text column --------------------------------------------------------- */
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin: 0 0 var(--space-m);
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-elev);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+  }
+
+  .hero__status {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+    flex: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__status {
+      animation: pulse 2.4s var(--ease) infinite;
+    }
+  }
+
+  @keyframes pulse {
+    50% {
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 0%, transparent);
+    }
+  }
+
+  .hero__title {
+    margin: 0;
+    font-size: var(--step-5);
+    letter-spacing: -0.045em;
+    background: linear-gradient(
+      100deg,
+      var(--text) 20%,
+      var(--accent) 55%,
+      var(--accent-2) 88%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero__role {
+    margin: var(--space-2xs) 0 var(--space-m);
+    font-family: var(--font-mono);
+    font-size: var(--step-1);
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: -0.01em;
+  }
+
+  .hero__tagline {
+    position: relative;
+    max-width: 52ch;
+    margin: 0 0 var(--space-l);
+    padding-left: 1.6rem;
+    color: var(--text);
+    font-size: var(--step-1);
+    line-height: 1.55;
+  }
+
+  .hero__prompt {
+    position: absolute;
+    left: 0;
+    top: 0.05em;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--accent-3);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    margin-bottom: var(--space-l);
+  }
+
+  .hero__social {
+    display: flex;
+    gap: var(--space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero__social-link {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-m);
+    color: var(--text-faint);
+    transition:
+      color var(--dur) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+
+  .hero__social-link:hover {
+    color: var(--accent);
+    background: var(--surface-hover);
+  }
+
+  /* -- Terminal panel ------------------------------------------------------ */
+  .hero__terminal {
+    display: none;
+  }
+
+  @media (min-width: 62rem) {
+    .hero__terminal {
+      display: block;
+    }
+  }
+
+  .terminal {
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-l);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    box-shadow:
+      var(--shadow-card),
+      0 0 60px -30px color-mix(in srgb, var(--accent) 60%, transparent);
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+  }
+
+  .terminal__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: 0.6rem var(--space-s);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-elev);
+  }
+
+  .terminal__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex: none;
+  }
+
+  .terminal__dot--1 {
+    background: var(--neon-magenta);
+  }
+  .terminal__dot--2 {
+    background: var(--neon-amber);
+  }
+  .terminal__dot--3 {
+    background: var(--neon-cyan);
+  }
+
+  .terminal__title {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  .terminal__body {
+    margin: 0;
+    padding: var(--space-m);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.75;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--text-muted);
+  }
+
+  .t-prompt {
+    color: var(--accent);
+  }
+  .t-out {
+    color: var(--text);
+  }
+  .t-ok {
+    color: var(--accent-3);
+  }
+
+  .t-cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    background: var(--accent-2);
+    translate: 0 0.15em;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .t-cursor {
+      animation: blink 1.15s steps(2, jump-none) infinite;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
