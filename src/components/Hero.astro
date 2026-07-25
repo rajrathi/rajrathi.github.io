@@ -19,6 +19,10 @@ const stack = skills
   .join(', ');
 
 const firstName = site.name.split(' ')[0] ?? site.name;
+
+// Glitch flavour for the name. `true` quantises the torn bands into pixel
+// blocks; `false` leaves them as clean RGB-split slices. Flip and compare.
+const pixelGlitch = true;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -35,7 +39,7 @@ const firstName = site.name.split(' ')[0] ?? site.name;
           generated content do not read it three times over. */
       }
       <h1
-        class="hero__title"
+        class={`hero__title${pixelGlitch ? ' hero__title--pixel' : ''}`}
         id="hero-title"
         data-text={site.name}
         aria-label={site.name}
@@ -315,6 +319,58 @@ const firstName = site.name.split(' ')[0] ?? site.name;
 
   :global(:root[data-theme='dark']) .hero__title::after {
     color: var(--accent-2);
+  }
+
+  /* -- Pixel variant -------------------------------------------------------
+     Quantises the torn bands into a square grid, so a burst reads as the name
+     dropping to a low-res framebuffer for a few frames. Only the copies are
+     masked — the h1 underneath keeps its smooth gradient — so the typography
+     is never permanently altered, which is what made a pixel font or a
+     full-time SVG filter the wrong trade here.
+
+     Two hard-stop repeating gradients (one per axis) intersected: the vertical
+     stripes and horizontal stripes overlap only at the cells, leaving a lattice
+     of solid squares. `--px-ink` under `--px-cell` is what leaves the dark
+     gutter between them; set them equal for solid blocks with no grid showing.
+
+     The mask sits in the element's own box, so it travels with the band when
+     the burst shoves it sideways — the block moves as a unit rather than the
+     text sliding under a fixed screen. */
+  :global(:root[data-theme='dark']) .hero__title--pixel::before,
+  :global(:root[data-theme='dark']) .hero__title--pixel::after {
+    /* em-relative, so the grid scales with the fluid --step-5 headline
+       instead of going coarse on mobile and fine on desktop. */
+    --px-cell: 0.1em;
+    --px-ink: 0.072em;
+
+    -webkit-mask-image:
+      repeating-linear-gradient(
+        to right,
+        #000 0 var(--px-ink),
+        transparent var(--px-ink) var(--px-cell)
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        #000 0 var(--px-ink),
+        transparent var(--px-ink) var(--px-cell)
+      );
+    mask-image:
+      repeating-linear-gradient(
+        to right,
+        #000 0 var(--px-ink),
+        transparent var(--px-ink) var(--px-cell)
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        #000 0 var(--px-ink),
+        transparent var(--px-ink) var(--px-cell)
+      );
+    /* Safari spells the intersection `source-in`; everyone else `intersect`.
+       Without this the two gradients union into a grid of holes instead. */
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    /* The lattice drops ~40% of each glyph, so lift the fill to compensate. */
+    opacity: 1;
   }
 
   /* Both copies run on the same 7s clock so their bursts land together — that
