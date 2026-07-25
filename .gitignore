@@ -24,3 +24,6 @@ pnpm-debug.log*
 *.swp
 .vscode/*
 !.vscode/extensions.json
+
+# Other
+.claude/
