@@ -235,6 +235,21 @@ failure is a content error, and the message names the file and field — for
 example `projects → 02-my-project data does not match collection schema`.
 Running `npm run build` locally reproduces it in a few seconds.
 
+If instead the **Install dependencies** step fails with
+`npm ci ... Missing: <package> from lock file`, the lockfile is missing the
+Linux-only binaries the runner needs. This happens when a version of npm writes
+a lockfile containing only the platform packages it needed on _your_ machine. It
+will not reproduce locally — macOS `npm ci` passes happily. Regenerate the
+lockfile against the same environment CI uses:
+
+```bash
+docker run --rm -u "$(id -u):$(id -g)" -v "$PWD":/app -w /app \
+  -e HOME=/tmp node:22 npm install --package-lock-only
+```
+
+Then commit `package-lock.json`. It stays valid on macOS — the file is a
+superset covering every platform.
+
 ### Adding a custom domain later
 
 1. At your DNS registrar, point the domain at GitHub:
