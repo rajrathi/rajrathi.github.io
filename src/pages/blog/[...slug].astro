@@ -211,8 +211,11 @@ const { title, date, summary, tags, cover, coverAlt, draft } = post.data;
 
   .post__cover img {
     width: 100%;
+    /* `contain` rather than `cover` — a cover image of any aspect ratio
+       always shows in full instead of being cropped/zoomed to fill the box. */
     aspect-ratio: 21 / 9;
-    object-fit: cover;
+    object-fit: contain;
+    background: var(--bg-elev);
     border: 1px solid var(--border);
     border-radius: var(--radius-l);
   }

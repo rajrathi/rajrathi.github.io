@@ -144,9 +144,12 @@ const iconFor = (label: string): LinkIcon => {
 
   .project__img {
     width: 100%;
-    /* Fixed ratio reserves the space, so images never shift the layout. */
+    /* Fixed ratio reserves the space, so images never shift the layout.
+       `contain` (not `cover`) so a thumbnail of any aspect ratio — portrait,
+       square, whatever gets added next — always shows in full instead of
+       being cropped/zoomed to fill the box. */
     aspect-ratio: 16 / 9;
-    object-fit: cover;
+    object-fit: contain;
     filter: saturate(0.9);
     transition:
       transform 500ms var(--ease),

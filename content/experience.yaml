@@ -17,63 +17,82 @@
 
 - role: Data Scientist
   company: Medline Industries
+  url: https://www.medline.com/
   start: Jul 2025
   end: Present
   location: Pune, India
   summary: >-
-    Building product intelligence and search over the product catalogue with
-    GraphRAG.
+    Building a Product Intelligence API over the product catalogue with
+    GraphRAG and LLMs.
   bullets:
-    - Build product intelligence and search capabilities on top of the product
-      catalogue, using GraphRAG to combine a knowledge graph of product
-      relationships with LLM-based retrieval.
-    # TODO: add the specifics once you are happy sharing them — catalogue size,
-    # which model and vector store, and how search quality is measured.
-    - "PLACEHOLDER: add a concrete outcome (e.g. 'lifted top-5 search relevance
-      from X% to Y% over the previous keyword search')."
-  tags: [Python, GraphRAG, LLMs, Knowledge Graphs, RAG, Search]
+    - Co-developing a Product Intelligence API using GraphRAG (Graph
+      Retrieval-Augmented Generation) and LLMs to automate product discovery
+      and power intelligent recommendations for the business unit.
+    - Leveraged knowledge graphs and community-detection algorithms to drive
+      next-generation AI recommendations in Product Intelligence.
+    - Designing and implementing a scalable graph database in Azure CosmosDB
+      to model complex product relationships and hierarchies.
+    - Managing the end-to-end ML lifecycle (MLOps) with Azure ML Studio and
+      Azure DevOps, streamlining model training and deployment.
+    - Leveraging Microsoft Fabric for unified data integration and analytics.
+  tags: [Python, GraphRAG, LLMs, Azure CosmosDB, Azure ML Studio, Microsoft Fabric]
 
-- role: Programmer Analyst
+- role: Python Developer (PySpark, Big Data)
   company: Bitwise Inc.
-  start: Nov 2023
-  end: Jun 2025
+  start: Aug 2023
+  end: Jul 2025
   location: Pune, India
   url: https://www.bitwiseglobal.com/
   summary: >-
-    Machine learning engineer on a payment technology client, taking models from
-    notebook to production.
+    Migrated Informatica ETL workflows to PySpark and modernised on-premise
+    pipelines onto Azure.
   bullets:
-    - Build and productionise machine learning models for a payment technology
-      client, covering feature engineering, training and deployment.
-    - Run training and batch inference workloads on managed cloud services
-      (AWS SageMaker, Azure Batch) rather than hand-rolled infrastructure.
-    - Work with the data engineering team to turn ad-hoc analytical queries into
-      scheduled, monitored pipelines.
-    # TODO: replace with a concrete result — model, metric moved, and by how much.
-    - "PLACEHOLDER: add a headline outcome here (e.g. 'cut fraud-review queue
-      volume by X% by replacing a rules engine with a gradient-boosted model')."
-  tags: [Python, PyTorch, scikit-learn, SageMaker, Azure, MLOps]
+    - Migrated and optimised complex Informatica workflows into PySpark ETL
+      pipelines and modular Python APIs, handling Delta tables and XML files.
+    - Deployed solutions on Microsoft Fabric, achieving a 20% performance
+      improvement in data processing.
+    - Modernised on-premise Python scripts by migrating them to Azure Cloud,
+      integrating Snowflake, MSSQL and AWS S3, which reduced costs by 60%.
+    - Built secure ETL pipelines for PII data handling from Sybase/MSSQL to
+      Snowflake, cutting processing time by 40%.
+    - Developed a zero-downtime Azure Function App for automated ServiceNow
+      ticket creation on ADF pipeline failures, improving incident response.
+  tags: [Python, PySpark, Delta Lake, Azure, Microsoft Fabric, Snowflake]
 
-- role: Programmer
+- role: Machine Learning Engineer
+  company: Bitwise Inc.
+  start: Aug 2022
+  end: Jul 2023
+  location: Pune, India
+  url: https://www.bitwiseglobal.com/
+  summary: >-
+    Built an ML pipeline to identify repeat callers, cutting customer-support
+    costs by up to $1M.
+  bullets:
+    - Developed an end-to-end ML pipeline in Python and AWS SageMaker to
+      identify repeat callers, enabling cost-effective customer engagement and
+      reducing costs by up to $1 million.
+    - Ran hypothesis testing, visualisation, data imputation, balancing and
+      cross-validation, reaching 82% prediction accuracy.
+    - Optimised data processing with SQL views in Snowflake and PySpark on AWS
+      EMR, resulting in 4x faster analysis.
+  tags: [Python, AWS SageMaker, PySpark, AWS EMR, Snowflake]
+
+- role: Data Engineer
   company: Bitwise Inc.
   start: Sep 2020
-  end: Oct 2023
+  end: Jul 2022
   location: Pune, India
   url: https://www.bitwiseglobal.com/
   summary: >-
-    Data engineering across two client platforms — ingestion, transformation and
-    warehousing.
+    Airflow-based ETL pipelines feeding AWS Redshift, and Informatica-to-ADF
+    migrations.
   bullets:
-    - Built and maintained ETL pipelines in Python and PySpark, orchestrated with
-      Apache Airflow and Azure Data Factory.
-    - Modelled and loaded analytical data into Redshift and Snowflake, including
-      the incremental-load and data-quality checks around them.
-    - Automated recurring delivery work with Jenkins and Azure DevOps so releases
-      stopped depending on any one person being online.
-    # TODO: replace with a concrete result — scale, runtime saved, or cost saved.
-    - "PLACEHOLDER: add a headline outcome here (e.g. 'reduced a nightly batch
-      window from 6h to 90m by repartitioning the Spark job')."
-  tags: [Python, PySpark, Airflow, Snowflake, Redshift, Azure Data Factory, S3]
+    - Streamlined Airflow-based ETL pipelines on EC2 for automated data
+      extraction from S3 to AWS Redshift, enabling business-metric evaluation.
+    - Standardised 30+ Informatica workflows to Azure Data Factory,
+      integrating Oracle and Synapse data sources to reduce latency.
+  tags: [Python, Airflow, AWS Redshift, Azure Data Factory, EC2]
 
 - role: SDE Intern
   company: Veritas LLC
@@ -92,17 +111,3 @@
     - Wired the tool into CI so the graph regenerated on every build instead of
       being redrawn by hand.
   tags: [Python, NetworkX, GraphViz, Plotly, Jenkins]
-
-- role: Computer Vision Intern
-  company: VInventTech
-  start: 2019
-  end: 2019
-  location: Pune, India
-  summary: >-
-    Helmet-detection model for real-time road transport video.
-  bullets:
-    - Trained an R-CNN based detector to identify two-wheeler riders without
-      helmets in live video, reaching roughly 85% AUC.
-    - Wrapped the model in a Flask API so it could be called from the client's
-      existing monitoring stack.
-  tags: [Python, Keras, OpenCV, Flask]

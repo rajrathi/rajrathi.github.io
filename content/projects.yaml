@@ -56,16 +56,6 @@
   imageAlt: Directed dependency graph of microservices
   tags: [Python, NetworkX, GraphViz, Plotly, Pandas, Jenkins, CI/CD]
 
-- title: Helmet Detection for Real-time Traffic Video
-  year: 2019
-  description: >-
-    An R-CNN based detector that identifies two-wheeler riders travelling without
-    a helmet in live road-transport video, at roughly 85% AUC, exposed as a Flask
-    API for a road-safety monitoring pipeline.
-  image: /project-thumb/04.jpg
-  imageAlt: Traffic camera frame with detection boxes over riders
-  tags: [Python, Keras, OpenCV, NumPy, Flask]
-
 - title: Mock Trading System
   year: 2019
   description: >-

@@ -90,6 +90,13 @@
   --accent-2: var(--neon-magenta); /* secondary: headings marker, hovers */
   --accent-3: var(--neon-amber); /* tertiary: dates, meta, counters */
 
+  /* -- macOS traffic-light dots. Fixed brand colours — unlike the neon
+     accents above, these stay the same in both themes, same as the real
+     window controls do. -------------------------------------------------- */
+  --mac-red: #ff5f57;
+  --mac-yellow: #febc2e;
+  --mac-green: #28c840;
+
   /* -- Surfaces ----------------------------------------------------------- */
   --bg: #0a0a11;
   --bg-elev: #10101b;

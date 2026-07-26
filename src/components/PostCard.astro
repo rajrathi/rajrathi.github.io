@@ -80,8 +80,10 @@ const { title, date, summary, tags, cover, coverAlt, draft } = post.data;
 
   .post-card__img {
     width: 100%;
+    /* `contain` rather than `cover` — a cover image of any aspect ratio
+       always shows in full instead of being cropped/zoomed to fill the box. */
     aspect-ratio: 21 / 9;
-    object-fit: cover;
+    object-fit: contain;
     filter: saturate(0.9);
     transition: transform 500ms var(--ease);
   }
